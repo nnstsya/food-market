@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterOutlet } from '@angular/router';
-import { CoreModule } from '@core/core.module';
 
 @NgModule({
   declarations: [
@@ -13,11 +12,10 @@ import { CoreModule } from '@core/core.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet,
-    CoreModule
+    RouterOutlet
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}

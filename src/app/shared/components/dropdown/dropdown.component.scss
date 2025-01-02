@@ -1,0 +1,55 @@
+@use "../../../../styles/variables" as *;
+
+.dropdown {
+  position: relative;
+  width: fit-content;
+
+  .dropdown-header {
+    padding-inline: 10px;
+    background: none;
+    gap: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.open {
+      border-color: #007bff;
+    }
+
+    .arrow {
+      color: $primary-color;
+      transition: transform 0.3s ease;
+
+      &.up {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .dropdown-list {
+    position: absolute;
+    padding-block: 8px;
+    background-color: $light-bg-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    max-height: 200px;
+    overflow-y: scroll;
+    z-index: 100;
+
+    .dropdown-item {
+      padding: 12px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+
+      &.selected {
+        background-color: $primary-color-dark;
+        color: white;
+      }
+    }
+  }
+}

@@ -18,7 +18,6 @@ body {
 
   &__contact {
     display: flex;
-    font-size: 14px;
     justify-content: center;
     align-items: center;
     gap: 36px;
@@ -26,10 +25,12 @@ body {
     &__chat {
       color: $primary-color;
       text-decoration: none;
+      font-size: 14px;
     }
 
     &__option {
       text-decoration: none;
+      font-size: 14px;
       color: #000;
 
       &:hover {
@@ -46,6 +47,7 @@ body {
 
     &__link {
       text-decoration: none;
+      font-size: 14px;
       color: $primary-color;
 
       &:hover {

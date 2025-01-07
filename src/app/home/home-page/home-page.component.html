@@ -1,0 +1,49 @@
+<div class="page">
+  <section class="section">
+
+    <div class="section__menu">
+      <div>
+        <h3 class="section__menu__list__heading">Best selling products</h3>
+        <ul class="section__menu__list">
+          @for (product of bestSellingProducts; track product.id) {
+            <li class="section__menu__list__item">{{ product.title }}</li>
+          }
+        </ul>
+      </div>
+
+      <app-button [secondary]="true">
+        More categories
+        <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
+      </app-button>
+    </div>
+
+    <div class="section__content">
+      <app-card
+        class="section__content__card"
+        [imageUrl]="'https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg'"
+        [gradientPosition]="'top'"
+      >
+        <div>
+          <p class="section__content__card__upper-text">Special Offers</p>
+          <h2 class="section__content__card__heading">Multi-buy discounts available this week only!</h2>
+        </div>
+
+        <app-button>
+          Show more
+          <img ngSrc="assets/icons/ic-chevron-right-white.svg" width="24" height="24" alt="open">
+        </app-button>
+      </app-card>
+
+      <app-card class="section__content__card">
+        <div>
+          <h2 class="section__content__card__heading">Space for heading</h2>
+        </div>
+
+        <app-button [outlined]="true">
+          Read recepies
+        </app-button>
+      </app-card>
+    </div>
+  </section>
+
+</div>

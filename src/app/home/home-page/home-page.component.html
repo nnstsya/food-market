@@ -34,15 +34,21 @@
         </app-button>
       </app-banner>
 
-      <app-banner class="section__content__card">
-        <div>
-          <h2 class="section__content__card__heading">Space for heading</h2>
-        </div>
+        <app-banner
+                class="section__content__card"
+                [imageUrl]="'https://lh7-us.googleusercontent.com/docsz/AD_4nXc0mdnWSJDMkg8AnXxeW3ja7xvl_fg427-XFgzNPSTLEWyqGW4Nn6JLgTJC_EsVng2wWY6WZGrJLZw-GttmvHFOBmKl601_4fcwx644aMFSvROYsOxuu3t3U4IrHWcFVJL0hdRMKJUz3yI7pyC9Kgv7VcLt?key=aViLBHe981uqzrfs2Wn2gA'"
+                [gradientPosition]="'top'"
+        >
+            <div>
+                <p class="section__content__card__upper-text">Online E-vouchers</p>
+                <h2 class="section__content__card__heading">Online E-vouchers are redeemable on thousands of items in our webshop.</h2>
+            </div>
 
-        <app-button [outlined]="true">
-          Read recepies
-        </app-button>
-      </app-banner>
+            <app-button>
+                Buy E-vouchers
+                <img ngSrc="assets/icons/ic-chevron-right-white.svg" width="24" height="24" alt="open">
+            </app-button>
+        </app-banner>
     </div>
   </section>
 

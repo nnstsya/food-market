@@ -8,5 +8,5 @@ import { categoryData } from '@core/mocks/categories';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
-  bestSellingProducts: Category[] = categoryData.slice(0, 5)
+  categories: Category[] = categoryData.slice(0, 5)
 }

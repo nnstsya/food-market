@@ -1,11 +1,11 @@
 import { Component, input, InputSignal } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  selector: 'app-banner',
+  templateUrl: './banner.component.html',
+  styleUrl: './banner.component.scss'
 })
-export class CardComponent {
+export class BannerComponent {
   imageUrl: InputSignal<string> = input<string>('');
   gradientPosition: InputSignal<'top' | 'bottom' | 'none'> = input<'top' | 'bottom' | 'none'>('none');
 

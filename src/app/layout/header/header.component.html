@@ -19,7 +19,7 @@
 
         <div class="main-header__search-bar">
             @if (isHomePage) {
-                <app-dropdown [options]="mockCategoryData" placeholder="All categories"></app-dropdown>
+                <app-dropdown [options]="categories" placeholder="All categories"></app-dropdown>
                 <div class="divider"></div>
             }
 
@@ -39,7 +39,7 @@
 
   <section class="nav-bar">
     <ul class="nav-bar__list">
-      @for (category of mockCategoryData; track category) {
+      @for (category of categories; track category) {
         <li class="nav-bar__item" [routerLink]="'home/' + category.id">
             <p>{{ category.title }}</p>
         </li>

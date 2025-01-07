@@ -1,10 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface Category {
-  id: number;
-  title: string;
-}
+import { Category } from '@core/models/category.model';
+import { categoryData } from '@core/mocks/categories';
 
 @Component({
   selector: 'app-header',
@@ -12,44 +9,13 @@ interface Category {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  mockCategoryData: Category[] = [
-    {
-      id: 1,
-      title: 'Bakery'
-    },
-    {
-      id: 2,
-      title: 'Fruit and vegetables'
-    },
-    {
-      id: 3,
-      title: 'Meat and fish'
-    },
-    {
-      id: 4,
-      title: 'Drinks'
-    },
-    {
-      id: 5,
-      title: 'Kitchen'
-    },
-    {
-      id: 6,
-      title: 'Special nutrition'
-    },
-    {
-      id: 7,
-      title: 'Baby'
-    },
-    {
-      id: 8,
-      title: 'Pharmacy'
-    }
-  ];
-
   cartCount: number = 4;
+  isHomePage: boolean;
+  categories: Category[] = categoryData;
 
   private router: Router = inject(Router);
 
-  isHomePage: boolean = this.router.url === '/';
+  constructor() {
+    this.isHomePage = this.router.url === '/'
+  }
 }

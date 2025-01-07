@@ -1,11 +1,13 @@
 @use "../../../../styles/variables" as *;
 
 .dropdown {
+  $dropdown-padding: 10px;
+
   position: relative;
   width: fit-content;
 
   .dropdown-header {
-    padding-inline: 10px;
+    padding-inline: $dropdown-padding;
     background: none;
     gap: 8px;
     font-weight: 600;
@@ -36,11 +38,15 @@
     border-radius: $border-radius;
     max-height: 200px;
     overflow-y: scroll;
+    width: calc(100% + ($dropdown-padding * 2));
     z-index: 100;
+    top: 40px;
+    right: -10px;
 
     .dropdown-item {
       padding: 12px;
       cursor: pointer;
+      overflow-wrap: break-word;
 
       &:hover {
         background-color: #f0f0f0;

@@ -1,0 +1,25 @@
+<div class="card">
+  <img class="card__image" [src]="product().imageUrl" [alt]="product().title">
+
+  <div class="card__body">
+    <p class="card__body__product-title">{{ product().title }}</p>
+    <p class="card__body__product-description">{{ product().description }}</p>
+
+    @if (product().rating) {
+      <div class="card__body__product-rating">
+        @for (rating of getRatingArray(); track rating) {
+          @if (rating) {
+            <img ngSrc="assets/icons/ic-actions-star-filled.svg" width="16" height="16" alt="star">
+          } @else {
+            <img ngSrc="assets/icons/ic-actions-star.svg" width="16" height="16" alt="star">
+          }
+        }
+      </div>
+    }
+  </div>
+
+  <div class="card__footer">
+    <p class="card__footer__product-price">{{ product().price | number:'0.2' }} ₴</p>
+    <app-button size="s">Buy now</app-button>
+  </div>
+</div>

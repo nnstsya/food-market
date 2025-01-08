@@ -1,0 +1,25 @@
+<div class="reviews">
+  <div class="reviews__container">
+    <div class="reviews__gradient-fade reviews__gradient-fade--left"></div>
+    <img ngSrc="assets/icons/ic-chevron-left.svg" width="24" height="24" class="reviews__button reviews__button--prev" alt="previous" (click)="getPrev()">
+
+    <div class="reviews__track-wrapper">
+      <div [ngClass]="{ 'reviews__track--next': slideDirection === 'next', 'reviews__track--prev': slideDirection === 'prev'}" class="reviews__track">
+
+        @for (review of visibleReviews; track review.author) {
+          <div class="reviews__slide">
+            <p class="reviews__slide__text">“ {{ review.text }} “</p>
+            <span class="reviews__slide__author">{{ review.author }}</span>
+            <div class="reviews__slide__avatar">
+              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img"/>
+            </div>
+          </div>
+        }
+
+      </div>
+    </div>
+
+    <img ngSrc="assets/icons/ic-chevron-right.svg" width="24" height="24" class="reviews__button reviews__button--next" alt="next" (click)="getNext()">
+    <div class="reviews__gradient-fade reviews__gradient-fade--right"></div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 @use "../../../styles/variables" as *;
 
 .page {
-  min-height: calc(100vh - $footer-height - $page-bottom-padding);
+  min-height: calc(100vh - $footer-height - $header-height - $page-bottom-padding);
 }

@@ -1,0 +1,49 @@
+<header>
+  <section class="header">
+    <section class="top-bar">
+        <div class="top-bar__contact">
+            <p class="top-bar__contact__chat">Chat with us</p>
+            <a href="tel:+420336775664" class="top-bar__contact__option">+420 336 775 664</a>
+            <a href="mailto:info@freshnesecom.com" class="top-bar__contact__option">info&#64;freshnesecom.com</a>
+        </div>
+
+        <div class="top-bar__links">
+            <a routerLink="/blog" class="top-bar__links__link">Blog</a>
+            <a routerLink="/about" class="top-bar__links__link">About Us</a>
+            <a routerLink="/careers" class="top-bar__links__link">Careers</a>
+        </div>
+    </section>
+
+    <section class="main-header">
+        <p class="main-header__logo">freshnesecom</p>
+
+        <div class="main-header__search-bar">
+            @if (isHomePage) {
+                <app-dropdown [options]="categories" placeholder="All categories"></app-dropdown>
+                <div class="divider"></div>
+            }
+
+            <input type="text" class="main-header__search-bar__input" placeholder="Search Products, categories...">
+            <img ngSrc="assets/icons/ic-actions-search.svg" width="20" height="20" class="main-header__search-bar__input-icon" alt="search">
+        </div>
+
+        <div class="main-header__actions">
+            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account">
+            <div class="main-header__actions__cart">
+                <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
+                <span class="main-header__actions__cart-count">{{ cartCount }}</span>
+            </div>
+        </div>
+    </section>
+  </section>
+
+  <section class="nav-bar">
+    <ul class="nav-bar__list">
+      @for (category of categories; track category) {
+        <li class="nav-bar__item" [routerLink]="'home/' + category.id">
+            <p>{{ category.title }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+</header>

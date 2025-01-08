@@ -23,6 +23,9 @@
       "dom"
     ],
     "paths": {
+      "@layout/*": ["./src/app/layout/*"],
+      "@core/*": ["./src/app/core/*"],
+      "@shared/*": ["./src/app/shared/*"],
       "@environments/*": ["./src/environments/*"]
     }
   },

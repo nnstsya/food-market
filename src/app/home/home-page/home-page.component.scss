@@ -3,3 +3,73 @@
 .page {
   min-height: calc(100vh - $footer-height - $header-height - $page-bottom-padding);
 }
+
+.blogs {
+  display: flex;
+  flex-direction: column;
+  padding: 64px 45px;
+  gap: 32px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__heading {
+      font-weight: 600;
+    }
+
+    &__nav {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      font-weight: 600;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    gap: 32px;
+
+    &__less-recent {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    &__banner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: end;
+      gap: 8px;
+
+      &__heading {
+        font-weight: 600;
+      }
+
+      &__info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &__avatar {
+          height: 32px;
+          width: 32px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+
+        &__details {
+          display: flex;
+          gap: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+

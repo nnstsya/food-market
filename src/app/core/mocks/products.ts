@@ -21,5 +21,28 @@ export const productsData: Product[] = [
     title: 'Vacuum boiled whole chestnuts',
     description: 'Price for 1 piece',
     price: 29,
+  },
+  {
+    id: 4,
+    imageUrl: 'https://img.taste.com.au/Y5xrT0TD/taste/2013/06/kale-182565-1.jpg',
+    title: 'Kale',
+    description: 'Price for 1 kg',
+    price: 32,
+  },
+  {
+    id: 5,
+    imageUrl: 'https://images.squarespace-cdn.com/content/v1/5ec32aea37a8de7bea170760/1609968619441-EQWEE9Z4CTDU88ES4UFA/Fennel',
+    title: 'Fennel',
+    description: 'Price for 1 kg',
+    price: 25,
+  },
+  {
+    id: 6,
+    imageUrl: 'https://images.deliveryhero.io/image/fd-th/LH/jtyd-listing.jpg',
+    title: 'Raw chestnut - Freshmart',
+    description: 'Price for 1 kg',
+    price: 26,
   }
 ];
+
+export const popularProductsData: string[] = ['Carrots', 'Tomatoes', 'Potatoes', 'Chicken', 'Pork']

@@ -14,7 +14,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
   exports: [
     ButtonComponent,
     ProductCardComponent,
-    DropdownComponent
+    DropdownComponent,
+    ProductCardComponent
   ],
   imports: [
     CommonModule,

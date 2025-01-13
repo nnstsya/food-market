@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { ButtonComponent } from './components/button/button.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { NgOptimizedImage } from '@angular/common';
+import { SkeletonDirective } from './directives/skeleton.directive';
 
 @NgModule({
   declarations: [
-    DropdownComponent
-  ],
-  imports: [
-    NgOptimizedImage
+    ButtonComponent,
+    ProductCardComponent,
+    DropdownComponent,
+    SkeletonDirective,
   ],
   exports: [
-    DropdownComponent
+    ButtonComponent,
+    ProductCardComponent,
+    DropdownComponent,
+    ProductCardComponent,
+    SkeletonDirective
+  ],
+  imports: [
+    CommonModule,
+    NgOptimizedImage
   ]
 })
 export class SharedModule {}

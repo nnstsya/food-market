@@ -34,3 +34,5 @@ export const categoryData: Category[] = [
     title: 'Pharmacy'
   }
 ];
+
+export const popularCategoryData: string[] = ['Carrots', 'Tomatoes', 'Potatoes', 'Chicken', 'Pork']

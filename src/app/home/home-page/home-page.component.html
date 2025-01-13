@@ -5,21 +5,21 @@
       <div>
         <h3 class="section__menu__list__heading">Best selling products</h3>
         <ul class="section__menu__list">
-          @for (product of bestSellingProducts; track product.id) {
-            <li class="section__menu__list__item">{{ product.title }}</li>
+          @for (category of bestSellingProductsCategories; track category.id) {
+            <li class="section__menu__list__item">{{ category.title }}</li>
           }
         </ul>
       </div>
 
       <app-button [variant]="'secondary'">
-        More products
+        More Categories
         <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
       </app-button>
     </div>
 
     <div class="section__content">
-        @for (product of products; track product.id) {
-            <app-product-card [product]="product"></app-product-card>
+        @for (product of bestSellingProducts; track product?.id) {
+            <app-product-card [product]="product" [showRate]="false"></app-product-card>
         }
     </div>
   </section>
@@ -43,8 +43,8 @@
     </div>
 
     <div class="section__content">
-      @for (product of popularProducts; track product.id) {
-        <app-product-card [product]="product"></app-product-card>
+      @for (product of popularProducts; track product?.id) {
+        <app-product-card [product]="product" [showRate]="false"></app-product-card>
       }
     </div>
   </section>

@@ -9,7 +9,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
   declarations: [
     ButtonComponent,
     ProductCardComponent,
-    DropdownComponent,
+    DropdownComponent
   ],
   exports: [
     ButtonComponent,

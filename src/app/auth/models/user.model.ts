@@ -10,13 +10,24 @@ export interface UserPasswordRecovery {
 }
 
 export interface User {
-  "firstName": string,
-  "lastName": string,
-  "username": string,
-  "email": string,
-  "phoneNumber": string,
-  "role": string,
-  "newsletterConsent": boolean,
-  "id": string,
-  "token": string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  role: string;
+  newsletterConsent: boolean;
+  id: string;
+  token: string;
+}
+
+export interface UserData {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  repeatedPassword: string;
+  newsletterConsent: boolean;
 }

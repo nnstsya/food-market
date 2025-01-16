@@ -1,0 +1,20 @@
+@if (label()) {
+  <p class="input-label">{{ label() }}</p>
+}
+
+<div class="input-wrapper" [ngClass]="{ 'input-border': border(), 'error': errorState() }">
+  <input [type]="type()"
+         class="input"
+         [value]="value"
+         [disabled]="disabled"
+         (input)="onInputChange($event)"
+         (blur)="onBlur()"
+         [placeholder]="placeholder()"
+  >
+
+  @if (iconUrl()) {
+    <img [ngSrc]="iconUrl()" width="20" height="20" class="input-icon" (click)="onIconClick()">
+  }
+</div>
+
+

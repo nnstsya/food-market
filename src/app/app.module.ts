@@ -8,11 +8,10 @@ import { RouterOutlet } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { AuthModule } from '@auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,10 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     HttpClientModule,
     SharedModule,
-    AuthModule
+    AuthModule,
+    CoreModule,
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

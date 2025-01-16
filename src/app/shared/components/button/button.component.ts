@@ -8,4 +8,5 @@ import { Component, input, InputSignal } from '@angular/core';
 export class ButtonComponent {
   variant: InputSignal<'secondary' | 'outlined' | 'basic'> = input<'secondary' | 'outlined' | 'basic'>('basic');
   size: InputSignal<'s' | 'lg'> = input<'s' | 'lg'>('lg');
+  disabled: InputSignal<boolean> = input<boolean>(false);
 }

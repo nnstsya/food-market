@@ -8,6 +8,7 @@ import { SkeletonDirective } from './directives/skeleton.directive';
 import { InputComponent } from './components/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -15,23 +16,24 @@ import { ModalComponent } from './components/modal/modal.component';
     InputComponent,
     ButtonComponent,
     ModalComponent,
+    CheckboxComponent,
     ProductCardComponent,
     SkeletonDirective
-  ],
-  exports: [
-    ButtonComponent,
-    ProductCardComponent,
-    DropdownComponent,
-    ProductCardComponent,
-    SkeletonDirective,
-    InputComponent,
-    ModalComponent
   ],
   imports: [
     CommonModule,
     NgOptimizedImage,
     NgClass,
-    ReactiveFormsModule,
-  ]
+    ReactiveFormsModule
+  ],
+  exports: [
+    DropdownComponent,
+    InputComponent,
+    ButtonComponent,
+    ModalComponent,
+    ProductCardComponent,
+    SkeletonDirective,
+    CheckboxComponent
+  ],
 })
 export class SharedModule {}

@@ -6,12 +6,13 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     PasswordRecoveryComponent,
-    LoginComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +24,7 @@ import { LoginComponent } from "./login/login.component";
   exports: [
     LoginComponent,
     PasswordRecoveryComponent,
-    LoginComponent
+    RegisterComponent
   ]
 })
 export class AuthModule {}

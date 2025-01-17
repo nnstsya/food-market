@@ -4,6 +4,16 @@
   min-height: calc(100vh - $footer-height - $header-height - $page-bottom-padding);
 }
 
+.quotes {
+  padding-block: 64px;
+
+  &__heading {
+    font-weight: 600;
+    padding-inline: 45px;
+    margin-bottom: 32px;
+  }
+}
+
 .blogs {
   display: flex;
   flex-direction: column;

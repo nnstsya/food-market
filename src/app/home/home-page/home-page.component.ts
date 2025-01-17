@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { blogData } from '@core/mocks/blogs';
 import { Blog } from '@core/models/blog.model';
+import { Review } from '@core/models/review.model';
+import { reviewData } from '@core/mocks/reviews';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +12,7 @@ import { Blog } from '@core/models/blog.model';
 export class HomePageComponent implements OnInit {
   blogs: Blog[] = blogData;
   sortedBlogs: Blog[] = [];
+  reviews: Review[] = reviewData;
 
   ngOnInit() {
     this.getSortedBlogs();

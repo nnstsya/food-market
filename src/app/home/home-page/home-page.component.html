@@ -1,4 +1,15 @@
 <div class="page">
+  <div class="quotes">
+    <h3 class="quotes__heading">Our customers say</h3>
+
+    @if (reviews.length > 3) {
+      <app-reviews-slider [reviews]="reviews"></app-reviews-slider>
+    } @else {
+      <app-reviews [reviews]="reviews"></app-reviews>
+    }
+
+  </div>
+
   <section class="blogs">
     <div class="blogs__header">
       <h3 class="blogs__header__heading">Read our Blog posts</h3>

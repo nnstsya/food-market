@@ -1,21 +1,7 @@
 <div class="page">
   <section class="section">
 
-    <div class="section__menu">
-      <div>
-        <h3 class="section__menu__list__heading">Category menu</h3>
-        <ul class="section__menu__list">
-          @for (category of categories; track category.id) {
-            <li class="section__menu__list__item">{{ category.title }}</li>
-          }
-        </ul>
-      </div>
-
-      <app-button [secondary]="true">
-        More categories
-        <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
-      </app-button>
-    </div>
+    <app-list [heading]="'Category menu'" [items]="categories" [buttonText]="'More categories'"></app-list>
 
     <div class="section__content">
       <app-banner

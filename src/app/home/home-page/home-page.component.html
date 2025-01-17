@@ -1,1 +1,12 @@
-<div class="page"></div>
+<div class="page">
+  <div class="quotes">
+    <h3 class="quotes__heading">Our customers say</h3>
+
+    @if (reviews.length > 3) {
+      <app-reviews-slider [reviews]="reviews"></app-reviews-slider>
+    } @else {
+      <app-reviews [reviews]="reviews"></app-reviews>
+    }
+
+  </div>
+</div>

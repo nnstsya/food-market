@@ -1,0 +1,123 @@
+@use "../../../../styles/variables" as *;
+
+.reviews {
+  $slide-width: 369px;
+  height: 250px;
+
+  &__container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__track {
+    display: flex;
+    justify-content: center;
+    padding-block: 4px;
+    gap: 32px;
+  }
+
+  &__slide {
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    align-items: center;
+    min-width: $slide-width;
+    max-width: $slide-width;
+    font-weight: 500;
+    height: 220px;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    border-radius: $border-radius;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
+
+    &__text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+    }
+
+    &__author {
+      display: block;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    &__avatar {
+      position: absolute;
+      bottom: -20px;
+      left: 44%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &__avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__button {
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.2s ease-out;
+    background-color: #151515;
+    width: 32px;
+    height: 48px;
+    z-index: 2;
+
+    &:hover {
+      opacity: 75%;
+      cursor: pointer;
+    }
+
+    &--prev {
+      border-radius: 0 10px 10px 0;
+      left: 0;
+    }
+
+    &--next {
+      border-radius: 10px 0 0 10px;
+      right: 0;
+    }
+  }
+
+  &__gradient-fade {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+
+    &--left {
+      background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      left: 0;
+    }
+
+    &--right {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      right: 0;
+    }
+  }
+
+  &__track--next {
+    transform: translateX(calc(-1 * $slide-width * 1.086));
+    transition: transform 0.5s ease;
+  }
+
+  &__track--prev {
+    transform: translateX(calc($slide-width * 1.086));
+    transition: transform 0.5s ease;
+  }
+}
+

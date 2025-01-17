@@ -1,0 +1,19 @@
+<div class="reviews">
+  <div class="reviews__container">
+    <div class="reviews__track-wrapper">
+      <div class="reviews__track">
+
+        @for (review of reviews(); track review.author) {
+          <div class="reviews__slide">
+            <p class="reviews__slide__text">“ {{ review.text }} “</p>
+            <span class="reviews__slide__author">{{ review.author }}</span>
+            <div class="reviews__slide__avatar">
+              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img"/>
+            </div>
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>

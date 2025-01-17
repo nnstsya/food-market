@@ -13,3 +13,19 @@
     justify-content: center;
   }
 }
+
+.modal {
+  position: absolute;
+  z-index: 999;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}

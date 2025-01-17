@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { popularProductsData, productsData } from '@core/mocks/products';
-import { Product } from '@core/models/product.model';
+import { Product, ProductItem } from '@core/models/product.model';
 
 @Component({
   selector: 'app-home-page',
@@ -9,5 +9,5 @@ import { Product } from '@core/models/product.model';
 })
 export class HomePageComponent {
   popularProducts: Product[] = productsData.slice(3, 6);
-  popularProductsCategories: string[] = popularProductsData;
+  popularProductsCategories: ProductItem[] = popularProductsData;
 }

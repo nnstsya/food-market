@@ -1,4 +1,4 @@
-import { Product } from '@core/models/product.model';
+import { Product, ProductItem } from '@core/models/product.model';
 
 export const productsData: Product[] = [
   {
@@ -45,4 +45,10 @@ export const productsData: Product[] = [
   }
 ];
 
-export const popularProductsData: string[] = ['Carrots', 'Tomatoes', 'Potatoes', 'Chicken', 'Pork']
+export const popularProductsData: ProductItem[] = [
+  { id: '1', title: 'Carrots' },
+  { id: '2', title: 'Tomatoes' },
+  { id: '3', title: 'Potatoes' },
+  { id: '4', title: 'Chicken' },
+  { id: '5', title: 'Pork' },
+];

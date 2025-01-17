@@ -6,3 +6,8 @@ export interface Product {
   rating?: number;
   price: number;
 }
+
+export interface ProductItem {
+  id: string;
+  title: string;
+}

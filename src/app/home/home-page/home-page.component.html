@@ -9,4 +9,36 @@
     }
 
   </div>
+
+  <section class="blogs">
+    <div class="blogs__header">
+      <h3 class="blogs__header__heading">Read our Blog posts</h3>
+      <div class="blogs__header__nav" routerLink="/blogs">
+        <p>Go to blog</p>
+        <img ngSrc="assets/icons/ic-chevron-right-green.svg" width="24" height="24" alt="go">
+      </div>
+    </div>
+
+    <div class="blogs__items">
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage">
+        <div class="blogs__items__banner">
+          <h2 class="blogs__items__banner__heading">{{ sortedBlogs[0].title }}</h2>
+          <div class="blogs__items__banner__info">
+            <img class="blogs__items__banner__info__avatar" [src]="sortedBlogs[0].authorAvatar" [alt]="sortedBlogs[0].author">
+            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].author }}</p>
+            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].date }}</p>
+          </div>
+        </div>
+      </app-banner>
+
+      <app-blog-card [blog]="sortedBlogs[1]"></app-blog-card>
+
+      <div class="blogs__items__less-recent">
+        <app-blog-card [blog]="sortedBlogs[2]" type="horizontal"></app-blog-card>
+        <app-blog-card [blog]="sortedBlogs[3]" type="horizontal"></app-blog-card>
+        <app-blog-card [blog]="sortedBlogs[4]" type="horizontal"></app-blog-card>
+      </div>
+    </div>
+
+  </section>
 </div>

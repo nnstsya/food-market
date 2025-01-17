@@ -1,0 +1,67 @@
+<h3>Log in to your account</h3>
+
+<p class="modal__text">Login to access all features our app offers.</p>
+
+<div class="divider"></div>
+
+<form [formGroup]="loginForm" class="modal__form" (ngSubmit)="onSubmit()">
+  @if (serverError) {
+    <div class="server-side-error">
+      {{ serverError }}
+    </div>
+  }
+
+  <div class="modal__form__input">
+    <app-input
+      [placeholder]="'Email'"
+      [type]="'email'"
+      [label]="'Email'"
+      [border]="true"
+      [errorState]="!!serverError || !!(loginForm.get('email')?.invalid && loginForm.get('email')?.touched)"
+      formControlName="email"
+    ></app-input>
+
+    @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+      <div class="error">
+        Please enter a valid email.
+      </div>
+    }
+  </div>
+
+  <div class="modal__form__input">
+    <app-input
+      [placeholder]="'Password'"
+      [type]="passwordVisible ? 'text' : 'password'"
+      [label]="'Password'"
+      [iconUrl]="passwordVisible ? 'assets/icons/ic-actions-view.svg' : 'assets/icons/ic-actions-closed-view.svg'"
+      (iconClicked)="togglePasswordVisibility()"
+      [errorState]="!!serverError || !!(loginForm.get('password')?.invalid && loginForm.get('password')?.touched)"
+      formControlName="password"
+    ></app-input>
+
+    @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+      <div class="error">
+        Password must be at least 6 characters long, include a letter, a number, and a special character.
+      </div>
+    }
+
+    <a class="modal__form__input__password-recovery" (click)="openPasswordRecoveryModal()">Forgot your password?</a>
+  </div>
+
+  <div class="modal__form__buttons">
+    <app-button
+      class="modal__form__buttons__button"
+      [size]="'s'"
+      [disabled]="!loginForm.valid"
+    >
+      Login
+    </app-button>
+    <app-button
+      [variant]="'secondary'"
+      [size]="'s'"
+      class="modal__form__buttons__button"
+    >
+      Create account
+    </app-button>
+  </div>
+</form>

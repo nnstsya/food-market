@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from '@core/models/category.model';
+import { CategoryItem } from '@core/models/category.model';
 import { categoryData } from '@core/mocks/categories';
 
 @Component({
@@ -11,7 +11,7 @@ import { categoryData } from '@core/mocks/categories';
 export class HeaderComponent {
   cartCount: number = 4;
   isHomePage: boolean;
-  categories: Category[] = categoryData;
+  categories: CategoryItem[] = categoryData;
 
   private router: Router = inject(Router);
 

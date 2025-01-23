@@ -9,6 +9,7 @@ import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
 import { TagComponent } from './components/tag/tag.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TagComponent } from './components/tag/tag.component';
     BreadcrumbsComponent,
     ButtonComponent,
     ProductCardComponent,
-    TagComponent
+    TagComponent,
+    PaginationComponent
   ],
   imports: [
     NgOptimizedImage,
@@ -28,14 +30,15 @@ import { TagComponent } from './components/tag/tag.component';
     DecimalPipe,
     NgClass
   ],
-  exports: [
-    DropdownComponent,
-    BannerComponent,
-    BlogCardComponent,
-    BreadcrumbsComponent,
-    ButtonComponent,
-    ProductCardComponent,
-    TagComponent
-  ]
+    exports: [
+        DropdownComponent,
+        BannerComponent,
+        BlogCardComponent,
+        BreadcrumbsComponent,
+        ButtonComponent,
+        ProductCardComponent,
+        TagComponent,
+        PaginationComponent
+    ]
 })
 export class SharedModule {}

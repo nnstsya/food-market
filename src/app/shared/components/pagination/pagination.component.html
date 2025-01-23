@@ -1,0 +1,25 @@
+<div class="pagination">
+  <div class="pagination__pages">
+    <p class="pagination__pages__text">Page:</p>
+
+    @for (page of pagesCountArray; track page) {
+      <p class="pagination__pages__item"
+         (click)="onPageClick($index + 1)"
+         [ngClass]="{ 'selected': currentPages.includes($index + 1) }">
+        {{ page }}
+      </p>
+    }
+  </div>
+
+  @if (currentPages[currentPages.length - 1] < totalPages) {
+    <app-button (click)="onShowMore()">
+      <p>Show more {{ itemName() }}</p>
+      <img ngSrc="assets/icons/ic-chevron-down-white.svg" width="24" height="24">
+    </app-button>
+  }
+
+  <div class="pagination__items">
+    <app-tag [text]="totalItems()"></app-tag>
+    <p class="pagination__items__text">{{ itemWithCapital }}</p>
+  </div>
+</div>

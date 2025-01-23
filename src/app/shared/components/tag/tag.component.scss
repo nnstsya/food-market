@@ -1,0 +1,13 @@
+@use "../../../../styles/variables" as *;
+
+.tag {
+  background-color: #F4F8EC;
+  padding-inline: 8px;
+  width: fit-content;
+  border-radius: $border-radius;
+
+  &__text {
+    font-size: 12px;
+    color: $primary-color;
+  }
+}

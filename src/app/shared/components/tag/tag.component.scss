@@ -1,13 +1,46 @@
 @use "../../../../styles/variables" as *;
 
 .tag {
-  background-color: #F4F8EC;
   padding-inline: 8px;
   width: fit-content;
   border-radius: $border-radius;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  height: 20px;
 
   &__text {
     font-size: 14px;
+  }
+
+  &__close {
+    opacity: 0.3;
+    cursor: pointer;
+    transition: 0.1s opacity ease-out;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &-closed {
+    display: none;
+  }
+}
+
+.green {
+  background-color: #F4F8EC;
+
+  &-text {
     color: $primary-color;
+  }
+}
+
+.gray {
+  background-color: $light-bg-color;
+  border: 1px solid $border-color;
+
+  &-text {
+    color: #000;
   }
 }

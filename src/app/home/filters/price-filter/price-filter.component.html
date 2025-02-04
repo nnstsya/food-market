@@ -1,0 +1,9 @@
+<div class="filter">
+  <h3 class="filter__heading">Price</h3>
+
+  <app-range
+    [min]="minValue()"
+    [max]="maxValue()"
+    (rangeChange)="onPriceChange($event)">
+  </app-range>
+</div>

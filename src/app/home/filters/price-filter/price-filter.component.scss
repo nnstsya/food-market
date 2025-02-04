@@ -1,0 +1,9 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__heading {
+    font-weight: 600;
+  }
+}

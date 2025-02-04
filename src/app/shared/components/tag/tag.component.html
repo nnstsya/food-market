@@ -1,3 +1,15 @@
-<div class="tag">
-  <p class="tag__text">{{ text() }}</p>
+<div class="tag" [ngClass]="{
+    'tag-closed': !visible,
+    'green': color() === 'green',
+    'gray': color() === 'gray'
+ }">
+  <p class="tag__text" [ngClass]="{ 'green-text': color() === 'green', 'gray-text': color() === 'gray'}">
+    {{ text() }}
+  </p>
+
+  <ng-content></ng-content>
+
+  @if (removable()) {
+    <img ngSrc="assets/icons/ic-actions-close-simple.svg" width="16" height="16" class="tag__close" (click)="remove()"/>
+  }
 </div>

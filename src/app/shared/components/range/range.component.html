@@ -1,0 +1,46 @@
+<div class="slider__container">
+    <div class="slider__wrapper">
+        <input
+                type="range"
+                class="slider min-slider"
+                [min]="min()"
+                [max]="maxValue - step()"
+                [step]="step()"
+                [value]="minValue"
+                (input)="handleSliderInput($event, 'min')"
+                [style.width.%]="minSliderWidth"
+        />
+
+        <input
+                type="range"
+                class="slider max-slider"
+                [min]="minValue + step()"
+                [max]="max()"
+                [step]="step()"
+                [value]="maxValue"
+                (input)="handleSliderInput($event, 'max')"
+                [style.width.%]="maxSliderWidth"
+        />
+
+        <div class="slider__track slider__track-inactive"></div>
+        <div class="slider__track" [style.left.%]="trackLeft" [style.width.%]="trackWidth"></div>
+    </div>
+
+    <div class="inputs">
+        <app-input class="inputs__item"
+                   [label]="'Min'"
+                   [placeholder]="''"
+                   [type]="'number'"
+                   [(ngModel)]="minInputValue"
+                   (blur)="handleInputChange('min')">
+        </app-input>
+        <p class="inputs__separator">-</p>
+        <app-input class="inputs__item"
+                   [label]="'Max'"
+                   [placeholder]="''"
+                   [type]="'number'"
+                   [(ngModel)]="maxInputValue"
+                   (blur)="handleInputChange('max')">
+        </app-input>
+    </div>
+</div>

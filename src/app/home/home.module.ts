@@ -17,8 +17,8 @@ import { SharedModule } from '@shared/shared.module';
   ],
   imports: [
     HomeRoutingModule,
-    SharedModule,
     NgOptimizedImage,
+    SharedModule,
     NgClass
   ]
 })

@@ -1,4 +1,66 @@
 <div class="page">
+  <section class="section">
+
+    <div class="section__menu">
+      <div>
+        <h3 class="section__menu__list__heading">Best selling products</h3>
+        <ul class="section__menu__list">
+          @for (category of bestSellingProductsCategories; track category.id) {
+            <li class="section__menu__list__item">{{ category.title }}</li>
+          }
+        </ul>
+      </div>
+
+      <app-button [variant]="'secondary'">
+        More Categories
+        <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
+      </app-button>
+    </div>
+
+    <div class="section__content">
+
+      @if (bestSellingProducts.length > 0) {
+        @for (product of bestSellingProducts; track product?.id) {
+          <app-product-card [product]="product" [showRate]="false"></app-product-card>
+        }
+      } @else {
+        <span class="loader"></span>
+      }
+
+    </div>
+  </section>
+
+  <section class="section">
+
+    <div class="section__menu">
+      <div>
+        <h3 class="section__menu__list__heading">Best from Farmers</h3>
+        <ul class="section__menu__list">
+          @for (product of popularProductsCategories; track product) {
+            <li class="section__menu__list__item">{{ product }}</li>
+          }
+        </ul>
+      </div>
+
+      <app-button [variant]="'secondary'">
+        More products
+        <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
+      </app-button>
+    </div>
+
+    <div class="section__content">
+
+      @if (popularProducts.length > 0) {
+        @for (product of popularProducts; track product?.id) {
+          <app-product-card [product]="product" [showRate]="false"></app-product-card>
+        }
+      } @else {
+        <span class="loader"></span>
+      }
+
+    </div>
+  </section>
+
   <div class="quotes">
     <h3 class="quotes__heading">Our customers say</h3>
 

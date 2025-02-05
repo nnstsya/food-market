@@ -4,20 +4,23 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ReviewsComponent } from './home-page/reviews/reviews.component';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { ReviewsSliderComponent } from '@home/home-page/reviews-slider/reviews-slider.component';
 import { SharedModule } from '@shared/shared.module';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     HomePageComponent,
     ReviewsComponent,
-    ReviewsSliderComponent
+    ReviewsSliderComponent,
+    CategoryComponent
   ],
   imports: [
     HomeRoutingModule,
     NgOptimizedImage,
+    AsyncPipe,
     SharedModule,
     NgClass
   ]

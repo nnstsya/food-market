@@ -45,3 +45,5 @@ export const categoriesData: Record<Category, string> = {
   [Category.BABY]: "Baby",
   [Category.PHARMACY]: "Pharmacy",
 };
+
+export const popularCategoryData: string[] = ['Carrots', 'Tomatoes', 'Potatoes', 'Chicken', 'Pork']

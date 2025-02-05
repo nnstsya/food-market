@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { Category } from '@core/models/category.model';
+import { CategoryItem } from '@core/models/category.model';
 import { categoryData, popularCategoryData } from '@core/mocks/categories';
 import { Product } from '@core/models/product.model';
 import { ProductsService } from '@home/services/products.service';
@@ -17,7 +17,7 @@ import { reviewData } from '@core/mocks/reviews';
 })
 export class HomePageComponent implements OnInit {
   popularProductsCategories: string[] = popularCategoryData;
-  bestSellingProductsCategories: Category[] = categoryData.slice(0, 5)
+  bestSellingProductsCategories: CategoryItem[] = categoryData.slice(0, 5)
   popularProducts: Product[] = [];
   bestSellingProducts: Product[] = [];
   blogs: Blog[] = blogData;

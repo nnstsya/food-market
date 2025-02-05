@@ -90,7 +90,7 @@
         </p>
 
         <div class="card-horizontal__footer__delivery">
-          <p class="card-horizontal__footer__delivery-info">Free Shipping</p>
+          <p class="card-horizontal__footer__delivery-info">{{ product().deliveryCoast ? product().deliveryCoast + ' UAH' : 'Free'}} Shipping</p>
           <p class="card-horizontal__footer__delivery-speed">Delivery {{ product().deliveryDays === 1 ? 'in 1 day' : product().deliveryDays === 0 ? 'today' : 'in ' + product().deliveryDays + ' days' }}</p>
         </div>
 

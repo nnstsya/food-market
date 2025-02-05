@@ -11,7 +11,7 @@ export interface Product {
   freshness: number;
   buyBy: string[];
   deliveryDays: number;
-  delivery: number;
+  deliveryCoast: number;
   deliveryAria: string;
   maxKgs: number;
   description: string;

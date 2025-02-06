@@ -1,0 +1,18 @@
+@if (breadcrumbs.length) {
+  <nav class="breadcrumbs">
+    @for (breadcrumb of breadcrumbs; track breadcrumb.label) {
+      @if (!$last) {
+        <p [routerLink]="breadcrumb.url" class="breadcrumbs__link">{{ breadcrumb.label }}</p>
+      }
+
+      @if ($last) {
+        <p [routerLink]="breadcrumb.url" class="breadcrumbs__current">{{ breadcrumb.label }}</p>
+      }
+
+      @if (!$last) {
+        <p [routerLink]="breadcrumb.url" class="breadcrumbs__separator">/</p>
+      }
+    }
+  </nav>
+}
+

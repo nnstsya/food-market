@@ -15,9 +15,19 @@
       </div>
 
       <div class="page__content">
-        @for (product of products; track product.id) {
-          <app-product-card [product]="product" [type]="'horizontal'"></app-product-card>
+        @if (productsQuantity) {
+          @for (product of products; track product.id) {
+            <app-product-card [product]="product" [type]="'horizontal'"></app-product-card>
+          }
+        } @else {
+          <p class="page__category-text">Sorry, looks like there are no products available in this category.</p>
         }
+      </div>
+    </div>
+  } @else {
+    <div class="page">
+      <div class="page__content">
+        <span class="loader"></span>
       </div>
     </div>
   }

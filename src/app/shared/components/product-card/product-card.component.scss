@@ -78,18 +78,19 @@
     }
   }
 
-
   &-horizontal {
     flex-direction: row;
+    justify-content: space-between;
     padding: 0;
     width: 869px;
     height: 280px;
+    gap: 0;
 
     &__content {
       display: flex;
       justify-content: space-between;
       height: 100%;
-      width: 100%;
+      width: 590px;
     }
 
     &__body, &__footer {

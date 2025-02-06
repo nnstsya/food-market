@@ -143,21 +143,44 @@
 .nav-bar {
   background-color: $light-bg-color;
   padding: 16px 45px;
+  height: 56px;
+  position: relative;
 
   &__list {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
     list-style: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 5px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__item {
     font-weight: 500;
     cursor: pointer;
+    width: fit-content;
+    flex-shrink: 0;
 
     &:hover {
       color: $primary-color;
       text-decoration: underline;
+    }
+
+    &-active {
+      color: $primary-color;
+      cursor: default;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }
@@ -166,4 +189,15 @@
   width: 2px;
   height: 26px;
   background-color: $border-color;
+}
+
+.nav__gradient-fade {
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 56px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba($light-bg-color, 1) 100%);
+  right: 32px;
 }

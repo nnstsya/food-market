@@ -1,6 +1,7 @@
-import { Category, CategoryItem } from '@core/models/category.model';
+import { Category } from '@core/models/category.model';
+import { Option } from "@shared/components/dropdown/dropdown.component";
 
-export const categoryData: CategoryItem[] = [
+export const categoryData: Option[] = [
   {
     id: 1,
     title: 'Bakery'

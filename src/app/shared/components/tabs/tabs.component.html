@@ -1,0 +1,15 @@
+<div class="tabs">
+  <div class="tabs__header">
+    @for (tab of tabTitles(); track tab; let i = $index) {
+      <div (click)="selectTab(i)" [class.tabs__header__tab-active]="i === activeTab" class="tabs__header__tab">
+        <p class="tabs__header__tab-title">{{ tab }}</p>
+
+        @if (tabTags()[i]) {
+          <app-tag [text]="tabTags()[i]!.toString()"></app-tag>
+        }
+      </div>
+    }
+  </div>
+  <ng-container *ngTemplateOutlet="tabContents.get(activeTab) ?? null"></ng-container>
+</div>
+

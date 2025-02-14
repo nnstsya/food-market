@@ -8,6 +8,7 @@ import { AsyncPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { ReviewsSliderComponent } from '@home/home-page/reviews-slider/reviews-slider.component';
 import { SharedModule } from '@shared/shared.module';
 import { CategoryComponent } from './category/category.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CategoryComponent } from './category/category.component';
     HomePageComponent,
     ReviewsComponent,
     ReviewsSliderComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductDetailComponent
   ],
   imports: [
     HomeRoutingModule,

@@ -1,5 +1,5 @@
 @if (type() === 'vertical') {
-  <div class="card">
+  <div class="card" (click)="navigateToProductDetail()">
     <img class="card__image"
          [src]="product().image"
          (error)="onImageError($event)"
@@ -35,7 +35,7 @@
     </div>
   </div>
 } @else {
-  <div class="card card-horizontal">
+  <div class="card card-horizontal" (click)="navigateToProductDetail()">
     <img class="card__image card-horizontal__image"
          [src]="product().image"
          (error)="onImageError($event)"

@@ -9,6 +9,8 @@ import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
 import { TagComponent } from './components/tag/tag.component';
+import { InputComponent } from "@shared/components/input/input.component";
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { TagComponent } from './components/tag/tag.component';
     BreadcrumbsComponent,
     ButtonComponent,
     ProductCardComponent,
-    TagComponent
+    TagComponent,
+    InputComponent,
+    TabsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { TagComponent } from './components/tag/tag.component';
     BreadcrumbsComponent,
     ButtonComponent,
     ProductCardComponent,
-    TagComponent
+    TagComponent,
+    InputComponent,
+    TabsComponent
   ]
 })
 export class SharedModule {}

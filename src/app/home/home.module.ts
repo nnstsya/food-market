@@ -9,6 +9,7 @@ import { ReviewsSliderComponent } from '@home/home-page/reviews-slider/reviews-s
 import { SharedModule } from '@shared/shared.module';
 import { CategoryComponent } from './category/category.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ReviewsComponent,
     ReviewsSliderComponent,
     CategoryComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductRecommendationsComponent
   ],
   imports: [
     HomeRoutingModule,

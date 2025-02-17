@@ -29,17 +29,19 @@
 
     <div class="card__footer">
       <p class="card__footer__product-price">
-        {{ product().price | number: '1.2-2' }} ₴
+        {{ product().price | number: '1.2-2' }} UAH
       </p>
       <app-button [size]="'s'">Buy now</app-button>
     </div>
   </div>
 } @else {
   <div class="card card-horizontal" (click)="navigateToProductDetail()">
-    <img class="card__image card-horizontal__image"
-         [src]="product().image"
-         (error)="onImageError($event)"
-    />
+    <div class="card-horizontal__image-wrapper">
+      <img class="card__image card-horizontal__image"
+           [src]="product().image"
+           (error)="onImageError($event)"
+      />
+    </div>
 
     <div class="card-horizontal__content">
       <div class="card__body card-horizontal__body">

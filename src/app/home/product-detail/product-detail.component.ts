@@ -21,6 +21,7 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
   buyByOptions: Option[] = buyByOptions;
+  quantity: number = 1;
 
   private productService: ProductsService = inject(ProductsService);
   private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
@@ -74,7 +75,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getFormattedBuyOptions(): string {
-    let uniqueOptions = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
+    let uniqueOptions: string[] = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
       return array.lastIndexOf(value) === index;
     });
 
@@ -86,7 +87,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.shoppingCartService.addToCart(this.product!, 1);
+    this.shoppingCartService.addToCart(this.product!, Number(this.quantity));
   }
 
   private updateBuyByOptions(): void {

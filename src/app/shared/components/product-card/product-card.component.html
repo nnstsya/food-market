@@ -40,7 +40,6 @@
     <img class="card__image card-horizontal__image"
          [src]="product().image"
          (error)="onImageError($event)"
-         (click)="navigateToProductDetail()"
     />
 
     <div class="card-horizontal__content">
@@ -95,7 +94,7 @@
         </div>
 
         <div class="card-horizontal__footer__buttons">
-          <app-button class="card-horizontal__footer__button">
+          <app-button class="card-horizontal__footer__button" (click)="navigateToProductDetail()">
             <p>Product detail</p>
             <img ngSrc="assets/icons/ic-chevron-right.svg" width="18" height="18">
           </app-button>

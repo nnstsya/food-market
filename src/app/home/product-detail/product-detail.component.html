@@ -68,7 +68,7 @@
             <app-dropdown [options]="buyByOptions" [placeholder]="buyByOptions[0].title"></app-dropdown>
           </div>
 
-          <app-button>
+          <app-button (click)="addToCart()">
             <div class="product__purchase-section__actions__button">
               <img ngSrc="assets/icons/ic-actions-add-simple.svg" width="18" height="18"/>
               <p>Add to cart</p>

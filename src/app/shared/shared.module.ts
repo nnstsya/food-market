@@ -11,6 +11,7 @@ import { ProductCardComponent } from "@shared/components/product-card/product-ca
 import { TagComponent } from './components/tag/tag.component';
 import { InputComponent } from "@shared/components/input/input.component";
 import { TabsComponent } from './components/tabs/tabs.component';
+import { ModalComponent } from "@shared/components/modal/modal.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TabsComponent } from './components/tabs/tabs.component';
     ProductCardComponent,
     TagComponent,
     InputComponent,
-    TabsComponent
+    TabsComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { TabsComponent } from './components/tabs/tabs.component';
     ProductCardComponent,
     TagComponent,
     InputComponent,
-    TabsComponent
+    TabsComponent,
+    ModalComponent
   ]
 })
 export class SharedModule {}

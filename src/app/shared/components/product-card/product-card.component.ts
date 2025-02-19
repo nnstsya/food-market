@@ -3,6 +3,7 @@ import { Product } from '@core/models/product.model';
 import { ProductsService } from "@home/services/products.service";
 import { Category } from "@core/models/category.model";
 import { Router } from "@angular/router";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
 
 @Component({
   selector: 'app-product-card',
@@ -15,6 +16,7 @@ export class ProductCardComponent {
   type: InputSignal<'vertical' | 'horizontal'> = input<'vertical' | 'horizontal'>('vertical');
 
   private productService: ProductsService = inject(ProductsService);
+  private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private router: Router = inject(Router);
 
   getRatingArray(): number[] {
@@ -61,6 +63,10 @@ export class ProductCardComponent {
       ['homepage', categoryName, productName],
       { queryParams: { id: product.id } }
     );
+  }
+
+  addToCart(): void {
+    this.shoppingCartService.addToCart(this.product(), 1);
   }
 
   private getFormatedCategoryName(categoryName: string): string {

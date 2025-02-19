@@ -1,8 +1,9 @@
 @if (type() === 'vertical') {
-  <div class="card" (click)="navigateToProductDetail()">
+  <div class="card">
     <img class="card__image"
          [src]="product().image"
          (error)="onImageError($event)"
+         (click)="navigateToProductDetail()"
     />
 
     <div class="card__body">
@@ -31,14 +32,15 @@
       <p class="card__footer__product-price">
         {{ product().price | number: '1.2-2' }} ₴
       </p>
-      <app-button [size]="'s'">Buy now</app-button>
+      <app-button [size]="'s'" (click)="addToCart()">Buy now</app-button>
     </div>
   </div>
 } @else {
-  <div class="card card-horizontal" (click)="navigateToProductDetail()">
+  <div class="card card-horizontal">
     <img class="card__image card-horizontal__image"
          [src]="product().image"
          (error)="onImageError($event)"
+         (click)="navigateToProductDetail()"
     />
 
     <div class="card-horizontal__content">
@@ -80,8 +82,6 @@
             <p class="card__body__product-info__items-item text-primary">{{ product().maxKgs }} kg</p>
           </div>
         </div>
-
-
       </div>
 
       <div class="card__footer card-horizontal__footer">
@@ -111,7 +111,6 @@
               <p>Add to wish list</p>
             </app-button>
           }
-
         </div>
       </div>
     </div>

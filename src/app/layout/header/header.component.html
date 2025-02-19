@@ -29,7 +29,7 @@
 
         <div class="main-header__actions">
             <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account">
-            <div class="main-header__actions__cart">
+            <div class="main-header__actions__cart" (click)="openShoppingCart()">
                 <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
                 <span class="main-header__actions__cart-count">{{ cartCount }}</span>
             </div>

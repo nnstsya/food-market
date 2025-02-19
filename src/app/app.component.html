@@ -1,5 +1,15 @@
-<div class="page-wrapper">
+<div class="page-wrapper" [ngClass]="(modalOpened$ | async) ? 'no-scroll' : ''">
   <app-layout class="page">
     <router-outlet></router-outlet>
   </app-layout>
+
+  @if (modalOpened$ | async) {
+    @switch (modalType$ | async) {
+      @case ('cart') {
+        <app-modal class="modal">
+          <app-shopping-cart class="modal-content"></app-shopping-cart>
+        </app-modal>
+      }
+    }
+  }
 </div>

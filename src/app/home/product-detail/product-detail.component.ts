@@ -11,6 +11,7 @@ import { Stock } from "@core/models/stock.model";
 import { Option } from "@shared/components/dropdown/dropdown.component";
 import { buyByOptions } from "@core/mocks/products";
 import { categoriesData } from "@core/mocks/categories";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -22,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
   buyByOptions: Option[] = buyByOptions;
 
   private productService: ProductsService = inject(ProductsService);
+  private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
@@ -81,6 +83,10 @@ export class ProductDetailComponent implements OnInit {
 
   getUrlCategoryName(title: string): string {
    return this.getFormattedCategory(title).split(' ').join('').toLowerCase();
+  }
+
+  addToCart(): void {
+    this.shoppingCartService.addToCart(this.product!, 1);
   }
 
   private updateBuyByOptions(): void {

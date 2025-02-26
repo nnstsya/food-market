@@ -16,7 +16,11 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     ModalComponent,
     CheckboxComponent,
   ],
-  imports: [NgOptimizedImage, NgClass, ReactiveFormsModule],
+  imports: [
+    NgOptimizedImage,
+    NgClass,
+    ReactiveFormsModule,
+  ],
   exports: [
     DropdownComponent,
     InputComponent,

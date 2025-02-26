@@ -9,7 +9,7 @@ import {
 import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);

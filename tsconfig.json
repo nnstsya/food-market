@@ -23,10 +23,11 @@
       "dom"
     ],
     "paths": {
-      "@home/*": ["./src/app/home/*"],
+      "@layout/*": ["./src/app/layout/*"],
       "@core/*": ["./src/app/core/*"],
       "@shared/*": ["./src/app/shared/*"],
-      "@environments/*": ["./src/environments/*"]
+      "@environments/*": ["./src/environments/*"],
+      "@home/*": ["./src/app/home/*"]
     }
   },
   "angularCompilerOptions": {

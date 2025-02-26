@@ -21,6 +21,6 @@ export interface Product {
 }
 
 export interface ProductItem {
-  id: string;
+  id: number;
   title: string;
 }

@@ -26,11 +26,6 @@ export class HomePageComponent implements OnInit {
     title: categoriesData[category],
   }));
 
-  bestSellingProducts: CategoryItem[] = this.allCategories.slice(0, 5).map((category: Category, index: number): CategoryItem => ({
-    id: index,
-    title: categoriesData[category],
-  }));
-
   products: Product[] = productsData.slice(0, 3);
 
   ngOnInit() {

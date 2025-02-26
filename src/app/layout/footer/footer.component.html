@@ -1,0 +1,50 @@
+<footer class="footer">
+  <div class="footer__container">
+
+    <div class="footer__section footer__section--contact">
+      <h3 class="footer__heading">Get in touch</h3>
+      <ul class="footer__list">
+        <li class="footer__item">About Us</li>
+        <li class="footer__item">Careers</li>
+        <li class="footer__item">Press Releases</li>
+        <li class="footer__item">Blog</li>
+      </ul>
+    </div>
+
+    <div class="footer__section footer__section--connections">
+      <h3 class="footer__heading">Connections</h3>
+      <ul class="footer__list">
+        <li class="footer__item">Facebook</li>
+        <li class="footer__item">Twitter</li>
+        <li class="footer__item">Instagram</li>
+        <li class="footer__item">Youtube</li>
+        <li class="footer__item">LinkedIn</li>
+      </ul>
+    </div>
+
+    <div class="footer__section footer__section--earnings">
+      <h3 class="footer__heading">Earnings</h3>
+      <ul class="footer__list">
+        <li class="footer__item">Become an Affiliate</li>
+        <li class="footer__item">Advertise your product</li>
+        <li class="footer__item">Sell on Market</li>
+      </ul>
+    </div>
+
+    <div class="footer__section footer__section--account">
+      <h3 class="footer__heading">Account</h3>
+      <ul class="footer__list">
+        <li class="footer__item">
+          <a class="footer__item__link" [routerLink]="isAuthenticated ? '/account' : '/auth'">Your account</a>
+        </li>
+        <li class="footer__item">Returns Centre</li>
+        <li class="footer__item">100% purchase protection</li>
+        <li class="footer__item">Chat with us</li>
+        <li class="footer__item">Help</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__copyright">
+    Copyright © 2020 petrbilek.com
+  </div>
+</footer>

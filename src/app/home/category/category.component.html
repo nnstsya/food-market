@@ -1,0 +1,32 @@
+<app-breadcrumbs></app-breadcrumbs>
+
+@if (categoryName) {
+  @if (products$ | async; as products) {
+    <div class="page">
+      <div class="page__top-bar">
+        <h1>{{ categoryName }}</h1>
+
+        <div class="page__top-bar__actions">
+          <div class="page__top-bar__actions__item">
+            <app-tag [text]="productsQuantity"></app-tag>
+            <p class="page__top-bar__actions__text">Products</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page__content">
+        @for (product of products; track product.id) {
+          <app-product-card [product]="product" [type]="'horizontal'"></app-product-card>
+        }
+      </div>
+    </div>
+  }
+} @else {
+  <div class="page">
+    <div class="page__content">
+      <p class="page__category-text">Sorry, looks like this category does not exist.</p>
+    </div>
+  </div>
+}
+
+

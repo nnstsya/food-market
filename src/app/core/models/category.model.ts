@@ -10,6 +10,6 @@ export enum Category {
 }
 
 export interface CategoryItem {
-  id: string;
+  id: number;
   title: string;
 }

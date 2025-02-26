@@ -1,0 +1,24 @@
+<div class="dropdown">
+  <div
+    class="dropdown-header"
+    (click)="toggleDropdown()"
+    [class.open]="isDropdownOpen"
+  >
+    {{ selectedOption || placeholder() }}
+    <img ngSrc="assets/icons/ic-chevron-down.svg" width="24" height="24" class="arrow" [class.up]="isDropdownOpen" alt="open">
+  </div>
+
+  @if (isDropdownOpen) {
+    <ul class="dropdown-list">
+      @for (option of options(); track option.id) {
+        <li
+          class="dropdown-item"
+          (click)="selectOption(option)"
+          [class.selected]="option.title === selectedOption"
+        >
+          <p>{{ option.title }}</p>
+        </li>
+      }
+    </ul>
+  }
+</div>

@@ -1,6 +1,6 @@
 <div class="page">
   <section class="section">
-    <app-list [heading]="'Category menu'" [items]="categories" [buttonText]="'More categories'"></app-list>
+    <app-list heading="Category menu" [items]="categories" buttonText="More categories"></app-list>
 
     <div class="section__content">
       <app-banner
@@ -39,13 +39,23 @@
 
   <section class="section">
     <app-list
-      [heading]="'Best selling products'"
-      [items]="bestSellingProducts"
-      [buttonText]="'More products'">
+      heading="Best selling products"
+      [items]="categories"
+      buttonText="More products">
     </app-list>
 
     <div class="section__content">
       @for (product of products; track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <app-list heading="Best from Farmers" [items]="popularProductsCategories" buttonText="More products"></app-list>
+
+    <div class="section__content">
+      @for (product of popularProducts; track product.id) {
         <app-product-card [product]="product"></app-product-card>
       }
     </div>

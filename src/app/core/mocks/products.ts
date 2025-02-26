@@ -1,9 +1,9 @@
-import { Product } from '@core/models/product.model';
+import { Product, ProductItem } from '@core/models/product.model';
 
 export const productsData: Product[] = [
   {
     id: 1,
-    name: 'Fennel mini 200g',
+    name: 'Fennel mini',
     image: [
       'https://d1q864mr06oufu.cloudfront.net/farmy-s3/public/spree/products/142519/large/Reust-Mini_Fenchel__200g-farmy-ch-01.JPG?1726140275'
     ],
@@ -69,5 +69,82 @@ export const productsData: Product[] = [
     tax: 2.5,
     createdAt: '2025-01-28T09:45:00Z',
     updatedAt: '2025-02-14T10:10:00Z'
+  },
+  {
+    id: 4,
+    name: 'Organic Strawberries',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg'
+    ],
+    price: 15,
+    SKU: 'STRAW-500-ORG',
+    category: 'Fruits',
+    subcategory: 'Berries',
+    farm: 'Berry Delight Farms',
+    stoke: 'In Stock',
+    freshness: 5,
+    buyBy: ['pack'],
+    deliveryDays: 2,
+    deliveryAria: 'Basel, Switzerland',
+    maxKgs: 5,
+    description: 'Sweet and juicy organic strawberries, perfect for desserts.',
+    rate: 4.9,
+    tax: 1.5,
+    createdAt: '2025-02-05T08:30:00Z',
+    updatedAt: '2025-02-17T10:00:00Z'
+  },
+  {
+    id: 5,
+    name: 'Organic Almonds',
+    image: [
+      'https://www.truly-organics.com/wp-content/uploads/2015/09/Organic-Almonds.jpg'
+    ],
+    price: 35,
+    SKU: 'ALM-1KG-ORG',
+    category: 'Nuts & Seeds',
+    subcategory: 'Almonds',
+    farm: 'NutriHarvest',
+    stoke: 'Limited Stock',
+    freshness: 4,
+    buyBy: ['kg'],
+    deliveryDays: 4,
+    deliveryAria: 'Lausanne, Switzerland',
+    maxKgs: 8,
+    description: 'Raw organic almonds, rich in nutrients and perfect for snacking.',
+    rate: 4.8,
+    tax: 2.2,
+    createdAt: '2025-01-30T07:00:00Z',
+    updatedAt: '2025-02-16T12:45:00Z'
+  },
+  {
+    id: 6,
+    name: 'Fresh Basil',
+    image: [
+      'https://www.gardenia.net/wp-content/uploads/2023/05/basil-planting-growing-harvesting.webp'
+    ],
+    price: 6,
+    SKU: 'BAS-100-FRESH',
+    category: 'Herbs & Spices',
+    subcategory: 'Herbs',
+    farm: 'Green Leaf Farms',
+    stoke: 'In Stock',
+    freshness: 5,
+    buyBy: ['bunch'],
+    deliveryDays: 1,
+    deliveryAria: 'Lugano, Switzerland',
+    maxKgs: 2,
+    description: 'Aromatic fresh basil, perfect for pesto and Italian dishes.',
+    rate: 3.6,
+    tax: 1,
+    createdAt: '2025-02-06T09:15:00Z',
+    updatedAt: '2025-02-18T13:00:00Z'
   }
+];
+
+export const popularProductsData: ProductItem[] = [
+  { id: 1, title: 'Carrots' },
+  { id: 2, title: 'Tomatoes' },
+  { id: 3, title: 'Potatoes' },
+  { id: 4, title: 'Chicken' },
+  { id: 5, title: 'Pork' },
 ];

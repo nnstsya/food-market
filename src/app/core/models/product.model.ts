@@ -19,3 +19,8 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ProductItem {
+  id: number;
+  title: string;
+}

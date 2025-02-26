@@ -3,12 +3,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   border-radius: $border-radius;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
   padding: 16px;
   width: 270px;
-  height: fit-content;
+  justify-content: space-between;
+  height: 360px;
   transition: 0.2s ease-out;
 
   &:hover {
@@ -21,13 +21,14 @@
     width: 100%;
     height: 180px;
     object-fit: cover;
+    cursor: pointer;
   }
 
   &__body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    height: 71px;
+    height: fit-content;
 
     &__product {
       &-title {
@@ -35,16 +36,19 @@
         overflow: hidden;
         text-overflow: ellipsis;
         font-weight: 500;
+        font-size: 15px;
       }
 
       &-description {
         color: #575757;
-        font-size: 14px;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       &-rating {
         display: flex;
-        margin-top: 8px;
+        margin-top: 2px;
       }
 
       &-info {
@@ -74,6 +78,7 @@
     &__product-price {
       font-size: 18px;
       font-weight: 600;
+      align-self: flex-start;
     }
   }
 
@@ -82,6 +87,16 @@
     padding: 0;
     width: 869px;
     height: 280px;
+
+    &__image {
+      height: 100%;
+      width: 100%;
+
+      &-wrapper {
+        width: 268px;
+        height: 100%;
+      }
+    }
 
     &__content {
       display: flex;
@@ -108,7 +123,6 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          font-size: 12px;
         }
 
         &-rating {

@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 export class CategoryComponent implements OnInit {
   categoryName: string | null = null;
   productsQuantity: number = 0;
+  view: 'list' | 'grid' = <'list' | 'grid'>localStorage.getItem('viewMode') || 'grid';
   products$: Observable<Product[]> = of([]);
 
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -40,5 +41,11 @@ export class CategoryComponent implements OnInit {
         this.categoryName = null;
       }
     });
+  }
+
+  changeView(view: 'grid' | 'list'): void {
+    this.view = view;
+
+    localStorage.setItem('viewMode', view);
   }
 }

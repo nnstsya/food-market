@@ -4,6 +4,38 @@
   min-height: calc(100vh - $footer-height - $header-height - $page-bottom-padding);
 }
 
+.section {
+  display: flex;
+  padding: 60px 45px;
+  gap: 80px;
+  height: 400px;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 50%;
+
+      &__upper-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: $primary-color;
+      }
+
+      &__heading {
+        font-weight: 600;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
 .quotes {
   padding-block: 64px;
 
@@ -82,4 +114,3 @@
     }
   }
 }
-

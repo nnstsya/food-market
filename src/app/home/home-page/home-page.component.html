@@ -1,6 +1,5 @@
 <div class="page">
   <section class="section">
-
     <app-list [heading]="'Category menu'" [items]="categories" [buttonText]="'More categories'"></app-list>
 
     <div class="section__content">
@@ -35,6 +34,20 @@
           <img ngSrc="assets/icons/ic-chevron-right-white.svg" width="24" height="24" alt="open">
         </app-button>
       </app-banner>
+    </div>
+  </section>
+
+  <section class="section">
+    <app-list
+      [heading]="'Best selling products'"
+      [items]="bestSellingProducts"
+      [buttonText]="'More products'">
+    </app-list>
+
+    <div class="section__content">
+      @for (product of products; track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
     </div>
   </section>
 

@@ -5,6 +5,8 @@ import { Review } from '@core/models/review.model';
 import { reviewData } from '@core/mocks/reviews';
 import { Category, CategoryItem } from '@core/models/category.model';
 import { categoriesData } from '@core/mocks/categories';
+import { Product } from '@core/models/product.model';
+import { productsData } from '@core/mocks/products';
 
 @Component({
   selector: 'app-home-page',
@@ -16,10 +18,18 @@ export class HomePageComponent implements OnInit {
   sortedBlogs: Blog[] = [];
   reviews: Review[] = reviewData;
   allCategories: Category[] = Object.values(Category);
+
   categories: CategoryItem[] = this.allCategories.slice(0, 5).map((category: Category, index: number): CategoryItem => ({
     id: index,
     title: categoriesData[category],
   }));
+
+  bestSellingProducts: CategoryItem[] = this.allCategories.slice(0, 5).map((category: Category, index: number): CategoryItem => ({
+    id: index,
+    title: categoriesData[category],
+  }));
+
+  products: Product[] = productsData.slice(0, 3);
 
   ngOnInit() {
     this.getSortedBlogs();

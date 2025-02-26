@@ -7,13 +7,13 @@
 .section {
   display: flex;
   padding: 60px 45px;
-  gap: 80px;
+  gap: 32px;
   height: 400px;
 
   &__content {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 32px;
     width: 100%;
 
     &__card {

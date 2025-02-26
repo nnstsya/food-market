@@ -4,11 +4,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 16px;
 
   &__content {
     list-style: none;
     padding: 0;
-    width: 280px;
+    width: 268px;
 
     &__heading {
       font-weight: bold;

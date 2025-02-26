@@ -13,6 +13,7 @@
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.08) 0 0 14px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+    cursor: pointer;
   }
 
   &__image {
@@ -80,7 +81,6 @@
       align-self: flex-start;
     }
   }
-
 
   &-horizontal {
     flex-direction: row;

@@ -15,7 +15,7 @@ export class ProductCardComponent {
   private productService: ProductsService = inject(ProductsService);
 
   getRatingArray(): number[] {
-    return [1, 1, 1, 1, 1].fill(0, Math.floor(this.product()!.rating!), 5);
+    return [1, 1, 1, 1, 1].fill(0, Math.floor(this.product()!.rate!), 5);
   }
 
   onImageError(event: Event): void {

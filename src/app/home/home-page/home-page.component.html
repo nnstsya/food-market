@@ -20,22 +20,63 @@
         </app-button>
       </app-banner>
 
-        <app-banner
-                class="section__content__card"
-                [imageUrl]="'https://lh7-us.googleusercontent.com/docsz/AD_4nXc0mdnWSJDMkg8AnXxeW3ja7xvl_fg427-XFgzNPSTLEWyqGW4Nn6JLgTJC_EsVng2wWY6WZGrJLZw-GttmvHFOBmKl601_4fcwx644aMFSvROYsOxuu3t3U4IrHWcFVJL0hdRMKJUz3yI7pyC9Kgv7VcLt?key=aViLBHe981uqzrfs2Wn2gA'"
-                [gradientPosition]="'top'"
-        >
-            <div>
-                <p class="section__content__card__upper-text">Online E-vouchers</p>
-                <h2 class="section__content__card__heading">Online E-vouchers are redeemable on thousands of items in our webshop.</h2>
-            </div>
+      <app-banner
+        class="section__content__card"
+        [imageUrl]="'https://lh7-us.googleusercontent.com/docsz/AD_4nXc0mdnWSJDMkg8AnXxeW3ja7xvl_fg427-XFgzNPSTLEWyqGW4Nn6JLgTJC_EsVng2wWY6WZGrJLZw-GttmvHFOBmKl601_4fcwx644aMFSvROYsOxuu3t3U4IrHWcFVJL0hdRMKJUz3yI7pyC9Kgv7VcLt?key=aViLBHe981uqzrfs2Wn2gA'"
+        [gradientPosition]="'top'"
+      >
+        <div>
+          <p class="section__content__card__upper-text">Online E-vouchers</p>
+          <h2 class="section__content__card__heading">Online E-vouchers are redeemable on thousands of items in our webshop.</h2>
+        </div>
 
-            <app-button>
-                Buy E-vouchers
-                <img ngSrc="assets/icons/ic-chevron-right-white.svg" width="24" height="24" alt="open">
-            </app-button>
-        </app-banner>
+        <app-button>
+          Buy E-vouchers
+          <img ngSrc="assets/icons/ic-chevron-right-white.svg" width="24" height="24" alt="open">
+        </app-button>
+      </app-banner>
     </div>
   </section>
 
+  <div class="quotes">
+    <h3 class="quotes__heading">Our customers say</h3>
+
+    @if (reviews.length > 3) {
+      <app-reviews-slider [reviews]="reviews"></app-reviews-slider>
+    } @else {
+      <app-reviews [reviews]="reviews"></app-reviews>
+    }
+
+  </div>
+
+  <section class="blogs">
+    <div class="blogs__header">
+      <h3 class="blogs__header__heading">Read our Blog posts</h3>
+      <div class="blogs__header__nav" routerLink="/blogs">
+        <p>Go to blog</p>
+        <img ngSrc="assets/icons/ic-chevron-right-green.svg" width="24" height="24" alt="go">
+      </div>
+    </div>
+
+    <div class="blogs__items">
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage">
+        <div class="blogs__items__banner">
+          <h2 class="blogs__items__banner__heading">{{ sortedBlogs[0].title }}</h2>
+          <div class="blogs__items__banner__info">
+            <img class="blogs__items__banner__info__avatar" [src]="sortedBlogs[0].authorAvatar" [alt]="sortedBlogs[0].author">
+            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].author }}</p>
+            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].date }}</p>
+          </div>
+        </div>
+      </app-banner>
+
+      <app-blog-card [blog]="sortedBlogs[1]"></app-blog-card>
+
+      <div class="blogs__items__less-recent">
+        <app-blog-card [blog]="sortedBlogs[2]" type="horizontal"></app-blog-card>
+        <app-blog-card [blog]="sortedBlogs[3]" type="horizontal"></app-blog-card>
+        <app-blog-card [blog]="sortedBlogs[4]" type="horizontal"></app-blog-card>
+      </div>
+    </div>
+  </section>
 </div>

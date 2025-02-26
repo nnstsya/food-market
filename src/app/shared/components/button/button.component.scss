@@ -8,9 +8,9 @@
   border-radius: 12px;
   font-weight: 600;
   font-size: 16px;
-  padding: 12px;
   cursor: pointer;
   transition: 0.2s ease-out;
+  width: 100%;
 }
 
 .basic {
@@ -42,4 +42,12 @@
     background-color: $primary-color;
     color: #fff;
   }
+}
+
+.s {
+  padding: 6px 12px;
+}
+
+.lg {
+  padding: 12px;
 }

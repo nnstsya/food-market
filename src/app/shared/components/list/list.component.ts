@@ -1,7 +1,7 @@
 import { Component, input, InputSignal } from '@angular/core';
 
 interface Item {
-  id: string;
+  id: number;
   title: string;
 }
 

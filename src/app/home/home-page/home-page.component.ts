@@ -16,8 +16,8 @@ export class HomePageComponent implements OnInit {
   sortedBlogs: Blog[] = [];
   reviews: Review[] = reviewData;
   allCategories: Category[] = Object.values(Category);
-  categories: CategoryItem[] = this.allCategories.slice(0, 5).map((category: Category): CategoryItem => ({
-    id: category,
+  categories: CategoryItem[] = this.allCategories.slice(0, 5).map((category: Category, index: number): CategoryItem => ({
+    id: index,
     title: categoriesData[category],
   }));
 

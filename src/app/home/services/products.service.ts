@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Product } from '@core/models/product.model';
 import { Category } from "@core/models/category.model";
 
@@ -20,8 +20,9 @@ export class ProductsService {
   }
 
   getProductsByCategory(category: Category): Observable<Product[]> {
-    return this.http.get<Product[]>(this.basePath).pipe(
-      map((products: Product[]) => products.filter((product: Product) => product.category === category)),
+    const params: HttpParams = new HttpParams().set('category', category);
+
+    return this.http.get<Product[]>(this.basePath, { params }).pipe(
       catchError(() => throwError(() => new Error('Failed to fetch products information.'))),
     )
   }

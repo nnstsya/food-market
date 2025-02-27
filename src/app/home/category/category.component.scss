@@ -39,3 +39,21 @@
     color: #a9a9a9;
   }
 }
+
+.grid {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.selected {
+  color: #000;
+}
+
+.view-action {
+  cursor: pointer;
+  transition: 0.2s ease-out;
+
+  &:hover {
+    filter: brightness(0.7);
+  }
+}

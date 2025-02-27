@@ -19,10 +19,10 @@ import { CategoryComponent } from './category/category.component';
   ],
   imports: [
     HomeRoutingModule,
-    NgOptimizedImage,
-    AsyncPipe,
     SharedModule,
-    NgClass
+    NgOptimizedImage,
+    NgClass,
+    AsyncPipe
   ]
 })
 export class HomeModule {}

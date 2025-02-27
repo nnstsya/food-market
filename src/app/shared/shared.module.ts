@@ -13,7 +13,7 @@ import { ListComponent } from './components/list/list.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
-
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { InputComponent } from './components/input/input.component';
     TagComponent,
     ListComponent,
     ModalComponent,
-    InputComponent
+    InputComponent,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +50,8 @@ import { InputComponent } from './components/input/input.component';
     TagComponent,
     ListComponent,
     ModalComponent,
-    InputComponent
+    InputComponent,
+    CheckboxComponent
   ]
 })
 export class SharedModule {}

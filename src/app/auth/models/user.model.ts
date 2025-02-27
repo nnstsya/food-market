@@ -20,3 +20,14 @@ export interface User {
   id: string;
   token: string;
 }
+
+export interface UserData {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  repeatedPassword: string;
+  newsletterConsent: boolean;
+}

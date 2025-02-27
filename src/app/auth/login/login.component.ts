@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
-import { AuthService } from "../services/auth.service";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { catchError } from "rxjs";
-import { ModalService } from "@shared/components/modal/modal.service";
-import { UserCredentials } from "@auth/models/user.model";
-import { LoginForm } from "@auth/models/form.model";
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError } from 'rxjs';
+import { ModalService } from '@shared/components/modal/modal.service';
+import { UserCredentials } from '@auth/models/user.model';
+import { LoginForm } from '@auth/models/form.model';
 
 @Component({
   selector: 'app-login',
@@ -44,22 +44,29 @@ export class LoginComponent {
     this.modalService.showModal('passwordRecovery');
   }
 
+  openSignUpModal(): void {
+    this.modalService.showModal('signUp');
+  }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const user: UserCredentials = {...this.loginForm.getRawValue()};
+      const user: UserCredentials = { ...this.loginForm.getRawValue() };
 
-      this.authService.signIn(user).pipe(
-        takeUntilDestroyed(this.destroyRef),
-        catchError((err: Error) => {
-          this.serverError = err.message;
-          return [];
-        })
-      ).subscribe({
-        next: () => {
-          this.serverError = '';
-          this.modalService.hideModal();
-        }
-      });
+      this.authService
+        .signIn(user)
+        .pipe(
+          takeUntilDestroyed(this.destroyRef),
+          catchError((err: Error) => {
+            this.serverError = err.message;
+            return [];
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.serverError = '';
+            this.modalService.hideModal();
+          },
+        });
     }
   }
 }

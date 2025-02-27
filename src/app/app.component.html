@@ -4,14 +4,22 @@
   </app-layout>
 
   @if (modalOpened$ | async) {
-    @if ((modalType$ | async) === 'login') {
-      <app-modal class="modal">
-        <app-login class="modal-content"></app-login>
-      </app-modal>
-    } @else if ((modalType$ | async) === 'passwordRecovery') {
-      <app-modal class="modal">
-        <app-password-recovery class="modal-content"></app-password-recovery>
-      </app-modal>
+    @switch (modalType$ | async) {
+      @case ('login') {
+        <app-modal class="modal">
+          <app-login class="modal-content"></app-login>
+        </app-modal>
+      }
+      @case ('passwordRecovery') {
+        <app-modal class="modal">
+          <app-password-recovery class="modal-content"></app-password-recovery>
+        </app-modal>
+      }
+      @case ('signUp') {
+        <app-modal class="modal">
+          <app-register class="modal-content"></app-register>
+        </app-modal>
+      }
     }
   }
 </div>

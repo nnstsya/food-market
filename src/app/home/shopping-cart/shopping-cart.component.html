@@ -1,0 +1,24 @@
+<div class="cart">
+  <h2 class="semibold">Shopping cart</h2>
+
+  <div class="cart__product-list">
+    @if (products.length) {
+      @for (product of products; track product.product.id; let last = $last) {
+        <app-product-item [product]="product" [ngClass]="{ 'border-bottom': !last }"></app-product-item>
+      }
+    } @else {
+      <p>Looks like there are no products in your cart.</p>
+    }
+  </div>
+
+  <div class="cart__bill">
+    <p class="cart__bill-text semibold">Subtotal</p>
+    <h2 class="semibold">73.22 UAH</h2>
+  </div>
+
+  <div class="cart__actions">
+    <p class="cart__actions-back" (click)="closeModal()">Continue shopping</p>
+    <app-button (click)="navigateUser()">Go to checkout</app-button>
+  </div>
+</div>
+

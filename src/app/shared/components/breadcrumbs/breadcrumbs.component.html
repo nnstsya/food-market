@@ -6,7 +6,7 @@
       }
 
       @if ($last) {
-        <p [routerLink]="breadcrumb.url" class="breadcrumbs__current">{{ breadcrumb.label }}</p>
+        <p class="breadcrumbs__current">{{ breadcrumb.label }}</p>
       }
 
       @if (!$last) {

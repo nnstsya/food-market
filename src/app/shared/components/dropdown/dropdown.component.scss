@@ -37,7 +37,7 @@
     border: 1px solid $border-color;
     border-radius: $border-radius;
     max-height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: calc(100% + ($dropdown-padding * 2));
     z-index: 100;
     top: 40px;
@@ -53,7 +53,7 @@
       }
 
       &.selected {
-        background-color: $primary-color-dark;
+        background-color: $primary-color;
         color: white;
       }
     }

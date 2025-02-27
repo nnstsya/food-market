@@ -19,16 +19,16 @@
 
         <div class="main-header__search-bar">
             @if (isHomePage) {
-                <app-dropdown [options]="categories" [placeholder]="'All categories'"></app-dropdown>
+                <app-dropdown [options]="categories" placeholder="All categories"></app-dropdown>
                 <div class="divider"></div>
             }
 
-          <app-input class="main-header__search-bar__input" [iconUrl]="'assets/icons/ic-actions-search.svg'" [border]="false" [placeholder]="'Search Products, categories...'"></app-input>
+          <app-input class="main-header__search-bar__input" iconUrl="assets/icons/ic-actions-search.svg" [border]="false" placeholder="Search Products, categories..."></app-input>
         </div>
 
         <div class="main-header__actions">
-            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account" (click)="navigateUser()">
-            <div class="main-header__actions__cart">
+            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account"  (click)="navigateUser()">
+            <div class="main-header__actions__cart" (click)="openShoppingCart()">
                 <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
                 <span class="main-header__actions__cart-count">{{ cartCount }}</span>
             </div>

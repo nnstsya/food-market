@@ -1,4 +1,5 @@
-import { Category, CategoryItem } from '@core/models/category.model';
+import { Category } from '@core/models/category.model';
+import { Option } from "@shared/components/dropdown/dropdown.component";
 
 export const categoriesData: Record<Category, string> = {
   [Category.BAKERY]: "Bakery",
@@ -11,13 +12,13 @@ export const categoriesData: Record<Category, string> = {
   [Category.PHARMACY]: "Pharmacy",
 };
 
-export const categoryData: CategoryItem[] = Object.entries(categoriesData)
+export const categoryData: Option[] = Object.entries(categoriesData)
   .map(([_, value], index) => ({
     id: index + 1,
     title: value
   }));
 
-export const popularCategoryData: CategoryItem[] = [
+export const popularCategoryData: Option[] = [
   {
     id: 1,
     title: 'Carrots'

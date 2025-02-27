@@ -15,6 +15,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ModalComponent,
     InputComponent,
     CheckboxComponent,
-    PaginationComponent
+    PaginationComponent,
+    TabsComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ModalComponent,
     InputComponent,
     CheckboxComponent,
-    PaginationComponent
+    PaginationComponent,
+    TabsComponent
   ]
 })
 export class SharedModule {}

@@ -27,6 +27,12 @@ export class ProductsService {
     )
   }
 
+  getProductById(productId: string): Observable<Product> {
+    return this.http.get<Product>(this.basePath + '/' + productId).pipe(
+      catchError(() => throwError(() => new Error('Failed to fetch product information.'))),
+    );
+  }
+
   addToWishList(product: Product): void {
     const wishList: Product[] = this.getWishList();
     wishList.push(product)

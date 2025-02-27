@@ -3,6 +3,7 @@
     <img class="card__image"
          [src]="product().image"
          (error)="onImageError($event)"
+         (click)="navigateToProductDetail()"
     />
 
     <div class="card__content">
@@ -32,7 +33,7 @@
         <p class="card__footer__product-price">
           {{ product().price | number: '1.2-2' }} UAH
         </p>
-        <app-button [size]="'s'">Buy now</app-button>
+        <app-button [size]="'s'" (click)="addToCart()">Buy now</app-button>
       </div>
     </div>
   </div>
@@ -42,6 +43,7 @@
       <img class="card__image card-horizontal__image"
            [src]="product().image"
            (error)="onImageError($event)"
+           (click)="navigateToProductDetail()"
       />
     </div>
 

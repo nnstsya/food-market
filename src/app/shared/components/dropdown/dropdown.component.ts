@@ -1,6 +1,6 @@
 import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 
-interface Option {
+export interface Option {
   id: number;
   title: string;
 }

@@ -1,5 +1,5 @@
 import { Component, forwardRef, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: 'app-input',
@@ -13,14 +13,15 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
     }
   ]
 })
-export class InputComponent {
-  placeholder: InputSignal<string> = input.required<string>();
+export class InputComponent implements ControlValueAccessor {
+  placeholder: InputSignal<string | number> = input.required<string | number>();
   label: InputSignal<string> = input<string>('');
   iconUrl: InputSignal<string> = input<string>('');
   border: InputSignal<boolean> = input<boolean>(true);
   errorState: InputSignal<boolean> = input<boolean>(false);
-  type: InputSignal<'password' | 'email' | 'text'> = input<'password' | 'email' | 'text'>('text');
+  type: InputSignal<'password' | 'email' | 'text' | 'number'> = input<'password' | 'email' | 'text' | 'number'>('text');
 
+  blur: OutputEmitterRef<void> = output<void>();
   iconClicked: OutputEmitterRef<void> = output<void>();
   value: string = '';
   disabled: boolean = false;
@@ -51,6 +52,7 @@ export class InputComponent {
   }
 
   onBlur(): void {
+    this.blur.emit();
     this.onTouched();
   }
 

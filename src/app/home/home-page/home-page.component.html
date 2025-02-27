@@ -40,13 +40,17 @@
   <section class="section">
     <app-list
       heading="Best selling products"
-      [items]="categories"
+      [items]="bestSellingProductsCategories"
       buttonText="More products">
     </app-list>
 
     <div class="section__content">
-      @for (product of products; track product.id) {
-        <app-product-card [product]="product"></app-product-card>
+      @if (bestSellingProducts.length > 0) {
+        @for (product of bestSellingProducts; track product?.id) {
+          <app-product-card [product]="product" [showRate]="false"></app-product-card>
+        }
+      } @else {
+        <span class="loader"></span>
       }
     </div>
   </section>
@@ -55,8 +59,12 @@
     <app-list heading="Best from Farmers" [items]="popularProductsCategories" buttonText="More products"></app-list>
 
     <div class="section__content">
-      @for (product of popularProducts; track product.id) {
-        <app-product-card [product]="product"></app-product-card>
+      @if (popularProducts.length > 0) {
+        @for (product of popularProducts; track product?.id) {
+          <app-product-card [product]="product" [showRate]="false"></app-product-card>
+        }
+      } @else {
+        <span class="loader"></span>
       }
     </div>
   </section>

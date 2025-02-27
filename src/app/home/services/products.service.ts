@@ -11,6 +11,12 @@ export class ProductsService {
   private http: HttpClient = inject(HttpClient);
   private API_URL: string = 'http://localhost:3000/api/products';
 
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.API_URL).pipe(
+      catchError(() => throwError(() => new Error('Failed to fetch products information.'))),
+    );
+  }
+
   getProductsByCategory(category: Category): Observable<Product[]> {
     return this.http.get<Product[]>(this.API_URL).pipe(
       map((products: Product[]) => products.filter((product: Product) => product.category === category)),

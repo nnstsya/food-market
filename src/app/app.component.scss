@@ -3,7 +3,6 @@
 .page {
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
-  min-height: calc(100vh - $page-bottom-padding - $header-height - $footer-height);
   width: 1260px;
 
   &-wrapper {

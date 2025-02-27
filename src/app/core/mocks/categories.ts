@@ -1,6 +1,6 @@
-import { Category } from '@core/models/category.model';
+import { Category, CategoryItem } from '@core/models/category.model';
 
-export const categoryData: Category[] = [
+export const categoryData: CategoryItem[] = [
   {
     id: 1,
     title: 'Bakery'
@@ -34,5 +34,16 @@ export const categoryData: Category[] = [
     title: 'Pharmacy'
   }
 ];
+
+export const categoriesData: Record<Category, string> = {
+  [Category.BAKERY]: "Bakery",
+  [Category.FRUITANDVEGETABLES]: "Fruit and vegetables",
+  [Category.MEATANDFISH]: "Meat and fish",
+  [Category.DRINKS]: "Drinks",
+  [Category.KITCHEN]: "Kitchen",
+  [Category.SPECIALNUTRITION]: "Special nutrition",
+  [Category.BABY]: "Baby",
+  [Category.PHARMACY]: "Pharmacy",
+};
 
 export const popularCategoryData: string[] = ['Carrots', 'Tomatoes', 'Potatoes', 'Chicken', 'Pork']

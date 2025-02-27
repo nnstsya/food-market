@@ -10,7 +10,7 @@ export interface Product {
   stoke: string;
   freshness: number;
   buyBy: string[];
-  delivery: number;
+  deliveryDays: number;
   deliveryAria: string;
   maxKgs: number;
   description: string;
@@ -18,4 +18,9 @@ export interface Product {
   tax: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ProductItem {
+  id: number;
+  title: string;
 }

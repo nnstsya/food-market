@@ -1,0 +1,56 @@
+<app-breadcrumbs></app-breadcrumbs>
+
+@if (categoryName) {
+  @if (products$ | async; as products) {
+    <div class="page">
+      <div class="page__top-bar">
+        <h1>{{ categoryName }}</h1>
+
+        <div class="page__top-bar__actions">
+          <div class="page__top-bar__actions__item view-action" (click)="changeView('grid')">
+            @if (view === 'grid') {
+              <img ngSrc="assets/icons/ic-layout-square-grid-green.svg" width="18" height="18">
+              <p class="page__top-bar__actions__text selected">Grid view</p>
+            } @else {
+              <img ngSrc="assets/icons/ic-layout-square-grid.svg" width="18" height="18">
+              <p class="page__top-bar__actions__text">Grid view</p>
+            }
+          </div>
+
+          <div class="page__top-bar__actions__item view-action" (click)="changeView('list')">
+            @if (view === 'list') {
+              <img ngSrc="assets/icons/ic-layout-sections-green.svg" width="18" height="18">
+              <p class="page__top-bar__actions__text selected">List view</p>
+            } @else {
+              <img ngSrc="assets/icons/ic-layout-sections.svg" width="18" height="18">
+              <p class="page__top-bar__actions__text">List view</p>
+            }
+          </div>
+
+          <div class="page__top-bar__actions__item">
+            <app-tag [text]="productsQuantity"></app-tag>
+            <p class="page__top-bar__actions__text">Products</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page__content" [ngClass]="view">
+        @for (product of products; track product.id) {
+          @if (view === 'list') {
+            <app-product-card [product]="product" [type]="'horizontal'"></app-product-card>
+          } @else {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        }
+      </div>
+    </div>
+  }
+} @else {
+  <div class="page">
+    <div class="page__content">
+      <p class="page__category-text">Sorry, looks like this category does not exist.</p>
+    </div>
+  </div>
+}
+
+

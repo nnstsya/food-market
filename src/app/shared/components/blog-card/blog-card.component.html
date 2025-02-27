@@ -1,0 +1,33 @@
+@if (type() === 'vertical') {
+  <div class="card">
+    <img class="card__image" [src]="blog().blogImage" [alt]="blog().title">
+
+    <div class="card__content">
+      <div class="card__content__body">
+        <h3 class="card__content__body__blog-title">{{ blog().title }}</h3>
+      </div>
+
+      <div class="card__content__footer">
+        <p class="card__content__footer__info">{{ blog().author }}</p>
+        <p class="card__content__footer__info">{{ blog().date }}</p>
+      </div>
+    </div>
+
+  </div>
+} @else {
+  <div class="card card-horizontal">
+    <div class="card__content">
+      <div class="card__content__body">
+        <p class="card__content__body__blog-title">{{ blog().title }}</p>
+      </div>
+
+      <div class="card__content__footer">
+        <p class="card__content__footer__info">{{ blog().author }}</p>
+        <p class="card__content__footer__info">{{ blog().date }}</p>
+      </div>
+    </div>
+
+    <img class="card__image card-horizontal__image" [src]="blog().blogImage" [alt]="blog().title">
+  </div>
+}
+

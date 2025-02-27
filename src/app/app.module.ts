@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from '@layout/layout.module';
 import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from "@shared/shared.module";
 import { AuthModule } from "@auth/auth.module";
 
@@ -17,6 +18,7 @@ import { AuthModule } from "@auth/auth.module";
     AppRoutingModule,
     RouterOutlet,
     LayoutModule,
+    HttpClientModule,
     SharedModule,
     AuthModule
   ],

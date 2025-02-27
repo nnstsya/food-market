@@ -75,7 +75,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getFormattedBuyOptions(): string {
-    let uniqueOptions: string[] = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
+   let uniqueOptions: string[] = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
       return array.lastIndexOf(value) === index;
     });
 

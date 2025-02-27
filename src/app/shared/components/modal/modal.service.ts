@@ -8,7 +8,7 @@ export class ModalService {
   modalVisible$: Observable<boolean>;
   modalType$: Observable<string>;
   private modalVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private modalType: BehaviorSubject<string> = new BehaviorSubject<string>('shopping-cart');
+  private modalType: BehaviorSubject<string> = new BehaviorSubject<string>('login');
 
   constructor() {
     this.modalVisible$ = this.modalVisible.asObservable();

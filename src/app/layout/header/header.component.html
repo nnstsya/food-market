@@ -23,12 +23,11 @@
                 <div class="divider"></div>
             }
 
-            <input type="text" class="main-header__search-bar__input" placeholder="Search Products, categories...">
-            <img ngSrc="assets/icons/ic-actions-search.svg" width="20" height="20" class="main-header__search-bar__input-icon" alt="search">
+          <app-input class="main-header__search-bar__input" iconUrl="assets/icons/ic-actions-search.svg" [border]="false" placeholder="Search Products, categories..."></app-input>
         </div>
 
         <div class="main-header__actions">
-            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account">
+            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account"  (click)="navigateUser()">
             <div class="main-header__actions__cart" (click)="openShoppingCart()">
                 <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
                 <span class="main-header__actions__cart-count">{{ cartCount }}</span>
@@ -40,10 +39,12 @@
   <section class="nav-bar">
     <ul class="nav-bar__list">
       @for (category of categories; track category) {
-        <li class="nav-bar__item" [routerLink]="'home/' + category.id">
+        <li class="nav-bar__item" [routerLink]="'homepage/' + getCategoryName(category.title)" [ngClass]="{ 'nav-bar__item-active': checkIfTabActive(category.title) }">
             <p>{{ category.title }}</p>
         </li>
       }
+
+      <div class="nav__gradient-fade"></div>
     </ul>
   </section>
 </header>

@@ -5,14 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from '@layout/layout.module';
 import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from "@angular/common/http";
-import { SharedModule } from "@shared/shared.module";
-import { HomeModule } from "@home/home.module";
+import { SharedModule } from '@shared/shared.module';
+import { AuthModule } from '@auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,10 +19,9 @@ import { HomeModule } from "@home/home.module";
     LayoutModule,
     HttpClientModule,
     SharedModule,
-    HomeModule
+    AuthModule,
+    CoreModule,
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

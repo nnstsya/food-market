@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError } from 'rxjs';
 import { UserPasswordRecovery } from '@auth/models/user.model';
 import { PasswordRecoveryForm } from '@auth/models/form.model';
+import { passwordsMatchValidator } from "@auth/validators/password-match.validator";
 
 @Component({
   selector: 'app-password-recovery',
@@ -42,11 +43,13 @@ export class PasswordRecoveryComponent {
           Validators.required,
           Validators.minLength(6),
           Validators.pattern(
-            /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*();:'",./|]).{6,}$/,
+            /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*();:'",./|])[A-Za-z\d!@#$%^&*();:'",./|]{6,}$/,
           ),
         ],
       ],
-    });
+    },
+    { validators: passwordsMatchValidator }
+    );
   }
 
   toggleNewPasswordVisibility(): void {
@@ -76,9 +79,6 @@ export class PasswordRecoveryComponent {
               this.modalService.hideModal();
             },
           });
-      } else {
-        this.serverError =
-          'Passwords must be identical. Please ensure both fields match.';
       }
     }
   }

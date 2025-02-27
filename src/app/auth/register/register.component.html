@@ -21,7 +21,7 @@
 
     @if (signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched) {
       <div class="error">
-        Please enter the first name.
+        Please use Latin letters only.
       </div>
     }
   </div>
@@ -36,7 +36,7 @@
 
     @if (signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched) {
       <div class="error">
-        Please enter the last name.
+        Please use Latin letters only.
       </div>
     }
   </div>

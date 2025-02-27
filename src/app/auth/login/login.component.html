@@ -16,6 +16,7 @@
       [placeholder]="'Email'"
       [type]="'email'"
       [label]="'Email'"
+      [border]="true"
       [errorState]="!!serverError || !!(loginForm.get('email')?.invalid && loginForm.get('email')?.touched)"
       formControlName="email"
     ></app-input>

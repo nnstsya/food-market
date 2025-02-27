@@ -10,7 +10,7 @@ export interface Product {
   stoke: string;
   freshness: number;
   buyBy: string[];
-  delivery: number;
+  deliveryDays: number;
   deliveryAria: string;
   maxKgs: number;
   description: string;

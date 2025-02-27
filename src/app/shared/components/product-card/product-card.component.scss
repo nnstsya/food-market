@@ -11,6 +11,13 @@
   height: 360px;
   transition: 0.2s ease-out;
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 132px;
+  }
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.08) 0 0 14px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
     cursor: pointer;

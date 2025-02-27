@@ -10,6 +10,10 @@ import { ButtonComponent } from "@shared/components/button/button.component";
 import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
 import { TagComponent } from './components/tag/tag.component';
 import { ListComponent } from './components/list/list.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,9 @@ import { ListComponent } from './components/list/list.component';
     ButtonComponent,
     ProductCardComponent,
     TagComponent,
-    ListComponent
+    ListComponent,
+    ModalComponent,
+    InputComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +36,8 @@ import { ListComponent } from './components/list/list.component';
     NgIf,
     RouterLink,
     DecimalPipe,
-    NgClass
+    NgClass,
+    ReactiveFormsModule
   ],
   exports: [
     DropdownComponent,
@@ -40,7 +47,9 @@ import { ListComponent } from './components/list/list.component';
     ButtonComponent,
     ProductCardComponent,
     TagComponent,
-    ListComponent
+    ListComponent,
+    ModalComponent,
+    InputComponent
   ]
 })
 export class SharedModule {}

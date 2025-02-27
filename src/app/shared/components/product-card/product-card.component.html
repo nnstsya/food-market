@@ -5,33 +5,35 @@
          (error)="onImageError($event)"
     />
 
-    <div class="card__body">
-      <p class="card__body__product-title">
-        {{ product().name }}
-      </p>
+    <div class="card__content">
+      <div class="card__body">
+        <p class="card__body__product-title">
+          {{ product().name }}
+        </p>
 
-      <p class="card__body__product-description">
-        {{ product().description }}
-      </p>
+        <p class="card__body__product-description">
+          {{ product().description }}
+        </p>
 
-      @if (showRate() && product().rate) {
-        <div class="card__body__product-rating">
-          @for (rating of getRatingArray(); track rating) {
-            <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
-                 width="16"
-                 height="16"
-                 alt="star"
-            />
-          }
-        </div>
-      }
-    </div>
+        @if (showRate() && product().rate) {
+          <div class="card__body__product-rating">
+            @for (rating of getRatingArray(); track rating) {
+              <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
+                   width="16"
+                   height="16"
+                   alt="star"
+              />
+            }
+          </div>
+        }
+      </div>
 
-    <div class="card__footer">
-      <p class="card__footer__product-price">
-        {{ product().price | number: '1.2-2' }} UAH
-      </p>
-      <app-button [size]="'s'">Buy now</app-button>
+      <div class="card__footer">
+        <p class="card__footer__product-price">
+          {{ product().price | number: '1.2-2' }} UAH
+        </p>
+        <app-button [size]="'s'">Buy now</app-button>
+      </div>
     </div>
   </div>
 } @else {
@@ -82,8 +84,6 @@
             <p class="card__body__product-info__items-item text-primary">{{ product().maxKgs }} kg</p>
           </div>
         </div>
-
-
       </div>
 
       <div class="card__footer card-horizontal__footer">
@@ -113,7 +113,6 @@
               <p>Add to wish list</p>
             </app-button>
           }
-
         </div>
       </div>
     </div>

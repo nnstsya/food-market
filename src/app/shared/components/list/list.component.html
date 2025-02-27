@@ -1,0 +1,17 @@
+<div class="list">
+  <div>
+    <h3 class="list__content__heading">{{ heading() }}</h3>
+    <ul class="list__content">
+      @for (item of items(); track item.id) {
+        <li class="list__content__item">{{ item.title }}</li>
+      }
+    </ul>
+  </div>
+
+  @if (buttonText()) {
+    <app-button [variant]="'secondary'">
+      {{ buttonText() }}
+      <img ngSrc="assets/icons/ic-chevron-right-black.svg" width="24" height="24" alt="open">
+    </app-button>
+  }
+</div>

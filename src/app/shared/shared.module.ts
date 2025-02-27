@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { DecimalPipe, NgClass, NgIf, CommonModule, NgOptimizedImage, NgStyle } from '@angular/common';
+import { DecimalPipe, NgClass, CommonModule, NgOptimizedImage, NgStyle } from '@angular/common';
 import { BannerComponent } from '@shared/components/banner/banner.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -22,19 +23,18 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     BannerComponent,
     BlogCardComponent,
     BreadcrumbsComponent,
-    ButtonComponent,
     ProductCardComponent,
     TagComponent,
     ListComponent,
     ModalComponent,
     InputComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
     NgOptimizedImage,
     NgStyle,
-    NgIf,
     RouterLink,
     DecimalPipe,
     NgClass,
@@ -51,7 +51,8 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     ListComponent,
     ModalComponent,
     InputComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    PaginationComponent
   ]
 })
 export class SharedModule {}

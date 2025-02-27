@@ -1,32 +1,57 @@
 import { NgModule } from '@angular/core';
 
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { NgClass, NgOptimizedImage } from '@angular/common';
-import { InputComponent } from './components/input/input.component';
+import { DecimalPipe, NgClass, NgIf, CommonModule, NgOptimizedImage, NgStyle } from '@angular/common';
+import { BannerComponent } from '@shared/components/banner/banner.component';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "@shared/components/button/button.component";
+import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
+import { TagComponent } from './components/tag/tag.component';
+import { ListComponent } from './components/list/list.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
     DropdownComponent,
-    InputComponent,
     ButtonComponent,
+    BannerComponent,
+    BlogCardComponent,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    ProductCardComponent,
+    TagComponent,
+    ListComponent,
     ModalComponent,
-    CheckboxComponent,
+    InputComponent,
+    CheckboxComponent
   ],
   imports: [
+    CommonModule,
     NgOptimizedImage,
+    NgStyle,
+    NgIf,
+    RouterLink,
+    DecimalPipe,
     NgClass,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     DropdownComponent,
-    InputComponent,
+    BannerComponent,
+    BlogCardComponent,
+    BreadcrumbsComponent,
     ButtonComponent,
+    ProductCardComponent,
+    TagComponent,
+    ListComponent,
     ModalComponent,
-    CheckboxComponent,
-  ],
+    InputComponent,
+    CheckboxComponent
+  ]
 })
 export class SharedModule {}

@@ -1,0 +1,120 @@
+@if (type() === 'vertical') {
+  <div class="card">
+    <img class="card__image"
+         [src]="product().image"
+         (error)="onImageError($event)"
+    />
+
+    <div class="card__content">
+      <div class="card__body">
+        <p class="card__body__product-title">
+          {{ product().name }}
+        </p>
+
+        <p class="card__body__product-description">
+          {{ product().description }}
+        </p>
+
+        @if (showRate() && product().rate) {
+          <div class="card__body__product-rating">
+            @for (rating of getRatingArray(); track rating) {
+              <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
+                   width="16"
+                   height="16"
+                   alt="star"
+              />
+            }
+          </div>
+        }
+      </div>
+
+      <div class="card__footer">
+        <p class="card__footer__product-price">
+          {{ product().price | number: '1.2-2' }} UAH
+        </p>
+        <app-button [size]="'s'">Buy now</app-button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="card card-horizontal">
+    <div class="card-horizontal__image-wrapper">
+      <img class="card__image card-horizontal__image"
+           [src]="product().image"
+           (error)="onImageError($event)"
+      />
+    </div>
+
+    <div class="card-horizontal__content">
+      <div class="card__body card-horizontal__body">
+        <div class="card-horizontal__body__product">
+          <h4 class="card__body__product-title">
+            {{ product().name }}
+          </h4>
+
+          <p class="card__body__product-description card-horizontal__body__product-description">
+            {{ product().description }}
+          </p>
+
+          @if (showRate() && product().rate) {
+            <div class="card__body__product-rating card-horizontal__body__product-rating">
+              @for (rating of getRatingArray(); track rating) {
+                <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
+                     width="20"
+                     height="20"
+                     alt="star"
+                />
+              }
+            </div>
+          }
+        </div>
+
+        <div class="card__body__product-info">
+          <div class="card__body__product-info__items">
+            <p class="card__body__product-info__items-item">Freshness:</p>
+            <p class="card__body__product-info__items-item">Farm:</p>
+            <p class="card__body__product-info__items-item">Delivery:</p>
+            <p class="card__body__product-info__items-item">Stock:</p>
+          </div>
+
+          <div class="card__body__product-info__items">
+            <p class="card__body__product-info__items-item text-primary">{{ getFreshness(product().freshness) }}</p>
+            <p class="card__body__product-info__items-item">{{ product().farm }}</p>
+            <p class="card__body__product-info__items-item">{{ product().deliveryAria }}</p>
+            <p class="card__body__product-info__items-item text-primary">{{ product().maxKgs }} kg</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card__footer card-horizontal__footer">
+        <p class="card__footer__product-price">
+          {{ product().price | number: '1.2-2' }} UAH
+        </p>
+
+        <div class="card-horizontal__footer__delivery">
+          <p class="card-horizontal__footer__delivery-info">Free Shipping</p>
+          <p class="card-horizontal__footer__delivery-speed">Delivery {{ product().deliveryDays === 1 ? 'in 1 day' : product().deliveryDays === 0 ? 'today' : 'in ' + product().deliveryDays + ' days' }}</p>
+        </div>
+
+        <div class="card-horizontal__footer__buttons">
+          <app-button class="card-horizontal__footer__button">
+            <p>Product detail</p>
+            <img ngSrc="assets/icons/ic-chevron-right.svg" width="18" height="18">
+          </app-button>
+
+          @if (checkIfInWishList(product())) {
+            <app-button [size]="'s'" [variant]="'secondary'" (click)="removeFromWishList(product())" class="card-horizontal__footer__button">
+              <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
+              <p>Added</p>
+            </app-button>
+          } @else {
+            <app-button [size]="'s'" [variant]="'secondary'" (click)="addToWishList(product())" class="card-horizontal__footer__button">
+              <img ngSrc="assets/icons/ic-actions-heart.svg" width="16" height="16">
+              <p>Add to wish list</p>
+            </app-button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

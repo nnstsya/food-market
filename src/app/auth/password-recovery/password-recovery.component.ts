@@ -43,7 +43,7 @@ export class PasswordRecoveryComponent {
           Validators.required,
           Validators.minLength(6),
           Validators.pattern(
-            /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*();:'",./|]).{6,}$/,
+            /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*();:'",./|])[A-Za-z\d!@#$%^&*();:'",./|]{6,}$/,
           ),
         ],
       ],

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ProductCart } from "@core/models/product.model";
 import { ModalService } from "@shared/components/modal/modal.service";
 import { ShoppingCartService } from "@home/services/shopping-cart.service";
@@ -9,16 +9,20 @@ import { Router } from "@angular/router";
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent {
   products: ProductCart[] = [];
+  totalPrice: number = 0;
   isAuthenticated: boolean = !!localStorage.getItem('user');
 
   private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private modalService: ModalService = inject(ModalService);
   private router: Router = inject(Router)
 
-  ngOnInit() {
-    this.products = this.shoppingCartService.items();
+  constructor() {
+    effect(() => {
+      this.products = this.shoppingCartService.items();
+      this.totalPrice = this.shoppingCartService.total();
+    });
   }
 
   navigateUser(): void {

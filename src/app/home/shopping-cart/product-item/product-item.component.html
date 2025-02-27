@@ -3,6 +3,7 @@
     <img class="product__image"
          [src]="product().product.image"
          (error)="onImageError($event)"
+         (click)="navigateToProductDetail(product().product)"
     />
 
     <div class="product__actions">
@@ -23,7 +24,7 @@
         <p class="product__actions__item-text">Compare</p>
       </div>
 
-      <div class="product__actions__item">
+      <div class="product__actions__item" (click)="removeFromCart()">
         <img ngSrc="assets/icons/ic-actions-close-simple.svg" width="16" height="16">
         <p class="product__actions__item-text">Remove</p>
       </div>
@@ -59,7 +60,15 @@
       <h3 class="product__purchase-section__price">{{ product().product.price }} UAH</h3>
 
       <div class="product__purchase-section__action">
-        <app-input [border]="false" placeholder="1" class="product__purchase-section__action__input" [ngModel]="product().quantity"></app-input>
+          <app-input class="product__purchase-section__action__input"
+                     [placeholder]="product().quantity"
+                     [border]="false"
+                     [ngModel]="product().quantity"
+                     [min]="1"
+                     [max]="product().product.maxKgs"
+                     (input)="onQuantityChange($event)"
+          >
+          </app-input>
         <div class="divider"></div>
         <app-dropdown [options]="buyByOptions" [placeholder]="buyByOptions[0].title"></app-dropdown>
       </div>

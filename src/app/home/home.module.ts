@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ReviewsComponent } from './home-page/reviews/reviews.component';
-import { AsyncPipe, NgClass, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, DecimalPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { ReviewsSliderComponent } from '@home/home-page/reviews-slider/reviews-slider.component';
 import { SharedModule } from '@shared/shared.module';
 import { CategoryComponent } from './category/category.component';
@@ -34,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     SharedModule,
     NgClass,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DecimalPipe
   ]
 })
 export class HomeModule {}

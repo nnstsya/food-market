@@ -29,6 +29,10 @@
   padding-block: 22px;
   gap: 16px;
 
+  &__image {
+    cursor: pointer;
+  }
+
   &__item {
     display: flex;
     flex-direction: column;

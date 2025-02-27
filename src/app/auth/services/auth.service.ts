@@ -13,10 +13,10 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
-  private API_URL: string = 'http://localhost:3000/api/users';
+  private basePath: string = '/users';
 
   signIn(userCredentials: UserCredentials): Observable<User> {
-    return this.http.post<User>(`${this.API_URL}/login`, userCredentials).pipe(
+    return this.http.post<User>(`${this.basePath}/login`, userCredentials).pipe(
       tap((response: User) => this.storeUserData(response)),
       catchError((err) =>
         throwError(
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   signUp(user: UserData): Observable<User> {
-    return this.http.post<User>(`${this.API_URL}/register`, user).pipe(
+    return this.http.post<User>(`${this.basePath}/register`, user).pipe(
       tap((response: User) => this.storeUserData(response)),
       catchError((err) =>
         throwError(
@@ -47,7 +47,7 @@ export class AuthService {
     userWithNewPassword: UserPasswordRecovery,
   ): Observable<boolean> {
     return this.http
-      .post<boolean>(`${this.API_URL}/reset-password`, userWithNewPassword)
+      .post<boolean>(`${this.basePath}/reset-password`, userWithNewPassword)
       .pipe(
         catchError((err) =>
           throwError(

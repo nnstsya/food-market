@@ -39,10 +39,12 @@
   <section class="nav-bar">
     <ul class="nav-bar__list">
       @for (category of categories; track category) {
-        <li class="nav-bar__item" [routerLink]="'home/' + category.id">
+        <li class="nav-bar__item" [routerLink]="'homepage/' + getCategoryName(category.title)" [ngClass]="{ 'nav-bar__item-active': checkIfTabActive(category.title) }">
             <p>{{ category.title }}</p>
         </li>
       }
+
+      <div class="nav__gradient-fade"></div>
     </ul>
   </section>
 </header>

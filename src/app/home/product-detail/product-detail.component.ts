@@ -37,8 +37,7 @@ export class ProductDetailComponent implements OnInit {
             this.product = product;
             this.updateBuyByOptions();
             return this.product;
-          }),
-          takeUntilDestroyed(this.destroyRef)
+          })
         )
       }),
       takeUntilDestroyed(this.destroyRef)

@@ -1,7 +1,7 @@
 <app-breadcrumbs></app-breadcrumbs>
 
 @if (categoryName) {
-  @if (displayedProducts) {
+  @if (displayedProducts.length) {
     <div class="page">
       <div class="page__top-bar">
         <div class="page__top-bar__header">
@@ -33,7 +33,7 @@
               <p class="page__top-bar__actions__text">Products</p>
             </div>
           </div>
-        </div>
+      </div>
 
         <div class="page__top-bar__filters">
           <div class="page__top-bar__filters__items">
@@ -104,7 +104,14 @@
           }
         </div>
       </div>
+
       <app-pagination itemName="products" [totalItems]="productsQuantity" [itemsPerPage]="productsPerPage" (pageChanged)="onSelectedPagesChange($event)"></app-pagination>
+    </div>
+  } @else {
+    <div class="page">
+      <div class="page__content">
+        <span class="loader"></span>
+      </div>
     </div>
   }
 } @else {

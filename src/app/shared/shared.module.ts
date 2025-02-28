@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { DecimalPipe, NgClass, NgOptimizedImage, NgStyle } from '@angular/common';
+import { DecimalPipe, NgClass, CommonModule, NgOptimizedImage, NgStyle } from '@angular/common';
 import { BannerComponent } from '@shared/components/banner/banner.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -9,50 +9,60 @@ import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
 import { TagComponent } from './components/tag/tag.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
-import { CheckboxComponent } from "@shared/components/checkbox/checkbox.component";
-import { RangeComponent } from './components/range/range.component';
+import { ListComponent } from './components/list/list.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InputComponent } from "@shared/components/input/input.component";
+import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { RangeComponent } from './components/range/range.component';
 import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
     DropdownComponent,
+    ButtonComponent,
     BannerComponent,
     BlogCardComponent,
-    CheckboxComponent,
-    RangeComponent,
     BreadcrumbsComponent,
-    ButtonComponent,
     ProductCardComponent,
     TagComponent,
-    PaginationComponent,
+    ListComponent,
+    ModalComponent,
     InputComponent,
-    FilterComponent
+    CheckboxComponent,
+    PaginationComponent,
+    TabsComponent,
+    FilterComponent,
+    RangeComponent
   ],
   imports: [
+    CommonModule,
     NgOptimizedImage,
     NgStyle,
     RouterLink,
     DecimalPipe,
-    ReactiveFormsModule,
     NgClass,
+    ReactiveFormsModule,
     FormsModule
   ],
   exports: [
     DropdownComponent,
     BannerComponent,
     BlogCardComponent,
-    CheckboxComponent,
     BreadcrumbsComponent,
     ButtonComponent,
     ProductCardComponent,
     TagComponent,
-    RangeComponent,
-    PaginationComponent,
+    ListComponent,
+    ModalComponent,
     InputComponent,
-    FilterComponent
+    CheckboxComponent,
+    PaginationComponent,
+    TabsComponent,
+    FilterComponent,
+    RangeComponent
   ]
 })
 export class SharedModule {}

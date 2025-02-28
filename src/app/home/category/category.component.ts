@@ -67,6 +67,8 @@ export class CategoryComponent implements OnInit {
           }),
           takeUntilDestroyed(this.destroyRef)
         ).subscribe();
+      } else {
+        this.categoryName = null;
       }
     });
   }
@@ -93,6 +95,7 @@ export class CategoryComponent implements OnInit {
 
   changeView(view: 'grid' | 'list'): void {
     this.view = view;
+
     localStorage.setItem('viewMode', view);
   }
 

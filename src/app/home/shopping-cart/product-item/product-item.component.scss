@@ -1,0 +1,138 @@
+@use "../../../../styles/variables" as *;
+
+:host {
+  ::ng-deep {
+    .input-wrapper {
+      padding: 6px !important;
+      border-radius: 12px !important;
+    }
+
+    .input {
+      font-size: 14px;
+    }
+
+    .dropdown-header {
+      padding-inline: 6px 0 !important;
+      gap: 2px !important;
+      font-size: 14px;
+    }
+
+    .dropdown-item {
+      font-size: 14px !important;
+      padding: 6px !important;
+    }
+  }
+}
+
+.product {
+  display: flex;
+  padding-block: 22px;
+  gap: 16px;
+
+  &__image {
+    cursor: pointer;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 231px;
+
+    &__name {
+      font-weight: 500;
+    }
+
+    &__details {
+      display: flex;
+      gap: 14px;
+
+      &__title, &__value {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        justify-content: space-between;
+      }
+    }
+
+    &__farm, &__freshness {
+      color: #a9a9a9;
+      font-size: 14px;
+      font-weight: 300;
+
+      &-value {
+        color: #000;
+      }
+    }
+
+    &__info {
+      padding-top: 7px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__item {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+
+      &-text {
+        font-size: 14px;
+        color: #a9a9a9;
+        font-weight: 300;
+        cursor: pointer;
+
+        &:hover {
+          color: #000;
+          transition: 0.2s ease-out;
+        }
+      }
+    }
+  }
+
+  &__image {
+    height: 67px;
+    width: 100px;
+  }
+
+  &__purchase-section {
+    display: flex;
+    padding-block: 6px;
+    justify-content: space-between;
+
+    &__price {
+      color: $primary-color;
+      font-weight: 600;
+    }
+
+    &__action {
+      align-items: center;
+      display: flex;
+      gap: 4px;
+      border-radius: 12px;
+      border: 1px solid $border-color;
+      background-color: $light-bg-color;
+      width: fit-content;
+
+      &__input {
+        width: 30px;
+      }
+    }
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 26px;
+  background-color: $border-color;
+}

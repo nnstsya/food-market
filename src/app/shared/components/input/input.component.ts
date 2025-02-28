@@ -20,6 +20,8 @@ export class InputComponent implements ControlValueAccessor {
   border: InputSignal<boolean> = input<boolean>(true);
   errorState: InputSignal<boolean> = input<boolean>(false);
   type: InputSignal<'password' | 'email' | 'text' | 'number'> = input<'password' | 'email' | 'text' | 'number'>('text');
+  min: InputSignal<number> = input<number>(-Infinity);
+  max: InputSignal<number> = input<number>(Infinity);
 
   blur: OutputEmitterRef<void> = output<void>();
   iconClicked: OutputEmitterRef<void> = output<void>();

@@ -1,39 +1,5 @@
-import { Category, CategoryItem } from '@core/models/category.model';
-
-export const categoryData: CategoryItem[] = [
-  {
-    id: 1,
-    title: 'Bakery'
-  },
-  {
-    id: 2,
-    title: 'Fruit and vegetables'
-  },
-  {
-    id: 3,
-    title: 'Meat and fish'
-  },
-  {
-    id: 4,
-    title: 'Drinks'
-  },
-  {
-    id: 5,
-    title: 'Kitchen'
-  },
-  {
-    id: 6,
-    title: 'Special nutrition'
-  },
-  {
-    id: 7,
-    title: 'Baby'
-  },
-  {
-    id: 8,
-    title: 'Pharmacy'
-  }
-];
+import { Category } from '@core/models/category.model';
+import { Option } from "@shared/components/dropdown/dropdown.component";
 
 export const categoriesData: Record<Category, string> = {
   [Category.BAKERY]: "Bakery",
@@ -45,3 +11,32 @@ export const categoriesData: Record<Category, string> = {
   [Category.BABY]: "Baby",
   [Category.PHARMACY]: "Pharmacy",
 };
+
+export const categoryData: Option[] = Object.entries(categoriesData)
+  .map(([_, value], index) => ({
+    id: index + 1,
+    title: value
+  }));
+
+export const popularCategoryData: Option[] = [
+  {
+    id: 1,
+    title: 'Carrots'
+  },
+  {
+    id: 2,
+    title: 'Tomatoes'
+  },
+  {
+    id: 3,
+    title: 'Potatoes'
+  },
+  {
+    id: 4,
+    title: 'Chicken'
+  },
+  {
+    id: 5,
+    title: 'Pork'
+  }
+];

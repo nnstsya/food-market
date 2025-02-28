@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Product } from '@core/models/product.model';
 import { Category } from "@core/models/category.model";
 
@@ -9,13 +9,28 @@ import { Category } from "@core/models/category.model";
 })
 export class ProductsService {
   private http: HttpClient = inject(HttpClient);
-  private API_URL: string = 'http://localhost:3000/api/products';
+  private basePath: string = '/products';
+
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.basePath).pipe(
+      catchError(() =>
+        throwError(() => new Error('Failed to fetch products information.')),
+      ),
+    );
+  }
 
   getProductsByCategory(category: Category): Observable<Product[]> {
-    return this.http.get<Product[]>(this.API_URL).pipe(
-      map((products: Product[]) => products.filter((product: Product) => product.category === category)),
+    const params: HttpParams = new HttpParams().set('category', category);
+
+    return this.http.get<Product[]>(this.basePath, { params }).pipe(
       catchError(() => throwError(() => new Error('Failed to fetch products information.'))),
     )
+  }
+
+  getProductById(productId: string): Observable<Product> {
+    return this.http.get<Product>(this.basePath + '/' + productId).pipe(
+      catchError(() => throwError(() => new Error('Failed to fetch product information.'))),
+    );
   }
 
   addToWishList(product: Product): void {

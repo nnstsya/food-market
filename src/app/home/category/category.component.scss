@@ -29,7 +29,7 @@
 
       &__text {
         color: #a9a9a9;
-        font-size: 14px;
+        font-size: 12px;
       }
     }
 
@@ -107,6 +107,8 @@
     align-self: center;
     justify-self: center;
     color: #a9a9a9;
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -125,5 +127,27 @@
 
   &:hover {
     filter: brightness(0.7);
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid $border-color;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  align-self: center;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-top: 60px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px 45px;
+  gap: 32px;
   width: 100%;
   justify-content: center;
 }
@@ -159,7 +160,6 @@
   height: 26px;
   background-color: $border-color;
 }
-
 
 .loader {
   width: 48px;

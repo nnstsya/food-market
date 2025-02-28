@@ -11,6 +11,7 @@ import { Stock } from "@core/models/stock.model";
 import { Option } from "@shared/components/dropdown/dropdown.component";
 import { buyByOptions } from "@core/mocks/products";
 import { categoriesData } from "@core/mocks/categories";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -20,8 +21,10 @@ import { categoriesData } from "@core/mocks/categories";
 export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
   buyByOptions: Option[] = buyByOptions;
+  quantity: number = 1;
 
   private productService: ProductsService = inject(ProductsService);
+  private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
@@ -43,8 +46,7 @@ export class ProductDetailComponent implements OnInit {
             this.product = product;
             this.updateBuyByOptions();
             return this.product;
-          }),
-          takeUntilDestroyed(this.destroyRef)
+          })
         )
       }),
       takeUntilDestroyed(this.destroyRef)
@@ -81,7 +83,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getFormattedBuyOptions(): string {
-    let uniqueOptions = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
+   let uniqueOptions: string[] = this.buyByOptions.map(option => option?.title || '').filter((value, index, array) => {
       return array.lastIndexOf(value) === index;
     });
 
@@ -90,6 +92,10 @@ export class ProductDetailComponent implements OnInit {
 
   getUrlCategoryName(title: string): string {
    return this.getFormattedCategory(title).split(' ').join('').toLowerCase();
+  }
+
+  addToCart(): void {
+    this.shoppingCartService.addToCart(this.product!, Number(this.quantity));
   }
 
   private updateBuyByOptions(): void {

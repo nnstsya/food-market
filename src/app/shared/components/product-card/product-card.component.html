@@ -1,45 +1,49 @@
 @if (type() === 'vertical') {
-  <div class="card" (click)="navigateToProductDetail()">
+  <div class="card">
     <img class="card__image"
          [src]="product().image"
          (error)="onImageError($event)"
+         (click)="navigateToProductDetail()"
     />
 
-    <div class="card__body">
-      <p class="card__body__product-title">
-        {{ product().name }}
-      </p>
+    <div class="card__content">
+      <div class="card__body">
+        <p class="card__body__product-title">
+          {{ product().name }}
+        </p>
 
-      <p class="card__body__product-description">
-        {{ product().description }}
-      </p>
+        <p class="card__body__product-description">
+          {{ product().description }}
+        </p>
 
-      @if (showRate() && product().rate) {
-        <div class="card__body__product-rating">
-          @for (rating of getRatingArray(); track rating) {
-            <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
-                 width="16"
-                 height="16"
-                 alt="star"
-            />
-          }
-        </div>
-      }
-    </div>
+        @if (showRate() && product().rate) {
+          <div class="card__body__product-rating">
+            @for (rating of getRatingArray(); track rating) {
+              <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
+                   width="16"
+                   height="16"
+                   alt="star"
+              />
+            }
+          </div>
+        }
+      </div>
 
-    <div class="card__footer">
-      <p class="card__footer__product-price">
-        {{ product().price | number: '1.2-2' }} UAH
-      </p>
-      <app-button [size]="'s'">Buy now</app-button>
+      <div class="card__footer">
+        <p class="card__footer__product-price">
+          {{ product().price | number: '1.2-2' }} UAH
+        </p>
+        <app-button [size]="'s'" (click)="addToCart()">Buy now</app-button>
+      </div>
     </div>
   </div>
 } @else {
-  <div class="card card-horizontal" (click)="navigateToProductDetail()">
+  <div class="card card-horizontal">
     <div class="card-horizontal__image-wrapper">
       <img class="card__image card-horizontal__image"
            [src]="product().image"
            (error)="onImageError($event)"
+           (click)="navigateToProductDetail()"
       />
     </div>
 
@@ -82,8 +86,6 @@
             <p class="card__body__product-info__items-item text-primary">{{ product().maxKgs }} kg</p>
           </div>
         </div>
-
-
       </div>
 
       <div class="card__footer card-horizontal__footer">
@@ -97,7 +99,7 @@
         </div>
 
         <div class="card-horizontal__footer__buttons">
-          <app-button class="card-horizontal__footer__button">
+          <app-button class="card-horizontal__footer__button" (click)="navigateToProductDetail()">
             <p>Product detail</p>
             <img ngSrc="assets/icons/ic-chevron-right.svg" width="18" height="18">
           </app-button>
@@ -113,7 +115,6 @@
               <p>Add to wish list</p>
             </app-button>
           }
-
         </div>
       </div>
     </div>

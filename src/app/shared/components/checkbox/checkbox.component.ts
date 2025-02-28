@@ -2,11 +2,11 @@ import {
   Component,
   forwardRef,
   input,
-  InputSignal,
+  InputSignal, OnChanges, OnInit,
   output,
-  OutputEmitterRef,
+  OutputEmitterRef, SimpleChanges,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox',
@@ -20,16 +20,27 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class CheckboxComponent {
+export class CheckboxComponent implements ControlValueAccessor, OnInit, OnChanges {
   label: InputSignal<string> = input<string>('');
   disabled: InputSignal<boolean> = input<boolean>(false);
+  checked: InputSignal<boolean> = input<boolean>(false);
 
   changed: OutputEmitterRef<boolean> = output<boolean>();
 
-  isChecked: boolean = false;
+  isChecked: boolean = this.checked();
 
   private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
+
+  ngOnInit() {
+   this.isChecked = this.checked();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['checked']) {
+      this.isChecked = this.checked();
+    }
+  }
 
   writeValue(value: boolean): void {
     this.isChecked = value || false;

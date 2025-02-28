@@ -1,0 +1,18 @@
+<div class="filter">
+  <h3 class="filter__heading">Rating</h3>
+  @for (rating of ratings(); track rating.id) {
+    <app-checkbox [checked]="rating.checked" (changed)="onFilterChange(rating.id)">
+      <div class="rating">
+        @for (star of rating.ratingArray; track star) {
+          @if (star) {
+            <img ngSrc="assets/icons/ic-actions-star-filled-yellow.svg" width="16" height="16" alt="filled star"/>
+          } @else {
+            <img ngSrc="assets/icons/ic-actions-star.svg" width="16" height="16" alt="empty star"/>
+          }
+        }
+      </div>
+
+      <app-tag [text]="rating.count!"></app-tag>
+    </app-checkbox>
+  }
+</div>

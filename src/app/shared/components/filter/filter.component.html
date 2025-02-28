@@ -1,0 +1,10 @@
+<div class="filter">
+  <app-checkbox
+    [label]="label()"
+    (changed)="onFilterChange($event)"
+    [checked]="checked()"
+  >
+  </app-checkbox>
+
+  <app-tag [text]="itemsCount()" color="gray"></app-tag>
+</div>

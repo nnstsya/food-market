@@ -10,12 +10,14 @@ import { ButtonComponent } from "@shared/components/button/button.component";
 import { ProductCardComponent } from "@shared/components/product-card/product-card.component";
 import { TagComponent } from './components/tag/tag.component';
 import { ListComponent } from './components/list/list.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { RangeComponent } from './components/range/range.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { TabsComponent } from './components/tabs/tabs.component';
     InputComponent,
     CheckboxComponent,
     PaginationComponent,
-    TabsComponent
+    TabsComponent,
+    FilterComponent,
+    RangeComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,8 @@ import { TabsComponent } from './components/tabs/tabs.component';
     RouterLink,
     DecimalPipe,
     NgClass,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     DropdownComponent,
@@ -55,7 +60,9 @@ import { TabsComponent } from './components/tabs/tabs.component';
     InputComponent,
     CheckboxComponent,
     PaginationComponent,
-    TabsComponent
+    TabsComponent,
+    FilterComponent,
+    RangeComponent
   ]
 })
 export class SharedModule {}

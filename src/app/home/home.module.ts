@@ -13,7 +13,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductItemComponent } from './shopping-cart/product-item/product-item.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
-
+import { RatingFilterComponent } from './filters/rating-filter/rating-filter.component';
+import { PriceFilterComponent } from './filters/price-filter/price-filter.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { ProductRecommendationsComponent } from './product-detail/product-recomm
     ProductDetailComponent,
     ShoppingCartComponent,
     ProductItemComponent,
-    ProductRecommendationsComponent
+    ProductRecommendationsComponent,
+    RatingFilterComponent,
+    PriceFilterComponent
   ],
   imports: [
     HomeRoutingModule,

@@ -12,6 +12,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductItemComponent } from './shopping-cart/product-item/product-item.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
+
 
 @NgModule({
   declarations: [
@@ -22,10 +24,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     CategoryComponent,
     ProductDetailComponent,
     ShoppingCartComponent,
-    ProductItemComponent
-  ],
-  exports: [
-    ShoppingCartComponent
+    ProductItemComponent,
+    ProductRecommendationsComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -36,6 +36,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     FormsModule,
     DecimalPipe
+  ],
+  exports: [
+    ShoppingCartComponent
   ]
 })
 export class HomeModule {}

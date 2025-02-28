@@ -28,6 +28,15 @@ export class ProductDetailComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
+  get freshness(): string {
+    return this.product?.freshness === 1 ? '1 day old' : `${this.product?.freshness} days old`;
+  }
+
+  get deliveryDays(): string {
+    if (this.product?.deliveryDays === 0) return 'Today';
+    return this.product?.deliveryDays === 1 ? 'In 1 day' : `In ${this.product?.deliveryDays} days`;
+  }
+
   ngOnInit(): void {
     this.route.queryParamMap.pipe(
       switchMap(params => {

@@ -42,7 +42,7 @@ export class CategoryComponent implements OnInit {
   nonWishlistFilter: Signal<FilterValue> = computed(() => this.filterService.getState()().nonWishlist);
   appliedFilters: Signal<ActiveFilter[]> = computed(() => this.filterService.appliedFilters());
 
-  private originalProducts: Product[] = [];
+  originalProducts: Product[] = [];
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   private productsService: ProductsService = inject(ProductsService);

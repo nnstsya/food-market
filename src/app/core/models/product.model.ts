@@ -21,6 +21,11 @@ export interface Product {
   updatedAt: string;
 }
 
+export interface ProductCart {
+  product: Product;
+  quantity: number;
+}
+
 export enum BuyBy {
   Weight = 'kgs',
   Piece = 'pcs',

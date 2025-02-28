@@ -1,5 +1,30 @@
-<div class="page-wrapper">
+<div class="page-wrapper" [ngClass]="(modalOpened$ | async) ? 'no-scroll' : ''">
   <app-layout class="page">
     <router-outlet></router-outlet>
   </app-layout>
+
+  @if (modalOpened$ | async) {
+    @switch (modalType$ | async) {
+      @case ('login') {
+        <app-modal class="modal">
+          <app-login class="modal-content"></app-login>
+        </app-modal>
+      }
+      @case ('passwordRecovery') {
+        <app-modal class="modal">
+          <app-password-recovery class="modal-content"></app-password-recovery>
+        </app-modal>
+      }
+      @case ('signUp') {
+        <app-modal class="modal">
+          <app-register class="modal-content"></app-register>
+        </app-modal>
+      }
+      @case ('cart') {
+        <app-modal class="modal">
+          <app-shopping-cart class="modal-content"></app-shopping-cart>
+        </app-modal>
+      }
+    }
+  }
 </div>

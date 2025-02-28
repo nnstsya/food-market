@@ -63,12 +63,12 @@
 
         <div class="product__purchase-section__actions">
           <div class="product__purchase-section__actions__number-of-items">
-            <app-input [border]="false" placeholder="1" class="product__purchase-section__actions__number-of-items__input"></app-input>
+            <app-input [border]="false" [(ngModel)]="quantity" placeholder="1" class="product__purchase-section__actions__number-of-items__input"></app-input>
             <div class="divider"></div>
             <app-dropdown [options]="buyByOptions" [placeholder]="buyByOptions[0].title"></app-dropdown>
           </div>
 
-          <app-button>
+          <app-button (click)="addToCart()">
             <div class="product__purchase-section__actions__button">
               <img ngSrc="assets/icons/ic-actions-add-simple.svg" width="18" height="18"/>
               <p>Add to cart</p>

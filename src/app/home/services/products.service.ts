@@ -18,11 +18,13 @@ export class ProductsService {
     );
   }
 
-  getProductsByCategory(category: Category): Observable<Product[]> {
-    const params: HttpParams = new HttpParams().set('category', category);
+  getProductsByCategory(category: Category, page: number = 1, pageSize: number = 10): Observable<Response> {
+    const params = new HttpParams()
+      .set('category', category)
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
 
     return this.http.get<Response>(this.basePath, { params }).pipe(
-      map((response: Response) => response.results),
       catchError(() => throwError(() => new Error('Failed to fetch products information.')))
     );
   }

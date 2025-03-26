@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, EMPTY, map, Observable, throwError } from 'rxjs';
 import { Product, Response } from '@core/models/product.model';
 import { Category } from "@core/models/category.model";
+import { ToastService } from "@shared/components/toast/toast.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Category } from "@core/models/category.model";
 export class ProductsService {
   private http: HttpClient = inject(HttpClient);
   private basePath: string = '/products';
+  private toastService: ToastService = inject(ToastService);
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Response>(this.basePath).pipe(
@@ -33,22 +35,28 @@ export class ProductsService {
     );
   }
 
-  addToWishList(product: Product): void {
-    const wishList: Product[] = this.getWishList();
-    wishList.push(product)
+  addToWishList(productId: string): Observable<void> {
+    if (!localStorage.getItem('user')) {
+      this.toastService.show('Only authorized users can add products to the wishlist.');
+      return EMPTY;
+    }
 
-    localStorage.setItem('wishList', JSON.stringify(wishList));
+    return this.http.post<void>(this.basePath + '/favorites', {productId}).pipe(
+      catchError(() => throwError(() => new Error('Failed to add product to wishlist.'))),
+    );
   }
 
-  removeFromWishList(product: Product): void {
-    const wishList: Product[] = this.getWishList();
+  removeFromWishList(productId: string): Observable<void> {
+    const params: HttpParams = new HttpParams().set('productId', productId);
 
-    localStorage.setItem('wishList', JSON.stringify(wishList.filter((wishListProduct: Product) => product.id !== wishListProduct.id)));
+    return this.http.delete<void>(this.basePath + '/favorites', { params }).pipe(
+      catchError(() => throwError(() => new Error('Failed to remove product from wishlist.'))),
+    );
   }
 
-  getWishList(): Product[] {
-    const wishList: string | null = localStorage.getItem('wishList');
-
-    return wishList ? JSON.parse(wishList) : [];
+  getWishList(): Observable<Response> {
+    return this.http.get<Response>(this.basePath + '/favorites').pipe(
+      catchError(() => throwError(() => new Error('Failed to fetch wishlist information.'))),
+    );
   }
 }

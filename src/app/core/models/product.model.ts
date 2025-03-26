@@ -27,6 +27,7 @@ export interface Product {
   tax: number;
   createdAt: string;
   updatedAt: string;
+  isInWishlist?: boolean;
 }
 
 export interface ProductCart {

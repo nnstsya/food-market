@@ -1,0 +1,133 @@
+<app-breadcrumbs></app-breadcrumbs>
+
+<div class="page">
+  <section class="section">
+    <div class="step">
+      <div class="step__header">
+        <h3 class="step__header__heading">Billing info</h3>
+        <div class="step__header__info">
+          <p class="step__header__info-text">Please enter your billing info</p>
+          <p class="step__header__info-text">Step 1 of 5</p>
+        </div>
+      </div>
+
+      <form [formGroup]="checkoutForm" class="step__form">
+        <div class="step__form__input">
+          <app-input
+            formControlName="firstName"
+            placeholder="First name"
+            label="First name"
+            [errorState]="!!(checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched) {
+            <div class="error">
+              First name must contain only Latin letters.
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="lastName"
+            placeholder="Last name"
+            label="Last name"
+            [errorState]="!!(checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched) {
+            <div class="error">
+              Last name must contain only Latin letters.
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="email"
+            placeholder="Email address"
+            label="Email address"
+            type="email"
+            [errorState]="!!(checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched) {
+            <div class="error">
+              Please enter a valid email address.
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="phoneNumber"
+            placeholder="Phone number"
+            label="Phone number"
+            type="number"
+            [errorState]="!!(checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched) {
+            <div class="error">
+              Please enter a valid phone number (10-14 digits).
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="address"
+            placeholder="Address"
+            label="Address"
+            [errorState]="!!(checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched) {
+            <div class="error">
+              Address can only contain letters, numbers, and basic punctuation.
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="city"
+            placeholder="Town / City"
+            label="Town or city"
+            [errorState]="!!(checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched) {
+            <div class="error">
+              City must contain only Latin letters (max 250 characters).
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-dropdown
+            formControlName="state"
+            [options]="countryOptions"
+            label="State / Country"
+            [background]="true"
+            placeholder="Choose a state or country"></app-dropdown>
+          @if (checkoutForm.get('state')?.invalid && checkoutForm.get('state')?.touched) {
+            <div class="error">
+              Please select a state or country (Latin letters only).
+            </div>
+          }
+        </div>
+
+        <div class="step__form__input">
+          <app-input
+            formControlName="zipCode"
+            placeholder="Postal code or ZIP"
+            label="ZIP / Postal code"
+            [errorState]="!!(checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched)"
+          ></app-input>
+          @if (checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched) {
+            <div class="error">
+              ZIP code must be 1-9 characters (letters and numbers).
+            </div>
+          }
+        </div>
+
+        <app-checkbox [background]="true" label="Ship to a different address?"></app-checkbox>
+      </form>
+    </div>
+  </section>
+</div>

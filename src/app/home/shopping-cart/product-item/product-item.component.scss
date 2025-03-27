@@ -62,7 +62,7 @@
     }
 
     &__farm, &__freshness {
-      color: #a9a9a9;
+      color: $secondary-color;
       font-size: 14px;
       font-weight: 300;
 
@@ -88,7 +88,7 @@
 
       &-text {
         font-size: 14px;
-        color: #a9a9a9;
+        color: $secondary-color;
         font-weight: 300;
         cursor: pointer;
 

@@ -1,0 +1,95 @@
+@use "../../../../styles/variables" as *;
+
+.radio-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: $light-bg-color;
+  transition: all 0.2s ease;
+  width: 100%;
+
+  &.checked {
+    background-color: #fff;
+  }
+
+  &:hover {
+    border-color: $primary-color-dark;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      border-color: $border-color;
+    }
+  }
+}
+
+.radio {
+  &-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-button {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #757575;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    transition: all 0.2s ease;
+
+    &.checked {
+      border: 5px solid $primary-color;
+    }
+  }
+
+  &-inner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+  }
+
+  &-label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  &-additional {
+    font-size: 14px;
+    color: $secondary-color;
+    justify-self: center;
+  }
+
+  &-icon {
+    justify-self: flex-end;
+  }
+
+  &-expandable-content {
+    width: 100%;
+    margin-top: 32px;
+
+    &:empty {
+      margin-top: 0;
+    }
+  }
+}

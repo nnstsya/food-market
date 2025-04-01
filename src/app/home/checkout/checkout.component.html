@@ -129,5 +129,127 @@
         <app-checkbox [background]="true" label="Ship to a different address?"></app-checkbox>
       </form>
     </div>
+
+    <div class="step">
+      <div class="step__header">
+        <h3 class="step__header__heading">Billing method</h3>
+        <div class="step__header__info">
+          <p class="step__header__info-text">Please enter your payment method</p>
+          <p class="step__header__info-text">Step 2 of 5</p>
+        </div>
+      </div>
+
+      <form [formGroup]="checkoutForm" class="step__form">
+        @for (method of shippingMethods; track method.value) {
+          <app-radio-input
+            class="radio-input"
+            [value]="method.value"
+            [label]="method.label"
+            [additionalText]="method.additionalText"
+            [iconUrl]="method.iconUrl"
+            formControlName="shippingMethod"
+            (change)="onShippingMethodChange($event)"
+          ></app-radio-input>
+        }
+      </form>
+    </div>
+
+    <div class="step">
+      <div class="step__header">
+        <h3 class="step__header__heading">Payment method</h3>
+        <div class="step__header__info">
+          <p class="step__header__info-text">Please enter your payment method</p>
+          <p class="step__header__info-text">Step 3 of 5</p>
+        </div>
+      </div>
+
+      <form [formGroup]="checkoutForm" class="step__form">
+        @for (method of paymentMethods; track method.value; let first = $first) {
+          @if (first) {
+            <app-radio-input
+              class="radio-input"
+              [value]="method.value"
+              [label]="method.label"
+              [iconUrl]="method.iconUrl"
+              [disabled]="!isPaymentMethodEnabled(method.value)"
+              formControlName="paymentMethod"
+              (click)="onPaymentMethodChange(method.value)"
+            >
+              @if (checkoutForm.get('paymentMethod')?.value === 'credit') {
+                <div class="credit-card-form">
+                  <div class="card-number-field">
+                    <app-input
+                      formControlName="cardNumber"
+                      placeholder="Card number"
+                      label="Card number"
+                      type="text"
+                      [errorState]="!!(checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched)"
+                    ></app-input>
+                    @if (checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched) {
+                      <div class="error">
+                        Card number must be 16 digits.
+                      </div>
+                    }
+                  </div>
+
+                  <div class="card-holder-field">
+                    <app-input
+                      formControlName="cardHolder"
+                      placeholder="Card holder"
+                      label="Card holder"
+                      [errorState]="!!(checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched)"
+                    ></app-input>
+                    @if (checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched) {
+                      <div class="error">
+                        Card holder name must contain only Latin characters.
+                      </div>
+                    }
+                  </div>
+
+                  <div class="expiration-date-field">
+                    <app-input
+                      formControlName="expirationDate"
+                      placeholder="DD/MM/YY"
+                      label="Expiration date"
+                      [errorState]="!!(checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched)"
+                    ></app-input>
+                    @if (checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched) {
+                      <div class="error">
+                        Enter a valid expiration date (DD/MM/YY).
+                      </div>
+                    }
+                  </div>
+
+                  <div class="cvc-field">
+                    <app-input
+                      formControlName="cvc"
+                      placeholder="CVC"
+                      label="CVC"
+                      type="number"
+                      [errorState]="!!(checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched)"
+                    ></app-input>
+                    @if (checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched) {
+                      <div class="error">
+                        CVC must be 3 digits.
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </app-radio-input>
+          } @else {
+            <app-radio-input
+              class="radio-input"
+              [value]="method.value"
+              [label]="method.label"
+              [iconUrl]="method.iconUrl"
+              [disabled]="!isPaymentMethodEnabled(method.value)"
+              formControlName="paymentMethod"
+              (click)="onPaymentMethodChange(method.value)"
+            ></app-radio-input>
+          }
+        }
+      </form>
+    </div>
   </section>
 </div>

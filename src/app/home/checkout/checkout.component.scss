@@ -43,11 +43,13 @@
   &__form {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    justify-content: space-between;
+    gap: 16px;
 
     &__input {
       display: block;
       width: 319px;
+      margin-bottom: 16px;
     }
   }
 }
@@ -55,4 +57,30 @@
 .error {
   font-size: 12px;
   color: red;
+}
+
+.credit-card-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto;
+  row-gap: 32px;
+  column-gap: 16px;
+}
+
+.card-number-field {
+  grid-column: span 5;
+}
+
+.card-holder-field {
+  grid-column: span 3;
+  padding-right: 16px;
+}
+
+.expiration-date-field,
+.cvc-field {
+  grid-column: span 1;
+}
+
+.radio-input {
+  width: 100%;
 }

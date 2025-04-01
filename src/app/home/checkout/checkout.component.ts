@@ -11,8 +11,18 @@ import { User } from "@auth/models/user.model";
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
-
   countryOptions: Option[] = countryOptions;
+
+  shippingMethods = [
+    { value: 'fedex', label: 'FedEx', additionalText: 'Additional price', iconUrl: 'assets/icons/ic-fedex.svg' },
+    { value: 'dhl', label: 'DHL', additionalText: 'Additional price', iconUrl: 'assets/icons/ic-dhl.svg' }
+  ];
+
+  paymentMethods = [
+    { value: 'credit', label: 'Credit card', iconUrl: 'assets/icons/ic-visa-mastercard.svg', enabled: true },
+    { value: 'paypal', label: 'PayPal', iconUrl: 'assets/icons/ic-paypal.svg', enabled: false },
+    { value: 'bitcoin', label: 'Bitcoin', iconUrl: 'assets/icons/ic-bitcoin.svg', enabled: false }
+  ];
 
   constructor(private fb: FormBuilder) {
     this.checkoutForm = this.fb.group({
@@ -47,6 +57,26 @@ export class CheckoutComponent implements OnInit {
       zipCode: ['', [
         Validators.required,
         Validators.pattern(/^[A-Za-z0-9]{1,9}$/)
+      ]],
+
+      shippingMethod: ['fedex', Validators.required],
+      paymentMethod: ['credit', Validators.required],
+
+      cardNumber: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9]{16}$/)
+      ]],
+      cardHolder: ['', [
+        Validators.required,
+        Validators.pattern(/^[A-Za-z\s]{1,250}$/)
+      ]],
+      expirationDate: ['', [
+        Validators.required,
+        Validators.pattern(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/([0-9]{2})$/)
+      ]],
+      cvc: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9]{3}$/)
       ]]
     });
   }
@@ -57,8 +87,8 @@ export class CheckoutComponent implements OnInit {
 
   prefillFormData() {
     const storedUserData: User | null = localStorage.getItem('user')
-      ? JSON.parse(localStorage.getItem('user') || '{}')
-      : null;
+        ? JSON.parse(localStorage.getItem('user') || '{}')
+        : null;
 
     if (storedUserData) {
       this.checkoutForm.get('firstName')?.setValue(storedUserData.firstName);
@@ -66,5 +96,18 @@ export class CheckoutComponent implements OnInit {
       this.checkoutForm.get('email')?.setValue(storedUserData.email);
       this.checkoutForm.get('phoneNumber')?.setValue(storedUserData.phoneNumber);
     }
+  }
+
+  onShippingMethodChange(value: string): void {
+    this.checkoutForm.get('shippingMethod')?.setValue(value);
+  }
+
+  onPaymentMethodChange(value: string): void {
+    this.checkoutForm.get('paymentMethod')?.setValue(value);
+  }
+
+  isPaymentMethodEnabled(methodValue: string): boolean {
+    const method = this.paymentMethods.find(m => m.value === methodValue);
+    return method ? method.enabled : false;
   }
 }

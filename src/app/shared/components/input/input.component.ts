@@ -22,6 +22,7 @@ export class InputComponent implements ControlValueAccessor {
   type: InputSignal<'password' | 'email' | 'text' | 'number'> = input<'password' | 'email' | 'text' | 'number'>('text');
   min: InputSignal<number> = input<number>(-Infinity);
   max: InputSignal<number> = input<number>(Infinity);
+  multiline: InputSignal<boolean> = input<boolean>(false);
 
   blur: OutputEmitterRef<void> = output<void>();
   iconClicked: OutputEmitterRef<void> = output<void>();
@@ -49,8 +50,8 @@ export class InputComponent implements ControlValueAccessor {
 
   onInputChange(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
-    this.value = value;
-    this.onChange(value);
+    this.value = value || '';
+    this.onChange(this.value);
   }
 
   onBlur(): void {
@@ -59,6 +60,8 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onIconClick(): void {
-    this.iconClicked.emit();
+    if (!this.disabled) {
+      this.iconClicked.emit();
+    }
   }
 }

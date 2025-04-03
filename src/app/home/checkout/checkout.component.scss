@@ -1,5 +1,13 @@
 @use "../../../styles/variables" as *;
 
+:host {
+  ::ng-deep {
+    .order-notes .input {
+      height: 112px;
+    }
+  }
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -38,6 +46,12 @@
         font-size: 12px;
       }
     }
+  }
+
+  &__confirmation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   &__form {

@@ -47,7 +47,14 @@ export class CheckoutComponent implements OnInit {
       zipCode: ['', [
         Validators.required,
         Validators.pattern(/^[A-Za-z0-9]{1,9}$/)
-      ]]
+      ]],
+      orderNotes: ['', [
+        Validators.maxLength(500)
+      ]],
+      acceptTerms: [false, [
+        Validators.requiredTrue
+      ]],
+      confirmOrder: [false]
     });
   }
 

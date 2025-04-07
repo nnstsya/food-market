@@ -11,6 +11,7 @@ import { User } from "@auth/models/user.model";
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
+
   countryOptions: Option[] = countryOptions;
 
   shippingMethods = [
@@ -58,10 +59,8 @@ export class CheckoutComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[A-Za-z0-9]{1,9}$/)
       ]],
-
       shippingMethod: ['fedex', Validators.required],
       paymentMethod: ['credit', Validators.required],
-
       cardNumber: ['', [
         Validators.required,
         Validators.pattern(/^[0-9]{16}$/)
@@ -77,7 +76,14 @@ export class CheckoutComponent implements OnInit {
       cvc: ['', [
         Validators.required,
         Validators.pattern(/^[0-9]{3}$/)
-      ]]
+      ]],
+      orderNotes: ['', [
+      Validators.maxLength(500)
+      ]],
+      acceptTerms: [false, [
+      Validators.requiredTrue
+      ]],
+      confirmOrder: [false]
     });
   }
 
@@ -87,8 +93,8 @@ export class CheckoutComponent implements OnInit {
 
   prefillFormData() {
     const storedUserData: User | null = localStorage.getItem('user')
-        ? JSON.parse(localStorage.getItem('user') || '{}')
-        : null;
+      ? JSON.parse(localStorage.getItem('user') || '{}')
+      : null;
 
     if (storedUserData) {
       this.checkoutForm.get('firstName')?.setValue(storedUserData.firstName);

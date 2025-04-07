@@ -251,5 +251,47 @@
         }
       </form>
     </div>
+
+    <div class="step">
+      <div class="step__header">
+          <h3 class="step__header__heading">Additional information</h3>
+          <div class="step__header__info">
+              <p class="step__header__info-text">Need something else? We will make it for you!</p>
+              <p class="step__header__info-text">Step 4 of 5</p>
+          </div>
+      </div>
+
+      <form [formGroup]="checkoutForm">
+          <app-input
+                  class="order-notes"
+                  formControlName="orderNotes"
+                  label="Order notes"
+                  [multiline]="true"
+                  placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
+                  [errorState]="!!(checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched)"
+          >
+          </app-input>
+          @if (checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched) {
+              <div class="error">
+                  Max length is 500 symbols.
+              </div>
+          }
+      </form>
+    </div>
+
+    <div class="step">
+      <div class="step__header">
+          <h3 class="step__header__heading">Confirmation</h3>
+          <div class="step__header__info">
+              <p class="step__header__info-text">We are getting to the end. Just few clicks and your order is ready!</p>
+              <p class="step__header__info-text">Step 5 of 5</p>
+          </div>
+      </div>
+
+      <form [formGroup]="checkoutForm" class="step__confirmation-form">
+          <app-checkbox formControlName="confirmOrder" [background]="true" label="I agree with sending an Marketing and newsletter emails. No spam, promissed!"></app-checkbox>
+          <app-checkbox formControlName="acceptTerms" [background]="true" label="I agree with our terms and conditions and privacy policy."></app-checkbox>
+      </form>
+    </div>
   </section>
 </div>

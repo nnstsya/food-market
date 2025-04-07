@@ -1,297 +1,316 @@
 <app-breadcrumbs></app-breadcrumbs>
 
-<div class="page">
-  <section class="section">
-    <div class="step">
-      <div class="step__header">
-        <h3 class="step__header__heading">Billing info</h3>
-        <div class="step__header__info">
-          <p class="step__header__info-text">Please enter your billing info</p>
-          <p class="step__header__info-text">Step 1 of 5</p>
-        </div>
-      </div>
-
-      <form [formGroup]="checkoutForm" class="step__form">
-        <div class="step__form__input">
-          <app-input
-            formControlName="firstName"
-            placeholder="First name"
-            label="First name"
-            [errorState]="!!(checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched) {
-            <div class="error">
-              First name must contain only Latin letters.
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="lastName"
-            placeholder="Last name"
-            label="Last name"
-            [errorState]="!!(checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched) {
-            <div class="error">
-              Last name must contain only Latin letters.
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="email"
-            placeholder="Email address"
-            label="Email address"
-            type="email"
-            [errorState]="!!(checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched) {
-            <div class="error">
-              Please enter a valid email address.
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="phoneNumber"
-            placeholder="Phone number"
-            label="Phone number"
-            type="number"
-            [errorState]="!!(checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched) {
-            <div class="error">
-              Please enter a valid phone number (10-14 digits).
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="address"
-            placeholder="Address"
-            label="Address"
-            [errorState]="!!(checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched) {
-            <div class="error">
-              Address can only contain letters, numbers, and basic punctuation.
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="city"
-            placeholder="Town / City"
-            label="Town or city"
-            [errorState]="!!(checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched) {
-            <div class="error">
-              City must contain only Latin letters (max 250 characters).
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-dropdown
-            formControlName="state"
-            [options]="countryOptions"
-            label="State / Country"
-            [background]="true"
-            placeholder="Choose a state or country"></app-dropdown>
-          @if (checkoutForm.get('state')?.invalid && checkoutForm.get('state')?.touched) {
-            <div class="error">
-              Please select a state or country (Latin letters only).
-            </div>
-          }
-        </div>
-
-        <div class="step__form__input">
-          <app-input
-            formControlName="zipCode"
-            placeholder="Postal code or ZIP"
-            label="ZIP / Postal code"
-            [errorState]="!!(checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched)"
-          ></app-input>
-          @if (checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched) {
-            <div class="error">
-              ZIP code must be 1-9 characters (letters and numbers).
-            </div>
-          }
-        </div>
-
-        <app-checkbox [background]="true" label="Ship to a different address?"></app-checkbox>
-      </form>
+@if (formSubmitted) {
+    <div class="thanks-text">
+        <h1 class="thanks-text__heading">Thanks for ordering!</h1>
+        <p class="thanks-text__subheading">Your order id - {{ orderId }}</p>
     </div>
-
-    <div class="step">
-      <div class="step__header">
-        <h3 class="step__header__heading">Billing method</h3>
-        <div class="step__header__info">
-          <p class="step__header__info-text">Please enter your payment method</p>
-          <p class="step__header__info-text">Step 2 of 5</p>
-        </div>
-      </div>
-
-      <form [formGroup]="checkoutForm" class="step__form">
-        @for (method of shippingMethods; track method.value) {
-          <app-radio-input
-            class="radio-input"
-            [value]="method.value"
-            [label]="method.label"
-            [additionalText]="method.additionalText"
-            [iconUrl]="method.iconUrl"
-            formControlName="shippingMethod"
-            (change)="onShippingMethodChange($event)"
-          ></app-radio-input>
-        }
-      </form>
-    </div>
-
-    <div class="step">
-      <div class="step__header">
-        <h3 class="step__header__heading">Payment method</h3>
-        <div class="step__header__info">
-          <p class="step__header__info-text">Please enter your payment method</p>
-          <p class="step__header__info-text">Step 3 of 5</p>
-        </div>
-      </div>
-
-      <form [formGroup]="checkoutForm" class="step__form">
-        @for (method of paymentMethods; track method.value; let first = $first) {
-          @if (first) {
-            <app-radio-input
-              class="radio-input"
-              [value]="method.value"
-              [label]="method.label"
-              [iconUrl]="method.iconUrl"
-              [disabled]="!isPaymentMethodEnabled(method.value)"
-              formControlName="paymentMethod"
-              (click)="onPaymentMethodChange(method.value)"
-            >
-              @if (checkoutForm.get('paymentMethod')?.value === 'credit') {
-                <div class="credit-card-form">
-                  <div class="card-number-field">
-                    <app-input
-                      formControlName="cardNumber"
-                      placeholder="Card number"
-                      label="Card number"
-                      type="text"
-                      [errorState]="!!(checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched)"
-                    ></app-input>
-                    @if (checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched) {
-                      <div class="error">
-                        Card number must be 16 digits.
-                      </div>
-                    }
-                  </div>
-
-                  <div class="card-holder-field">
-                    <app-input
-                      formControlName="cardHolder"
-                      placeholder="Card holder"
-                      label="Card holder"
-                      [errorState]="!!(checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched)"
-                    ></app-input>
-                    @if (checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched) {
-                      <div class="error">
-                        Card holder name must contain only Latin characters.
-                      </div>
-                    }
-                  </div>
-
-                  <div class="expiration-date-field">
-                    <app-input
-                      formControlName="expirationDate"
-                      placeholder="DD/MM/YY"
-                      label="Expiration date"
-                      [errorState]="!!(checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched)"
-                    ></app-input>
-                    @if (checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched) {
-                      <div class="error">
-                        Enter a valid expiration date (DD/MM/YY).
-                      </div>
-                    }
-                  </div>
-
-                  <div class="cvc-field">
-                    <app-input
-                      formControlName="cvc"
-                      placeholder="CVC"
-                      label="CVC"
-                      type="number"
-                      [errorState]="!!(checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched)"
-                    ></app-input>
-                    @if (checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched) {
-                      <div class="error">
-                        CVC must be 3 digits.
-                      </div>
-                    }
-                  </div>
+} @else {
+    <div class="page">
+        <section class="section">
+            <div class="step">
+                <div class="step__header">
+                    <h3 class="step__header__heading">Billing info</h3>
+                    <div class="step__header__info">
+                        <p class="step__header__info-text">Please enter your billing info</p>
+                        <p class="step__header__info-text">Step 1 of 5</p>
+                    </div>
                 </div>
-              }
-            </app-radio-input>
-          } @else {
-            <app-radio-input
-              class="radio-input"
-              [value]="method.value"
-              [label]="method.label"
-              [iconUrl]="method.iconUrl"
-              [disabled]="!isPaymentMethodEnabled(method.value)"
-              formControlName="paymentMethod"
-              (click)="onPaymentMethodChange(method.value)"
-            ></app-radio-input>
-          }
-        }
-      </form>
+
+                <form [formGroup]="checkoutForm" class="step__form">
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="firstName"
+                                placeholder="First name"
+                                label="First name"
+                                [errorState]="!!(checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched) {
+                            <div class="error">
+                                First name must contain only Latin letters.
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="lastName"
+                                placeholder="Last name"
+                                label="Last name"
+                                [errorState]="!!(checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched) {
+                            <div class="error">
+                                Last name must contain only Latin letters.
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="email"
+                                placeholder="Email address"
+                                label="Email address"
+                                type="email"
+                                [errorState]="!!(checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched) {
+                            <div class="error">
+                                Please enter a valid email address.
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="phoneNumber"
+                                placeholder="Phone number"
+                                label="Phone number"
+                                type="number"
+                                [errorState]="!!(checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched) {
+                            <div class="error">
+                                Please enter a valid phone number (10-14 digits).
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="address"
+                                placeholder="Address"
+                                label="Address"
+                                [errorState]="!!(checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched) {
+                            <div class="error">
+                                Address can only contain letters, numbers, and basic punctuation.
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="city"
+                                placeholder="Town / City"
+                                label="Town or city"
+                                [errorState]="!!(checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched) {
+                            <div class="error">
+                                City must contain only Latin letters (max 250 characters).
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-dropdown
+                                formControlName="country"
+                                [options]="countryOptions"
+                                label="State / Country"
+                                [background]="true"
+                                placeholder="Choose a state or country"
+                                (optionSelected)="onCountryChange($event.title)"
+                        ></app-dropdown>
+                        @if (checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched) {
+                            <div class="error">
+                                Please select a state or country (Latin letters only).
+                            </div>
+                        }
+                    </div>
+
+                    <div class="step__form__input">
+                        <app-input
+                                formControlName="zipCode"
+                                placeholder="Postal code or ZIP"
+                                label="ZIP / Postal code"
+                                [errorState]="!!(checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched)"
+                        ></app-input>
+                        @if (checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched) {
+                            <div class="error">
+                                ZIP code must be 1-9 characters (letters and numbers).
+                            </div>
+                        }
+                    </div>
+
+                    <app-checkbox [background]="true" label="Ship to a different address?"></app-checkbox>
+                </form>
+            </div>
+
+            <div class="step">
+                <div class="step__header">
+                    <h3 class="step__header__heading">Billing method</h3>
+                    <div class="step__header__info">
+                        <p class="step__header__info-text">Please enter your payment method</p>
+                        <p class="step__header__info-text">Step 2 of 5</p>
+                    </div>
+                </div>
+
+                <form [formGroup]="checkoutForm" class="step__form">
+                    @for (method of shippingMethods; track method.value) {
+                        <app-radio-input
+                                class="radio-input"
+                                [value]="method.value"
+                                [label]="method.label"
+                                [additionalText]="method.additionalText"
+                                [iconUrl]="method.iconUrl"
+                                formControlName="shippingMethod"
+                                (change)="onShippingMethodChange($event)"
+                        ></app-radio-input>
+                    }
+                </form>
+            </div>
+
+            <div class="step">
+                <div class="step__header">
+                    <h3 class="step__header__heading">Payment method</h3>
+                    <div class="step__header__info">
+                        <p class="step__header__info-text">Please enter your payment method</p>
+                        <p class="step__header__info-text">Step 3 of 5</p>
+                    </div>
+                </div>
+
+                <form [formGroup]="checkoutForm" class="step__form">
+                    @for (method of paymentMethods; track method.value; let first = $first) {
+                        @if (first) {
+                            <app-radio-input
+                                    class="radio-input"
+                                    [value]="method.value"
+                                    [label]="method.label"
+                                    [iconUrl]="method.iconUrl"
+                                    [disabled]="!isPaymentMethodEnabled(method.value)"
+                                    formControlName="paymentMethod"
+                                    (click)="onPaymentMethodChange(method.value)"
+                            >
+                                @if (checkoutForm.get('paymentMethod')?.value === 'credit') {
+                                    <div class="credit-card-form">
+                                        <div class="card-number-field">
+                                            <app-input
+                                                    formControlName="cardNumber"
+                                                    placeholder="Card number"
+                                                    label="Card number"
+                                                    type="text"
+                                                    [errorState]="!!(checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched)"
+                                            ></app-input>
+                                            @if (checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched) {
+                                                <div class="error">
+                                                    Card number must be 16 digits.
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="card-holder-field">
+                                            <app-input
+                                                    formControlName="cardHolder"
+                                                    placeholder="Card holder"
+                                                    label="Card holder"
+                                                    [errorState]="!!(checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched)"
+                                            ></app-input>
+                                            @if (checkoutForm.get('cardHolder')?.invalid && checkoutForm.get('cardHolder')?.touched) {
+                                                <div class="error">
+                                                    Card holder name must contain only Latin characters.
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="expiration-date-field">
+                                            <app-input
+                                                    formControlName="expirationDate"
+                                                    placeholder="DD/MM/YY"
+                                                    label="Expiration date"
+                                                    [errorState]="!!(checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched)"
+                                            ></app-input>
+                                            @if (checkoutForm.get('expirationDate')?.invalid && checkoutForm.get('expirationDate')?.touched) {
+                                                <div class="error">
+                                                    Enter a valid expiration date (DD/MM/YY).
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="cvc-field">
+                                            <app-input
+                                                    formControlName="cvc"
+                                                    placeholder="CVC"
+                                                    label="CVC"
+                                                    type="number"
+                                                    [errorState]="!!(checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched)"
+                                            ></app-input>
+                                            @if (checkoutForm.get('cvc')?.invalid && checkoutForm.get('cvc')?.touched) {
+                                                <div class="error">
+                                                    CVC must be 3 digits.
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </app-radio-input>
+                        } @else {
+                            <app-radio-input
+                                    class="radio-input"
+                                    [value]="method.value"
+                                    [label]="method.label"
+                                    [iconUrl]="method.iconUrl"
+                                    [disabled]="!isPaymentMethodEnabled(method.value)"
+                                    formControlName="paymentMethod"
+                                    (click)="onPaymentMethodChange(method.value)"
+                            ></app-radio-input>
+                        }
+                    }
+                </form>
+            </div>
+
+            <div class="step">
+                <div class="step__header">
+                    <h3 class="step__header__heading">Additional information</h3>
+                    <div class="step__header__info">
+                        <p class="step__header__info-text">Need something else? We will make it for you!</p>
+                        <p class="step__header__info-text">Step 4 of 5</p>
+                    </div>
+                </div>
+
+                <form [formGroup]="checkoutForm">
+                    <app-input
+                            class="order-notes"
+                            formControlName="orderNotes"
+                            label="Order notes"
+                            [multiline]="true"
+                            placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
+                            [errorState]="!!(checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched)"
+                    >
+                    </app-input>
+                    @if (checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched) {
+                        <div class="error">
+                            Max length is 500 symbols.
+                        </div>
+                    }
+                </form>
+            </div>
+
+            <div class="step">
+                <div class="step__header">
+                    <h3 class="step__header__heading">Confirmation</h3>
+                    <div class="step__header__info">
+                        <p class="step__header__info-text">We are getting to the end. Just few clicks and your order is ready!</p>
+                        <p class="step__header__info-text">Step 5 of 5</p>
+                    </div>
+                </div>
+
+                <form [formGroup]="checkoutForm" class="step__confirmation-form">
+                    <app-checkbox formControlName="confirmOrder" [background]="true" label="I agree with sending an Marketing and newsletter emails. No spam, promised!"></app-checkbox>
+                    <app-checkbox formControlName="acceptTerms" [background]="true" label="I agree with our terms and conditions and privacy policy."></app-checkbox>
+                </form>
+
+                <app-button class="submit-button" [disabled]="!checkoutForm.valid" (click)="submitForm()">Complete order</app-button>
+
+                <div class="security-info">
+                    <img [ngSrc]="'assets/icons/ic-security-safety.svg'" width="32" height="32">
+                    <p class="security-info__text">All your data are safe</p>
+                    <p class="security-info__text security-info__text-secondary">We are using the most advanced security to provide you the best experience ever.</p>
+                </div>
+            </div>
+        </section>
+
+        <app-order-summary></app-order-summary>
     </div>
-
-    <div class="step">
-      <div class="step__header">
-          <h3 class="step__header__heading">Additional information</h3>
-          <div class="step__header__info">
-              <p class="step__header__info-text">Need something else? We will make it for you!</p>
-              <p class="step__header__info-text">Step 4 of 5</p>
-          </div>
-      </div>
-
-      <form [formGroup]="checkoutForm">
-          <app-input
-                  class="order-notes"
-                  formControlName="orderNotes"
-                  label="Order notes"
-                  [multiline]="true"
-                  placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
-                  [errorState]="!!(checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched)"
-          >
-          </app-input>
-          @if (checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched) {
-              <div class="error">
-                  Max length is 500 symbols.
-              </div>
-          }
-      </form>
-    </div>
-
-    <div class="step">
-      <div class="step__header">
-          <h3 class="step__header__heading">Confirmation</h3>
-          <div class="step__header__info">
-              <p class="step__header__info-text">We are getting to the end. Just few clicks and your order is ready!</p>
-              <p class="step__header__info-text">Step 5 of 5</p>
-          </div>
-      </div>
-
-      <form [formGroup]="checkoutForm" class="step__confirmation-form">
-          <app-checkbox formControlName="confirmOrder" [background]="true" label="I agree with sending an Marketing and newsletter emails. No spam, promissed!"></app-checkbox>
-          <app-checkbox formControlName="acceptTerms" [background]="true" label="I agree with our terms and conditions and privacy policy."></app-checkbox>
-      </form>
-    </div>
-  </section>
-</div>
+}

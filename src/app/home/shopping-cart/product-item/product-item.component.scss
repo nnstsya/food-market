@@ -43,7 +43,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 231px;
+    width: 100%;
+    min-width: 228px;
 
     &__name {
       font-weight: 500;

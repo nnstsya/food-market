@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Option } from "@shared/components/dropdown/dropdown.component";
 import { countryOptions } from "@core/mocks/countries";
 import { User } from "@auth/models/user.model";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -11,8 +12,11 @@ import { User } from "@auth/models/user.model";
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
-
   countryOptions: Option[] = countryOptions;
+  formSubmitted = false;
+  orderId: number = 0;
+
+  private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
 
   shippingMethods = [
     { value: 'fedex', label: 'FedEx', additionalText: 'Additional price', iconUrl: 'assets/icons/ic-fedex.svg' },
@@ -51,9 +55,8 @@ export class CheckoutComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]{1,250}$/)
       ]],
-      state: ['', [
+      country: ['', [
         Validators.required,
-        Validators.pattern(/^[A-Za-z\s]{1,250}$/)
       ]],
       zipCode: ['', [
         Validators.required,
@@ -104,6 +107,10 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  onCountryChange(value: string) {
+    this.checkoutForm.get('country')?.setValue(value);
+  }
+
   onShippingMethodChange(value: string): void {
     this.checkoutForm.get('shippingMethod')?.setValue(value);
   }
@@ -115,5 +122,11 @@ export class CheckoutComponent implements OnInit {
   isPaymentMethodEnabled(methodValue: string): boolean {
     const method = this.paymentMethods.find(m => m.value === methodValue);
     return method ? method.enabled : false;
+  }
+
+  submitForm(): void {
+    this.orderId = Date.now();
+    this.formSubmitted = true;
+    this.shoppingCartService.clear();
   }
 }

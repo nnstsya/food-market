@@ -1,7 +1,7 @@
 <div class="product">
   <div class="product__item">
     <img class="product__image"
-         [src]="product().product.image"
+         [src]="product().product.image[0]"
          (error)="onImageError($event)"
          (click)="navigateToProductDetail(product().product)"
     />

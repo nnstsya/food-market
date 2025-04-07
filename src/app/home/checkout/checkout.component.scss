@@ -8,13 +8,30 @@
   }
 }
 
-.page {
+.thanks-text {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+
+  &__heading {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  &__subheading {
+    color: $secondary-color;
+  }
+}
+
+.page {
+  display: flex;
   padding: 16px 45px;
   gap: 32px;
   width: 100%;
-  justify-content: center;
 }
 
 .section {
@@ -68,6 +85,23 @@
   }
 }
 
+.security-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 218px;
+
+  &__text {
+    font-size: 12px;
+    font-weight: 600;
+
+    &-secondary {
+      font-weight: 400;
+      color: $secondary-color;
+    }
+  }
+}
+
 .error {
   font-size: 12px;
   color: red;
@@ -97,4 +131,8 @@
 
 .radio-input {
   width: 100%;
+}
+
+.submit-button {
+  width: 218px;
 }

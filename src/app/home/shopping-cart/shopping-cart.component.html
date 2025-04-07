@@ -1,7 +1,7 @@
-<div class="cart">
-  <h2 class="semibold">Shopping cart</h2>
+<div class="cart flex flex-column space-between gap-24">
+  <h2 class="bolder">Shopping cart</h2>
 
-  <div class="cart__product-list">
+  <div class="cart__product-list flex flex-column">
     @if (products.length) {
       @for (product of products; track product.product.id; let last = $last) {
         <app-product-item [product]="product" [ngClass]="{ 'border-bottom': !last }"></app-product-item>
@@ -12,12 +12,12 @@
   </div>
 
   <div class="cart__bill">
-    <p class="cart__bill-text semibold">Subtotal</p>
-    <h2 class="semibold">{{ totalPrice | number:'0.2' }} UAH</h2>
+    <p class="cart__bill-text semibold fs-14">Subtotal</p>
+    <h2 class="bolder">{{ totalPrice | number:'0.2' }} UAH</h2>
   </div>
 
-  <div class="cart__actions">
-    <p class="cart__actions-back" (click)="closeModal()">Continue shopping</p>
+  <div class="cart__actions flex space-between align-center">
+    <p class="cart__actions-back bolder transition-ease-out" (click)="closeModal()">Continue shopping</p>
     <app-button (click)="navigateUser()">Go to checkout</app-button>
   </div>
 </div>

@@ -3,19 +3,10 @@
 .dropdown {
   $dropdown-padding: 10px;
 
-  position: relative;
-  width: 100%;
-
   .dropdown-header {
     padding-inline: $dropdown-padding;
     background: none;
-    gap: 8px;
-    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
 
     &.open {
       border-color: #007bff;
@@ -31,15 +22,8 @@
     }
   }
 
-  &-label {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
   &-with-background {
     background-color: $light-bg-color;
-    display: flex;
-    align-items: center;
     padding: 12px 12px 12px 16px;
     border-radius: 12px;
     border: 1.5px solid $border-color;
@@ -57,7 +41,6 @@
   }
 
   .dropdown-list {
-    position: absolute;
     padding-block: 8px;
     background-color: $light-bg-color;
     border: 1px solid $border-color;

@@ -28,7 +28,7 @@
       }
 
       &__text {
-        color: #a9a9a9;
+        color: $secondary-color;
         font-size: 12px;
       }
     }
@@ -50,7 +50,7 @@
           gap: 12px;
 
           &-text {
-            color: #a9a9a9;
+            color: $secondary-color;
             font-size: 14px;
             font-weight: 500;
           }
@@ -66,7 +66,7 @@
 
     &-text {
       margin-inline: auto;
-      color: #a9a9a9;
+      color: $secondary-color;
     }
 
     &__products {
@@ -92,7 +92,7 @@
           font-weight: 600;
           font-size: 16px;
           cursor: pointer;
-          color: #a9a9a9;
+          color: $secondary-color;
           transition: color 0.2s ease-out;
 
           &:hover {
@@ -106,7 +106,7 @@
   &__category-text {
     align-self: center;
     justify-self: center;
-    color: #a9a9a9;
+    color: $secondary-color;
     width: 100%;
     text-align: center;
   }

@@ -26,7 +26,8 @@ export class ShoppingCartComponent {
   }
 
   navigateUser(): void {
-    this.isAuthenticated ? this.router.navigateByUrl('/checkout') : this.modalService.showModal('login')
+    this.modalService.hideModal();
+    this.isAuthenticated ? this.router.navigateByUrl('homepage/checkout') : this.modalService.showModal('login')
   }
 
   closeModal(): void {

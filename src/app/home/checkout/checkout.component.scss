@@ -1,0 +1,138 @@
+@use "../../../styles/variables" as *;
+
+:host {
+  ::ng-deep {
+    .order-notes .input {
+      height: 112px;
+    }
+  }
+}
+
+.thanks-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+
+  &__heading {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  &__subheading {
+    color: $secondary-color;
+  }
+}
+
+.page {
+  display: flex;
+  padding: 16px 45px;
+  gap: 32px;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.step {
+  width: 670px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    &__heading {
+      font-size: 22px;
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+
+      &-text {
+        color: $secondary-color;
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__confirmation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+
+    &__input {
+      display: block;
+      width: 319px;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.security-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 218px;
+
+  &__text {
+    font-size: 12px;
+    font-weight: 600;
+
+    &-secondary {
+      font-weight: 400;
+      color: $secondary-color;
+    }
+  }
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.credit-card-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto;
+  row-gap: 32px;
+  column-gap: 16px;
+}
+
+.card-number-field {
+  grid-column: span 5;
+}
+
+.card-holder-field {
+  grid-column: span 3;
+  padding-right: 16px;
+}
+
+.expiration-date-field,
+.cvc-field {
+  grid-column: span 1;
+}
+
+.radio-input {
+  width: 100%;
+}
+
+.submit-button {
+  width: 218px;
+}

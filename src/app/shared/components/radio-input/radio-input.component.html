@@ -1,0 +1,27 @@
+<div class="radio-wrapper" [class.disabled]="disabled()" [class.checked]="checked" (click)="onRadioChange()">
+  <div class="radio-control">
+    <div class="radio-button" [class.checked]="checked">
+      @if (checked) {
+        <div class="radio-inner"></div>
+      }
+    </div>
+
+    <div class="radio-content">
+      <span class="radio-label">{{ label() }}</span>
+
+      @if (additionalText()) {
+        <span class="radio-additional">{{ additionalText() }}</span>
+      }
+
+      @if (iconUrl()) {
+        <img [src]="iconUrl()" class="radio-icon" alt="icon">
+      }
+    </div>
+  </div>
+
+  @if (checked) {
+    <div class="radio-expandable-content">
+      <ng-content></ng-content>
+    </div>
+  }
+</div>

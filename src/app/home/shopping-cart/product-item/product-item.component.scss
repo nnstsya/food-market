@@ -43,7 +43,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 231px;
+    width: 100%;
+    min-width: 228px;
 
     &__name {
       font-weight: 500;
@@ -62,7 +63,7 @@
     }
 
     &__farm, &__freshness {
-      color: #a9a9a9;
+      color: $secondary-color;
       font-size: 14px;
       font-weight: 300;
 
@@ -88,7 +89,7 @@
 
       &-text {
         font-size: 14px;
-        color: #a9a9a9;
+        color: $secondary-color;
         font-weight: 300;
         cursor: pointer;
 

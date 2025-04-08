@@ -1,19 +1,25 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
-import { FilterState, RatingCheckbox, FilterValue, PriceRange, ActiveFilter } from '../models/filter.model';
+import { DestroyRef, inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { ActiveFilter, FilterState, FilterValue, PriceRange, RatingCheckbox } from '../models/filter.model';
 import { Product } from '@core/models/product.model';
+import { ProductsService } from "@home/services/products.service";
+import { Category } from "@core/models/category.model";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { forkJoin, map, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
+  appliedFilters: WritableSignal<ActiveFilter[]> = signal<ActiveFilter[]>([]);
+
   private state: WritableSignal<FilterState> = signal<FilterState>({
     wishlist: this.createTagFilter('wishlist', 'In Wishlist'),
     nonWishlist: this.createTagFilter('nonWishlist', 'Not in Wishlist'),
     ratings: this.createRatingFilters(),
     priceRange: this.createPriceRange()
   });
-
-  appliedFilters: WritableSignal<ActiveFilter[]> = signal<ActiveFilter[]>([]);
+  private productsService: ProductsService = inject(ProductsService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   getState(): WritableSignal<FilterState> {
     return this.state;
@@ -66,24 +72,29 @@ export class FilterService {
       nonWishlist: { ...state.nonWishlist, count: products.filter(p => !wishlistProducts.some(w => w.id === p.id)).length },
       ratings: state.ratings.map((rating: RatingCheckbox) => ({
         ...rating,
-        count: products.filter((p: Product) => rating.id === Math.floor(p.rate!).toString()).length
+        count: products.filter((p: Product) => rating.id === Math.round(p.rate!).toString()).length
       })),
       priceRange: { min: minPrice, max: maxPrice, current: { min: minPrice, max: maxPrice } }
     }));
   }
 
-  filterProducts(products: Product[]): Product[] {
+  filterProducts(pageSize: number, currentPages: number[], category: Category): Observable<Product[]> {
     const { priceRange, ratings, wishlist, nonWishlist } = this.state();
     const wishlistProducts: Product[] = this.getWishlistProducts();
 
-    return products.filter((product: Product) => {
-      const matchesPrice: boolean = product.price >= priceRange.current.min && product.price <= priceRange.current.max;
-      const matchesRating: boolean = ratings.some((r: RatingCheckbox) => r.checked && r.id === Math.floor(product.rate!).toString());
-      const inWishlist: boolean = wishlistProducts.some((w: Product) => w.id === product.id);
-      const matchesWishlist: boolean = (wishlist.checked && inWishlist) || (nonWishlist.checked && !inWishlist);
+    const rate: number[] = [...ratings.filter(r => r.checked).map(r => Number(r.id))];
 
-      return matchesPrice && matchesRating && matchesWishlist;
-    });
+    const requests = currentPages.map(page =>
+      this.productsService.getProducts(page, pageSize, category, priceRange.current.min, priceRange.current.max, rate)
+    );
+
+    return forkJoin(requests).pipe(
+      map(responses => responses.flatMap(res => res.results).filter((product: Product) => {
+        const inWishlist: boolean = wishlistProducts.some((w: Product) => w.id === product.id);
+        return (wishlist.checked && inWishlist) || (nonWishlist.checked && !inWishlist);
+      })),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   private getActiveFilters(): ActiveFilter[] {

@@ -8,8 +8,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { Category } from "@core/models/category.model";
-import { categoriesData } from "@core/mocks/categories";
+import { Category, Subcategory } from "@core/models/category.model";
+import { categoriesData, subcategoriesData } from "@core/mocks/categories";
 import { forkJoin, map, Observable } from "rxjs";
 import { Product, Response } from "@core/models/product.model";
 import { ProductsService } from "@home/services/products.service";
@@ -57,19 +57,20 @@ export class CategoryComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe((params: ParamMap) => {
       const categoryParam = params.get('category')?.toUpperCase() as keyof typeof Category;
+      const subcategoryParam = params.get('category')?.toUpperCase() as keyof typeof Subcategory;
 
-      if (categoryParam && Category[categoryParam]) {
-        if (this.category !== Category[categoryParam]) {
+      if (categoryParam && (Category[categoryParam] || Subcategory[subcategoryParam])) {
+        if (this.category !== Category[categoryParam] || Subcategory[subcategoryParam]) {
           this.currentPages = [1];
           localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
         }
 
-        this.categoryName = categoriesData[Category[categoryParam]];
-        this.category = Category[categoryParam];
+        this.categoryName = categoriesData[Category[categoryParam]] || subcategoriesData[Subcategory[subcategoryParam]];
+        this.category = Category[categoryParam] || Subcategory[subcategoryParam];
 
         if (this.currentPages.length !== 1) {
           for (let page of this.currentPages) {
-            this.productsService.getProductsByCategory(this.category!, page, this.productsPerPage).pipe(
+            this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
               map((response: Response) => {
                 this.originalProducts.push(...response.results);
                 this.filterService.initializeFilters(this.originalProducts);
@@ -81,7 +82,7 @@ export class CategoryComponent implements OnInit {
             ).subscribe();
           }
         } else {
-          this.productsService.getProductsByCategory(this.category!, this.currentPages[0], this.productsPerPage).pipe(
+          this.productsService.getProducts(this.currentPages[0], this.productsPerPage, this.category!).pipe(
             map((response: Response) => {
               this.originalProducts = response.results;
               this.filterService.initializeFilters(response.results);
@@ -100,12 +101,16 @@ export class CategoryComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.products = this.filterService.filterProducts(this.originalProducts);
-    this.productsQuantity = this.products.length;
+    this.filterService.filterProducts(this.productsPerPage, this.currentPages, this.category!)
+      .subscribe(filteredProducts => {
+        this.products = filteredProducts;
+        this.productsQuantity = filteredProducts.length;
 
-    this.filterService.applyFilters();
-    this.updateDisplayedProducts();
+        this.displayedProducts = [...filteredProducts];
+        this.filterService.applyFilters();
+      });
   }
+
 
   onFiltersApply(): void {
     this.currentPages = [1];
@@ -153,7 +158,7 @@ export class CategoryComponent implements OnInit {
     this.displayedProducts = [];
 
     const requests: Observable<Product[]>[] = this.currentPages.map(page =>
-      this.productsService.getProductsByCategory(this.category!, page, this.productsPerPage).pipe(
+      this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
         map((response: Response) => response.results)
       )
     );

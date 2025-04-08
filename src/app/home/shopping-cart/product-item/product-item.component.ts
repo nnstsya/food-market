@@ -27,7 +27,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   getRatingArray(): number[] {
-    return [1, 1, 1, 1, 1].fill(0, Math.floor(this.product()!.product.rate!), 5);
+    return [1, 1, 1, 1, 1].fill(0, Math.round(this.product()!.product.rate!), 5);
   }
 
   onImageError(event: Event): void {

@@ -1,6 +1,6 @@
 <div class="page">
   <section class="section">
-    <app-list heading="Category menu" [items]="categories" buttonText="More categories"></app-list>
+    <app-list heading="Category menu" [items]="categories" [getLink]="getCategoryUrl" buttonText="More categories"></app-list>
 
     <div class="section__content">
       <app-banner
@@ -39,6 +39,7 @@
 
   <section class="section">
     <app-list
+      [getLink]="getCategoryUrl"
       heading="Best selling products"
       [items]="bestSellingProductsCategories"
       buttonText="More products">
@@ -56,7 +57,7 @@
   </section>
 
   <section class="section">
-    <app-list heading="Best from Farmers" [items]="popularProductsCategories" buttonText="More products"></app-list>
+    <app-list heading="Best from Farmers" [items]="popularProductsCategories" [getLink]="getSubcategoryUrl" buttonText="More products"></app-list>
 
     <div class="section__content">
       @if (popularProducts.length > 0) {

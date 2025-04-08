@@ -11,7 +11,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Category } from "@core/models/category.model";
 import { categoriesData } from "@core/mocks/categories";
 import { map } from "rxjs";
-import { Product } from "@core/models/product.model";
+import { Product, Response } from "@core/models/product.model";
 import { ProductsService } from "@home/services/products.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FilterService } from "@home/services/filter.service";
@@ -59,11 +59,11 @@ export class CategoryComponent implements OnInit {
         this.categoryName = categoriesData[Category[categoryParam]];
 
         this.productsService.getProductsByCategory(Category[categoryParam]).pipe(
-          map((products: Product[]) => {
-            this.originalProducts = products;
-            this.filterService.initializeFilters(products);
+          map((res: Response) => {
+            this.originalProducts = res.results;
+            this.filterService.initializeFilters(res.results);
             this.applyFilters();
-            return products;
+            return res.results;
           }),
           takeUntilDestroyed(this.destroyRef)
         ).subscribe();

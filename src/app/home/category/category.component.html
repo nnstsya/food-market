@@ -82,7 +82,7 @@
           <app-price-filter [priceRange]="priceRange()" (filterChanged)="onPriceRangeChange($event)"></app-price-filter>
 
           <div class="page__content__filters__buttons">
-            <app-button (click)="applyFilters()">Apply</app-button>
+            <app-button (click)="onFiltersApply()">Apply</app-button>
             <p class="page__content__filters__buttons__reset-button"
                (click)="onResetFilters()">
               Reset

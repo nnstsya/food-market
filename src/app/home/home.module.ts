@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
 import { RatingFilterComponent } from './filters/rating-filter/rating-filter.component';
 import { PriceFilterComponent } from './filters/price-filter/price-filter.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PriceFilterComponent } from './filters/price-filter/price-filter.compon
     ProductItemComponent,
     ProductRecommendationsComponent,
     RatingFilterComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    CheckoutComponent
   ],
   imports: [
     HomeRoutingModule,

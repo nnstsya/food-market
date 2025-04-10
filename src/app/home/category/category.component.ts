@@ -11,12 +11,13 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Category } from "@core/models/category.model";
 import { categoriesData } from "@core/mocks/categories";
 import { map } from "rxjs";
-import { Product } from "@core/models/product.model";
+import { Product, Response } from "@core/models/product.model";
 import { ProductsService } from "@home/services/products.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FilterService } from "@home/services/filter.service";
 import { ActiveFilter, FilterValue, PriceRange, RatingCheckbox } from "@home/models/filter.model";
 import { PriceFilterComponent } from "@home/filters/price-filter/price-filter.component";
+import { switchMap } from "rxjs/operators";
 
 type Range = { min: number; max: number };
 
@@ -59,11 +60,25 @@ export class CategoryComponent implements OnInit {
         this.categoryName = categoriesData[Category[categoryParam]];
 
         this.productsService.getProductsByCategory(Category[categoryParam]).pipe(
-          map((products: Product[]) => {
-            this.originalProducts = products;
-            this.filterService.initializeFilters(products);
+          switchMap((products: Product[]) => {
+            const categoryProducts: Product[] = products;
+
+            return this.productsService.getWishList().pipe(
+              map((wishlistProducts: Response) => {
+                const wishlistIds = new Set(wishlistProducts.results.map(p => p.id));
+
+                return categoryProducts.map(product => ({
+                  ...product,
+                  isInWishlist: wishlistIds.has(product.id)
+                }));
+              })
+            );
+          }),
+          map((productsWithFavorites: Product[]) => {
+            this.originalProducts = productsWithFavorites;
+            this.filterService.initializeFilters(productsWithFavorites);
             this.applyFilters();
-            return products;
+            return productsWithFavorites;
           }),
           takeUntilDestroyed(this.destroyRef)
         ).subscribe();

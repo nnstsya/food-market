@@ -18,6 +18,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { TabsComponent } from './components/tabs/tabs.component';
 import { RangeComponent } from './components/range/range.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FilterComponent } from './components/filter/filter.component';
     PaginationComponent,
     TabsComponent,
     FilterComponent,
-    RangeComponent
+    RangeComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { FilterComponent } from './components/filter/filter.component';
     PaginationComponent,
     TabsComponent,
     FilterComponent,
-    RangeComponent
+    RangeComponent,
+    ToastComponent
   ]
 })
 export class SharedModule {}

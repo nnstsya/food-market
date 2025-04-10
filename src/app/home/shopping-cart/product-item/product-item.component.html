@@ -7,14 +7,14 @@
     />
 
     <div class="product__actions">
-      @if (checkIfInWishList(product().product)) {
-        <div class="product__actions__item" (click)="removeFromWishList(product().product)">
-          <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
+      @if (!isAuthenticated || !isInWishlist) {
+        <div class="product__actions__item" (click)="addToWishList(product().product)">
+          <img ngSrc="assets/icons/ic-actions-heart.svg" width="16" height="16">
           <p class="product__actions__item-text">Wishlist</p>
         </div>
       } @else {
-        <div class="product__actions__item" (click)="addToWishList(product().product)">
-          <img ngSrc="assets/icons/ic-actions-heart.svg" width="16" height="16">
+        <div class="product__actions__item" (click)="removeFromWishList(product().product)">
+          <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
           <p class="product__actions__item-text">Wishlist</p>
         </div>
       }

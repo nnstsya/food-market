@@ -16,7 +16,15 @@ export class ProductsService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Response>(this.basePath).pipe(
       map((response: Response) => response.results),
-      catchError(() => throwError(() => new Error('Failed to fetch products information.')))
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch products information.',
+            ),
+        ),
+      ),
     );
   }
 
@@ -25,13 +33,29 @@ export class ProductsService {
 
     return this.http.get<Response>(this.basePath, { params }).pipe(
       map((response: Response) => response.results),
-      catchError(() => throwError(() => new Error('Failed to fetch products information.')))
-    );
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch products information.',
+            ),
+        ),
+      ),
+    )
   }
 
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(this.basePath + '/' + productId).pipe(
-      catchError(() => throwError(() => new Error('Failed to fetch product information.'))),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch product information.',
+            ),
+        ),
+      ),
     );
   }
 
@@ -42,7 +66,15 @@ export class ProductsService {
     }
 
     return this.http.post<void>(this.basePath + '/favorites', {productId}).pipe(
-      catchError(() => throwError(() => new Error('Failed to add product to wishlist.'))),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to add product to wishlist.',
+            ),
+        ),
+      ),
     );
   }
 
@@ -50,13 +82,29 @@ export class ProductsService {
     const params: HttpParams = new HttpParams().set('productId', productId);
 
     return this.http.delete<void>(this.basePath + '/favorites', { params }).pipe(
-      catchError(() => throwError(() => new Error('Failed to remove product from wishlist.'))),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to remove product from wishlist.',
+            ),
+        ),
+      ),
     );
   }
 
   getWishList(): Observable<Response> {
     return this.http.get<Response>(this.basePath + '/favorites').pipe(
-      catchError(() => throwError(() => new Error('Failed to fetch wishlist information.'))),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch wishlist information.',
+            ),
+        ),
+      ),
     );
   }
 }

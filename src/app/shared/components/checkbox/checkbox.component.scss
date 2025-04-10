@@ -6,6 +6,15 @@
   cursor: pointer;
   gap: 8px;
 
+  &-with-background {
+    background-color: $light-bg-color;
+    display: flex;
+    align-items: center;
+    padding: 12px 12px 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid $border-color;
+  }
+
   &.disabled {
     cursor: default;
     opacity: 0.6;

@@ -54,7 +54,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getRatingArray(rate: number): number[] {
-    return [1, 1, 1, 1, 1].fill(0, Math.floor(rate), 5);
+    return [1, 1, 1, 1, 1].fill(0, Math.round(rate), 5);
   }
 
   onImageError(event: Event): void {

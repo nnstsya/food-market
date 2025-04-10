@@ -9,6 +9,17 @@ export enum Category {
   PHARMACY = "PHARMACY",
 }
 
+export enum Subcategory {
+  BAKERY = "BAKERY",
+  VEGETABLES = "VEGETABLES",
+  FRUIT = "FRUIT",
+  DRINKS = "DRINKS",
+  KITCHEN = "KITCHEN",
+  SPECIALNUTRITION = "SPECIALNUTRITION",
+  FISH = "FISH",
+  MEAT = "MEAT",
+}
+
 export interface CategoryItem {
   id: number;
   title: string;

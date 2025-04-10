@@ -24,14 +24,31 @@ export class ProductsService {
       priceMax,
       rate
     });
+
     return this.http.get<Response>(this.basePath, { params }).pipe(
-      catchError(() => throwError(() => new Error('Failed to fetch products information.')))
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch products information.',
+            ),
+        ),
+      ),
     );
   }
 
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(this.basePath + '/' + productId).pipe(
-      catchError(() => throwError(() => new Error('Failed to fetch product information.'))),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message ||
+              'Failed to fetch product information.',
+            ),
+        ),
+      ),
     );
   }
 

@@ -4,7 +4,8 @@ import { ButtonType } from "@shared/components/button/button.model";
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
+  standalone: false
 })
 export class ButtonComponent {
   variant: InputSignal<ButtonType> = input<ButtonType>('basic');

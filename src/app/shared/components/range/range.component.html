@@ -31,7 +31,8 @@
                    [label]="'Min'"
                    [placeholder]="''"
                    [type]="'number'"
-                   [(ngModel)]="minInputValue"
+                   [ngModel]="minInputValue"
+                   (ngModelChange)="minInputValue = $event"
                    (blur)="handleInputChange('min')">
         </app-input>
         <p class="inputs__separator">-</p>
@@ -39,7 +40,8 @@
                    [label]="'Max'"
                    [placeholder]="''"
                    [type]="'number'"
-                   [(ngModel)]="maxInputValue"
+                   [ngModel]="maxInputValue"
+                   (ngModelChange)="maxInputValue = $event"
                    (blur)="handleInputChange('max')">
         </app-input>
     </div>

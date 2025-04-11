@@ -8,7 +8,8 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
+  standalone: false
 })
 export class HeaderComponent {
   cartCount: number = 0;

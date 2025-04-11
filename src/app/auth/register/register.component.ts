@@ -11,6 +11,7 @@ import { SignUpForm } from '@auth/models/form.model';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: '../../shared/components/modal/modal.component.scss',
+  standalone: false
 })
 export class RegisterComponent {
   passwordVisible: boolean = false;

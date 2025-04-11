@@ -3,7 +3,8 @@ import { Component, ContentChildren, input, InputSignal, QueryList, TemplateRef 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrl: './tabs.component.scss'
+  styleUrl: './tabs.component.scss',
+  standalone: false
 })
 export class TabsComponent {
   @ContentChildren(TemplateRef) tabContents!: QueryList<TemplateRef<any>>;

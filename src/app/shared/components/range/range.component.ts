@@ -16,7 +16,8 @@ interface Range {
 @Component({
   selector: 'app-range',
   templateUrl: './range.component.html',
-  styleUrl: './range.component.scss'
+  styleUrl: './range.component.scss',
+  standalone: false
 })
 export class RangeComponent implements OnChanges {
   min: InputSignal<number> = input.required<number>();

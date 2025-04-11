@@ -8,7 +8,8 @@ export interface Option {
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss'
+  styleUrl: './dropdown.component.scss',
+  standalone: false
 })
 export class DropdownComponent {
   options: InputSignal<Option[]> = input.required<Option[]>();

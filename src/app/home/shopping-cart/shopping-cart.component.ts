@@ -7,7 +7,8 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.scss'
+  styleUrl: './shopping-cart.component.scss',
+  standalone: false
 })
 export class ShoppingCartComponent {
   products: ProductCart[] = [];

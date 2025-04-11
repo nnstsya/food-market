@@ -3,7 +3,8 @@ import { Component, input, InputSignal, output, OutputEmitterRef } from '@angula
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
-  styleUrl: './tag.component.scss'
+  styleUrl: './tag.component.scss',
+  standalone: false
 })
 export class TagComponent {
   text: InputSignal<string | number> = input.required<string | number>();

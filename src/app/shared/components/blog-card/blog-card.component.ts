@@ -4,7 +4,8 @@ import { Blog } from '@core/models/blog.model';
 @Component({
   selector: 'app-blog-card',
   templateUrl: './blog-card.component.html',
-  styleUrl: './blog-card.component.scss'
+  styleUrl: './blog-card.component.scss',
+  standalone: false
 })
 export class BlogCardComponent {
   blog: InputSignal<Blog> = input.required<Blog>();

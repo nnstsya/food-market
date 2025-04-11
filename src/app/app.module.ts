@@ -7,23 +7,23 @@ import { LayoutModule } from '@layout/layout.module';
 import { RouterOutlet } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { AuthModule } from '@auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CoreModule } from '@core/core.module';
 import { HomeModule } from "@home/home.module";
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
     LayoutModule,
-    HttpClientModule,
     SharedModule,
     AuthModule,
     CoreModule,
     HomeModule
   ],
-  bootstrap: [AppComponent],
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule {}

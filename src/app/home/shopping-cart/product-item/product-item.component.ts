@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, input, InputSignal, OnInit } from '@angular/core';
 import { BuyBy, Product, ProductCart } from "@core/models/product.model";
 import { buyByOptions } from "@core/mocks/products";
 import { Option } from "@shared/components/dropdown/dropdown.component";
@@ -7,6 +7,8 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 import { Category } from "@core/models/category.model";
 import { Router } from "@angular/router";
 import { ModalService } from "@shared/components/modal/modal.service";
+import { map, Observable, tap } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-product-item',
@@ -16,14 +18,19 @@ import { ModalService } from "@shared/components/modal/modal.service";
 export class ProductItemComponent implements OnInit {
   product: InputSignal<ProductCart> = input.required<ProductCart>();
   buyByOptions: Option[] = buyByOptions;
+  isAuthenticated: boolean = !!localStorage.getItem('user');
+  isInWishlist: boolean = false;
 
   private productsService: ProductsService = inject(ProductsService);
   private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private router: Router = inject(Router);
   private modalService: ModalService = inject(ModalService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.updateBuyByOptions();
+
+    this.checkIfInWishList(this.product().product).subscribe();
   }
 
   getRatingArray(): number[] {
@@ -36,15 +43,27 @@ export class ProductItemComponent implements OnInit {
   }
 
   addToWishList(product: Product): void {
-    this.productsService.addToWishList(product);
+    this.productsService.addToWishList(product.id).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
+
+    this.isInWishlist = true;
   }
 
   removeFromWishList(product: Product): void {
-    this.productsService.removeFromWishList(product);
+    this.productsService.removeFromWishList(product.id).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
+
+    this.isInWishlist = false;
   }
 
-  checkIfInWishList(product: Product): boolean {
-    return this.productsService.getWishList().some((wishListProduct: Product) => product.id === wishListProduct.id);
+  checkIfInWishList(product: Product): Observable<boolean> {
+    return this.productsService.getWishList().pipe(
+      map(wishList => wishList.results.some((wishListProduct: Product) => product.id === wishListProduct.id)),
+      tap((result: boolean) => this.isInWishlist = result),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   removeFromCart(): void {

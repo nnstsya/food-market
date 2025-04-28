@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FilterService } from "@home/services/filter.service";
 import { ActiveFilter, FilterValue, PriceRange, RatingCheckbox } from "@home/models/filter.model";
 import { PriceFilterComponent } from "@home/filters/price-filter/price-filter.component";
+import { switchMap } from "rxjs/operators";
 
 type Range = { min: number; max: number };
 
@@ -71,6 +72,25 @@ export class CategoryComponent implements OnInit {
         if (this.currentPages.length !== 1) {
           for (let page of this.currentPages) {
             this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
+              switchMap((response: Response) => {
+                const categoryResponse: Response = response;
+
+                return this.productsService.getWishList().pipe(
+                  map((wishlistProducts: Response) => {
+                    const wishlistIds = new Set(wishlistProducts.results.map(p => p.id));
+
+                    const updatedResults = categoryResponse.results.map(product => ({
+                      ...product,
+                      isInWishlist: wishlistIds.has(product.id)
+                    }));
+
+                    return {
+                      ...categoryResponse,
+                      results: updatedResults
+                    };
+                  })
+                );
+              }),
               map((response: Response) => {
                 this.originalProducts.push(...response.results);
                 this.filterService.initializeFilters(this.originalProducts);

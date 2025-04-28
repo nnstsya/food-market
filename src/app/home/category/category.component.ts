@@ -111,7 +111,6 @@ export class CategoryComponent implements OnInit {
       });
   }
 
-
   onFiltersApply(): void {
     this.currentPages = [1];
     this.applyFilters();

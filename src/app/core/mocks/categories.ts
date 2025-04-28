@@ -1,4 +1,4 @@
-import { Category } from '@core/models/category.model';
+import { Category, Subcategory } from '@core/models/category.model';
 import { Option } from "@shared/components/dropdown/dropdown.component";
 
 export const categoriesData: Record<Category, string> = {
@@ -12,7 +12,24 @@ export const categoriesData: Record<Category, string> = {
   [Category.PHARMACY]: "Pharmacy",
 };
 
+export const subcategoriesData: Record<Subcategory, string> = {
+  [Subcategory.BAKERY]: "Bakery",
+  [Subcategory.FRUIT]: "Fruit",
+  [Subcategory.VEGETABLES]: "Vegetables",
+  [Subcategory.DRINKS]: "Drinks",
+  [Subcategory.KITCHEN]: "Kitchen",
+  [Subcategory.SPECIALNUTRITION]: "Special nutrition",
+  [Subcategory.MEAT]: "Meat",
+  [Subcategory.FISH]: "Fish",
+};
+
 export const categoryData: Option[] = Object.entries(categoriesData)
+  .map(([_, value], index) => ({
+    id: index + 1,
+    title: value
+  }));
+
+export const subcategoryData: Option[] = Object.entries(subcategoriesData)
   .map(([_, value], index) => ({
     id: index + 1,
     title: value

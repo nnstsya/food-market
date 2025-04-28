@@ -14,4 +14,5 @@ export class ListComponent {
   heading: InputSignal<string> = input.required<string>();
   items: InputSignal<Item[]> = input.required<Item[]>();
   buttonText: InputSignal<string> = input<string>('');
+  getLink: InputSignal<(title: string) => string> = input<(title: string) => string>(() => '');
 }

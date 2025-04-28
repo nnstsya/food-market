@@ -20,7 +20,7 @@ export class ProductCardComponent {
   private router: Router = inject(Router);
 
   getRatingArray(): number[] {
-    return [1, 1, 1, 1, 1].fill(0, Math.floor(this.product()!.rate!), 5);
+    return [1, 1, 1, 1, 1].fill(0, Math.round(this.product()!.rate!), 5);
   }
 
   onImageError(event: Event): void {

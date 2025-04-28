@@ -8,9 +8,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { Category } from "@core/models/category.model";
-import { categoriesData } from "@core/mocks/categories";
-import { map } from "rxjs";
+import { Category, Subcategory } from "@core/models/category.model";
+import { categoriesData, subcategoriesData } from "@core/mocks/categories";
+import { forkJoin, map, Observable } from "rxjs";
 import { Product, Response } from "@core/models/product.model";
 import { ProductsService } from "@home/services/products.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -29,12 +29,13 @@ export class CategoryComponent implements OnInit {
   @ViewChild(PriceFilterComponent) priceFilter!: PriceFilterComponent;
 
   categoryName: string | null = null;
+  category: Category | null = null;
   productsQuantity: number = 0;
   view: 'list' | 'grid' = <'list' | 'grid'>localStorage.getItem('viewMode') || 'grid';
   productsPerPage: number = 5;
   products: Product[] = [];
   displayedProducts: Product[] = [];
-  currentPages: number[] = JSON.parse(localStorage.getItem('currentPages') || '[1]');
+  currentPages: number[] = [];
 
   priceRange: Signal<PriceRange> = computed(() => this.filterService.getState()().priceRange);
   ratings: Signal<RatingCheckbox[]> = computed(() => this.filterService.getState()().ratings);
@@ -50,23 +51,49 @@ export class CategoryComponent implements OnInit {
   private filterService: FilterService = inject(FilterService);
 
   ngOnInit(): void {
+    this.currentPages = JSON.parse(localStorage.getItem('currentPages') || '[1]');
+
     this.route.paramMap.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe((params: ParamMap) => {
       const categoryParam = params.get('category')?.toUpperCase() as keyof typeof Category;
+      const subcategoryParam = params.get('category')?.toUpperCase() as keyof typeof Subcategory;
 
-      if (categoryParam && Category[categoryParam]) {
-        this.categoryName = categoriesData[Category[categoryParam]];
+      if (categoryParam && (Category[categoryParam] || Subcategory[subcategoryParam])) {
+        if (this.category !== Category[categoryParam] || Subcategory[subcategoryParam]) {
+          this.currentPages = [1];
+          localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
+        }
 
-        this.productsService.getProductsByCategory(Category[categoryParam]).pipe(
-          map((res: Response) => {
-            this.originalProducts = res.results;
-            this.filterService.initializeFilters(res.results);
-            this.applyFilters();
-            return res.results;
-          }),
-          takeUntilDestroyed(this.destroyRef)
-        ).subscribe();
+        this.categoryName = categoriesData[Category[categoryParam]] || subcategoriesData[Subcategory[subcategoryParam]];
+        this.category = Category[categoryParam] || Subcategory[subcategoryParam];
+
+        if (this.currentPages.length !== 1) {
+          for (let page of this.currentPages) {
+            this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
+              map((response: Response) => {
+                this.originalProducts.push(...response.results);
+                this.filterService.initializeFilters(this.originalProducts);
+                this.applyFilters();
+                this.productsQuantity = response.totalItems;
+                return response;
+              }),
+              takeUntilDestroyed(this.destroyRef)
+            ).subscribe();
+          }
+        } else {
+          this.productsService.getProducts(this.currentPages[0], this.productsPerPage, this.category!).pipe(
+            map((response: Response) => {
+              this.originalProducts = response.results;
+              this.filterService.initializeFilters(response.results);
+              this.applyFilters();
+              this.productsQuantity = response.totalItems;
+              return response;
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          ).subscribe();
+        }
+
       } else {
         this.categoryName = null;
       }
@@ -74,12 +101,20 @@ export class CategoryComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.products = this.filterService.filterProducts(this.originalProducts);
-    this.currentPages = [1];
-    this.productsQuantity = this.products.length;
+    this.filterService.filterProducts(this.productsPerPage, this.currentPages, this.category!)
+      .subscribe(filteredProducts => {
+        this.products = filteredProducts;
+        this.productsQuantity = filteredProducts.length;
 
-    this.filterService.applyFilters();
-    this.updateDisplayedProducts();
+        this.displayedProducts = [...filteredProducts];
+        this.filterService.applyFilters();
+      });
+  }
+
+
+  onFiltersApply(): void {
+    this.currentPages = [1];
+    this.applyFilters();
   }
 
   onFilterTagRemoved(filterId: string): void {
@@ -120,10 +155,18 @@ export class CategoryComponent implements OnInit {
   }
 
   private updateDisplayedProducts(): void {
-    this.displayedProducts = this.currentPages.reduce((acc: Product[], page: number): Product[] => {
-      const startIndex: number = (page - 1) * this.productsPerPage;
-      const endIndex: number = startIndex + this.productsPerPage;
-      return acc.concat(this.products.slice(startIndex, endIndex));
-    }, []);
+    this.displayedProducts = [];
+
+    const requests: Observable<Product[]>[] = this.currentPages.map(page =>
+      this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
+        map((response: Response) => response.results)
+      )
+    );
+
+    forkJoin(requests).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(resultsArray => {
+      this.displayedProducts = resultsArray.flat();
+    });
   }
 }

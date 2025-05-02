@@ -70,7 +70,9 @@
           >
           </app-input>
         <div class="divider"></div>
-        <app-dropdown [options]="buyByOptions" [placeholder]="buyByOptions[0].title"></app-dropdown>
+        @if (buyByOptions.length > 0) {
+          <app-dropdown [options]="buyByOptions" [placeholder]="buyByOptions[0].title"></app-dropdown>
+        }
       </div>
     </div>
   </div>

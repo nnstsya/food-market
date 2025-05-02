@@ -4,7 +4,6 @@ import { buyByOptions } from "@core/mocks/products";
 import { Option } from "@shared/components/dropdown/dropdown.component";
 import { ProductsService } from "@home/services/products.service";
 import { ShoppingCartService } from "@home/services/shopping-cart.service";
-import { Category } from "@core/models/category.model";
 import { Router } from "@angular/router";
 import { ModalService } from "@shared/components/modal/modal.service";
 import { map, Observable, tap } from "rxjs";
@@ -17,7 +16,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 })
 export class ProductItemComponent implements OnInit {
   product: InputSignal<ProductCart> = input.required<ProductCart>();
-  buyByOptions: Option[] = buyByOptions;
+  buyByOptions: Option[] = [];
   isAuthenticated: boolean = !!localStorage.getItem('user');
   isInWishlist: boolean = false;
 
@@ -28,7 +27,9 @@ export class ProductItemComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.updateBuyByOptions();
+    if (this.product()) {
+      this.updateBuyByOptions();
+    }
 
     this.checkIfInWishList(this.product().product).subscribe();
   }
@@ -106,9 +107,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   private getFormatedCategoryName(categoryName: string): string {
-    const categoryKey = categoryName.split(' ').join('').toUpperCase() as keyof typeof Category;
-
-    return Category[categoryKey].toLowerCase();
+    return categoryName.toLowerCase().split(' ').join('-');
   }
 
   private getFormatedProductName(productName: string): string {

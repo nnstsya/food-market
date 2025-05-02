@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
 import { RatingFilterComponent } from './filters/rating-filter/rating-filter.component';
 import { PriceFilterComponent } from './filters/price-filter/price-filter.component';
+import { CoreModule } from "@core/core.module";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PriceFilterComponent } from './filters/price-filter/price-filter.compon
     NgClass,
     ReactiveFormsModule,
     FormsModule,
-    DecimalPipe
+    DecimalPipe,
+    CoreModule
   ],
   exports: [
     ShoppingCartComponent

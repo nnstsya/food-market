@@ -20,7 +20,7 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
-  buyByOptions: Option[] = buyByOptions;
+  buyByOptions: Option[] = [];
   quantity: number = 1;
   isAuthenticated: boolean = !!localStorage.getItem('user');
   isInWishlist: boolean = false;
@@ -91,7 +91,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getFormattedCategory(category: string): string {
-    return categoriesData[category.toUpperCase() as keyof typeof Category];
+    if (!category) return '';
+    const formattedCategory = categoriesData[category.toUpperCase() as keyof typeof Category];
+    return formattedCategory || '';
   }
 
   getFormattedStock(stock: string): string {
@@ -107,7 +109,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getUrlCategoryName(title: string): string {
-   return this.getFormattedCategory(title).split(' ').join('').toLowerCase();
+    if (!title) return '';
+    const formattedCategory = this.getFormattedCategory(title);
+    return formattedCategory ? formattedCategory.split(' ').join('').toLowerCase() : '';
   }
 
   addToCart(): void {
@@ -126,3 +130,4 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 }
+

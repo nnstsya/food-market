@@ -28,17 +28,10 @@ export class ProductsService {
     });
 
     return this.http.get<Response>(this.basePath, { params }).pipe(
-      catchError((err) =>
-        throwError(
-          () =>
-            new Error(
-              err?.error.message ||
-              'Failed to fetch products information.',
-            ),
-        ),
-      ),
+      catchError((err) => throwError(() => new Error(err?.error.message || 'Failed to fetch products information.')))
     );
   }
+
 
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(this.basePath + '/' + productId).pipe(
@@ -116,3 +109,4 @@ export class ProductsService {
     return params;
   }
 }
+

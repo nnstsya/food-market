@@ -8,8 +8,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { Category, Subcategory } from "@core/models/category.model";
-import { categoriesData, subcategoriesData } from "@core/mocks/categories";
+import { Category } from "@core/models/category.model";
+import { categoriesData } from "@core/mocks/categories";
 import { forkJoin, map, Observable } from "rxjs";
 import { Product, Response } from "@core/models/product.model";
 import { ProductsService } from "@home/services/products.service";
@@ -37,6 +37,7 @@ export class CategoryComponent implements OnInit {
   products: Product[] = [];
   displayedProducts: Product[] = [];
   currentPages: number[] = [];
+  shouldResetPages: boolean = false;
 
   priceRange: Signal<PriceRange> = computed(() => this.filterService.getState()().priceRange);
   ratings: Signal<RatingCheckbox[]> = computed(() => this.filterService.getState()().ratings);
@@ -57,63 +58,57 @@ export class CategoryComponent implements OnInit {
     this.route.paramMap.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe((params: ParamMap) => {
-      const categoryParam = params.get('category')?.toUpperCase() as keyof typeof Category;
-      const subcategoryParam = params.get('category')?.toUpperCase() as keyof typeof Subcategory;
+      const categoryParam = params.get('category')?.toUpperCase();
 
-      if (categoryParam && (Category[categoryParam] || Subcategory[subcategoryParam])) {
-        if (this.category !== Category[categoryParam] || Subcategory[subcategoryParam]) {
+      if (categoryParam && Object.values(Category).includes(categoryParam as Category)) {
+        if (this.category !== categoryParam) {
           this.currentPages = [1];
           localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
         }
 
-        this.categoryName = categoriesData[Category[categoryParam]] || subcategoriesData[Subcategory[subcategoryParam]];
-        this.category = Category[categoryParam] || Subcategory[subcategoryParam];
+        queueMicrotask(() => {
+          this.categoryName = categoriesData[categoryParam as Category];
+          this.category = categoryParam as Category;
 
-        if (this.currentPages.length !== 1) {
-          for (let page of this.currentPages) {
-            this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
-              switchMap((response: Response) => {
-                const categoryResponse: Response = response;
-
-                return this.productsService.getWishList().pipe(
-                  map((wishlistProducts: Response) => {
-                    const wishlistIds = new Set(wishlistProducts.results.map(p => p.id));
-
-                    const updatedResults = categoryResponse.results.map(product => ({
-                      ...product,
-                      isInWishlist: wishlistIds.has(product.id)
-                    }));
-
-                    return {
-                      ...categoryResponse,
-                      results: updatedResults
-                    };
-                  })
-                );
-              }),
-              map((response: Response) => {
-                this.originalProducts.push(...response.results);
-                this.filterService.initializeFilters(this.originalProducts);
-                this.applyFilters();
-                this.productsQuantity = response.totalItems;
-                return response;
-              }),
-              takeUntilDestroyed(this.destroyRef)
-            ).subscribe();
-          }
-        } else {
-          this.productsService.getProducts(this.currentPages[0], this.productsPerPage, this.category!).pipe(
-            map((response: Response) => {
-              this.originalProducts = response.results;
-              this.filterService.initializeFilters(response.results);
-              this.applyFilters();
+          this.productsService.getProducts(1, this.productsPerPage, categoryParam as Category).pipe(
+            switchMap((response: Response) => {
               this.productsQuantity = response.totalItems;
-              return response;
+
+              const allPagesRequests = Array.from({ length: response.totalPages }, (_, i) =>
+                this.productsService.getProducts(
+                  i + 1,
+                  this.productsPerPage,
+                  categoryParam as Category,
+                  null,
+                  null,
+                  [1, 2, 3, 4, 5]
+                )
+              );
+
+              return forkJoin(allPagesRequests);
+            }),
+            switchMap((responses: Response[]) => {
+              const allProducts = responses.flatMap(response => response.results);
+
+              return this.productsService.getWishList().pipe(
+                map((wishlistProducts: Response) => {
+                  const wishlistIds = new Set(wishlistProducts.results.map(p => p.id));
+
+                  return allProducts.map(product => ({
+                    ...product,
+                    isInWishlist: wishlistIds.has(product.id)
+                  }));
+                })
+              );
+            }),
+            map((products: Product[]) => {
+              this.originalProducts = products;
+              this.filterService.initializeFilters(this.originalProducts);
+              return products;
             }),
             takeUntilDestroyed(this.destroyRef)
           ).subscribe();
-        }
-
+        });
       } else {
         this.categoryName = null;
       }
@@ -122,17 +117,17 @@ export class CategoryComponent implements OnInit {
 
   applyFilters(): void {
     this.filterService.filterProducts(this.productsPerPage, this.currentPages, this.category!)
-      .subscribe(filteredProducts => {
-        this.products = filteredProducts;
-        this.productsQuantity = filteredProducts.length;
-
-        this.displayedProducts = [...filteredProducts];
+      .subscribe((response: Response) => {
+        this.products = response.results;
+        this.productsQuantity = response.totalItems;
+        this.displayedProducts = [...response.results];
         this.filterService.applyFilters();
       });
   }
 
   onFiltersApply(): void {
     this.currentPages = [1];
+    this.shouldResetPages = true;
     this.applyFilters();
   }
 
@@ -144,7 +139,11 @@ export class CategoryComponent implements OnInit {
       this.priceFilter.reset();
     }
 
+    this.shouldResetPages = true;
     this.applyFilters();
+    queueMicrotask(() => {
+      this.shouldResetPages = false;
+    });
   }
 
   changeView(view: 'grid' | 'list'): void {
@@ -168,9 +167,13 @@ export class CategoryComponent implements OnInit {
   }
 
   onResetFilters(): void {
-   this.filterService.resetAllFilters();
+    this.filterService.resetAllFilters();
+    this.shouldResetPages = true;
     this.applyFilters();
     this.priceFilter.reset();
+    queueMicrotask(() => {
+      this.shouldResetPages = false;
+    });
   }
 
   private updateDisplayedProducts(): void {

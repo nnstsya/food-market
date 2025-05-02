@@ -3,7 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ModalService } from '@shared/components/modal/modal.service';
 import { AuthService } from '@auth/services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { UserPasswordRecovery } from '@auth/models/user.model';
 import { PasswordRecoveryForm } from '@auth/models/form.model';
 import { passwordsMatchValidator } from "@auth/validators/password-match.validator";
@@ -71,13 +71,17 @@ export class PasswordRecoveryComponent {
           .resetPassword(user)
           .pipe(
             takeUntilDestroyed(this.destroyRef),
-            catchError((err: Error) => (this.serverError = err.message)),
+            catchError((err: Error) => {
+              this.serverError = err.message;
+              return throwError(() => err);
+            }),
           )
           .subscribe({
             next: () => {
               this.serverError = '';
               this.modalService.hideModal();
             },
+            error: () => {}
           });
       }
     }

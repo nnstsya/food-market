@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, input, InputSignal, OnInit } from '@angular/core';
 import { Product } from '@core/models/product.model';
 import { ProductsService } from "@home/services/products.service";
-import { Category } from "@core/models/category.model";
 import { Router } from "@angular/router";
 import { ShoppingCartService } from "@home/services/shopping-cart.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -53,17 +52,17 @@ export class ProductCardComponent implements OnInit {
   addToWishList(product: Product): void {
     this.productService.addToWishList(product.id).pipe(
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-
-    this.isInWishlist = true;
+    ).subscribe(() => {
+      this.isInWishlist = true;
+    });
   }
 
   removeFromWishList(product: Product): void {
     this.productService.removeFromWishList(product.id).pipe(
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-
-     this.isInWishlist = false;
+    ).subscribe(() => {
+      this.isInWishlist = false;
+    });
   }
 
   navigateToProductDetail(): void {
@@ -82,9 +81,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   private getFormatedCategoryName(categoryName: string): string {
-    const categoryKey = categoryName.split(' ').join('').toUpperCase() as keyof typeof Category;
-
-    return Category[categoryKey].toLowerCase();
+    return categoryName.toLowerCase();
   }
 
   private getFormatedProductName(productName: string): string {

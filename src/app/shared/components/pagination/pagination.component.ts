@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, OnInit, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, OnInit, output, OutputEmitterRef, effect } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -9,9 +9,20 @@ export class PaginationComponent implements OnInit {
   itemName: InputSignal<string> = input<string>('');
   totalItems: InputSignal<number> = input.required<number>();
   itemsPerPage: InputSignal<number> = input.required<number>();
+  resetPages: InputSignal<boolean> = input<boolean>(false);
   pageChanged: OutputEmitterRef<number[]> = output();
 
   currentPages: number[] = JSON.parse(localStorage.getItem('currentPages') || '[1]');
+
+  constructor() {
+    effect(() => {
+      if (this.resetPages()) {
+        this.currentPages = [1];
+        localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
+        this.pageChanged.emit(this.currentPages);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.pageChanged.emit(this.currentPages);
@@ -37,13 +48,16 @@ export class PaginationComponent implements OnInit {
 
   onPageClick(page: number): void {
     this.currentPages = [page];
+    localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
     this.pageChanged.emit(this.currentPages);
   }
 
   onShowMore(): void {
     const lastSelectedPage: number = this.currentPages[this.currentPages.length - 1];
-
-    this.currentPages.push(lastSelectedPage + 1);
-    this.pageChanged.emit(this.currentPages);
+    if (lastSelectedPage < this.totalPages) {
+      this.currentPages.push(lastSelectedPage + 1);
+      localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
+      this.pageChanged.emit(this.currentPages);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { ActiveFilter, FilterState, FilterValue, PriceRange, RatingCheckbox } from '../models/filter.model';
-import { Product } from '@core/models/product.model';
+import { Product, Response } from '@core/models/product.model';
 import { ProductsService } from "@home/services/products.service";
 import { Category } from "@core/models/category.model";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -32,14 +32,21 @@ export class FilterService {
   toggleFilter(type: 'wishlist' | 'nonWishlist' | string): void {
     this.state.update((state: FilterState) => {
       if (type === 'wishlist' || type === 'nonWishlist') {
-        state[type].checked = !state[type].checked;
+        return {
+          ...state,
+          [type]: {
+            ...state[type],
+            checked: !state[type].checked
+          }
+        };
       } else {
-        const rating: RatingCheckbox | undefined = state.ratings.find((r: RatingCheckbox) => r.id === type);
-        if (rating) {
-          rating.checked = !rating.checked;
-        }
+        return {
+          ...state,
+          ratings: state.ratings.map((rating: RatingCheckbox) =>
+            rating.id === type ? { ...rating, checked: !rating.checked } : rating
+          )
+        };
       }
-      return { ...state };
     });
   }
 
@@ -78,7 +85,7 @@ export class FilterService {
     }));
   }
 
-  filterProducts(pageSize: number, currentPages: number[], category: Category): Observable<Product[]> {
+  filterProducts(pageSize: number, currentPages: number[], category: Category): Observable<Response> {
     const { priceRange, ratings, wishlist, nonWishlist } = this.state();
     const wishlistProducts: Product[] = this.getWishlistProducts();
 
@@ -89,10 +96,15 @@ export class FilterService {
     );
 
     return forkJoin(requests).pipe(
-      map(responses => responses.flatMap(res => res.results).filter((product: Product) => {
-        const inWishlist: boolean = wishlistProducts.some((w: Product) => w.id === product.id);
-        return (wishlist.checked && inWishlist) || (nonWishlist.checked && !inWishlist);
-      })),
+      map(responses => {
+        return {
+          ...responses[0],
+          results: responses.flatMap(res => res.results).filter((product: Product) => {
+            const inWishlist: boolean = wishlistProducts.some((w: Product) => w.id === product.id);
+            return (wishlist.checked && inWishlist) || (nonWishlist.checked && !inWishlist);
+          })
+        }
+      }),
       takeUntilDestroyed(this.destroyRef)
     );
   }
@@ -143,3 +155,4 @@ export class FilterService {
     return wishlist ? JSON.parse(wishlist) : [];
   }
 }
+

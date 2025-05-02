@@ -105,7 +105,13 @@
         </div>
       </div>
 
-      <app-pagination itemName="products" [totalItems]="productsQuantity" [itemsPerPage]="productsPerPage" (pageChanged)="onSelectedPagesChange($event)"></app-pagination>
+      <app-pagination
+        itemName="products"
+        [totalItems]="productsQuantity"
+        [itemsPerPage]="productsPerPage"
+        [resetPages]="shouldResetPages"
+        (pageChanged)="onSelectedPagesChange($event)">
+      </app-pagination>
     </div>
   } @else {
     <div class="page">
@@ -121,5 +127,3 @@
     </div>
   </div>
 }
-
-

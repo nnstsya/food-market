@@ -1,0 +1,29 @@
+@use "../../../../styles/variables" as *;
+
+.order-summary {
+  flex: 1;
+  border-radius: 12px;
+  gap: 40px;
+  padding: 32px 16px;
+  border: 1px solid $border-color;
+
+  &__header {
+    &__heading {
+      font-size: 22px;
+    }
+
+    &__subheading {
+      color: $secondary-color;
+    }
+  }
+
+  &__price-summary {
+    &__text {
+      align-self: flex-start;
+    }
+
+    &__price {
+      color: $primary-color;
+    }
+  }
+}

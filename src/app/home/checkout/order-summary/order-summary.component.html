@@ -1,0 +1,21 @@
+<div class="order-summary flex flex-column h-fit">
+  <div class="order-summary__header flex flex-column gap-4">
+    <h2 class="order-summary__header__heading">Order summary</h2>
+    <p class="order-summary__header__subheading fs-12 lighter">Price can change depending on shipping method and taxes of your state.</p>
+  </div>
+
+  <div class="order-summary__product-list flex flex-column gap-32">
+    @if (products.length) {
+      @for (product of products; track product.product.id; let last = $last) {
+        <app-product-item [product]="product" [ngClass]="{ 'border-bottom': !last }"></app-product-item>
+      }
+    } @else {
+      <p>Looks like there are no products in your cart.</p>
+    }
+  </div>
+
+  <div class="order-summary__price-summary flex space-between">
+    <p class="order-summary__price-summary__text fs-14 bolder">Total order</p>
+    <h2 class="order-summary__price-summary__price bolder">{{ totalPrice }} USD</h2>
+  </div>
+</div>

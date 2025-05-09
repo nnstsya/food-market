@@ -7,12 +7,17 @@ import { ProductDetailComponent } from "@home/product-detail/product-detail.comp
 import { CheckoutComponent } from "@home/checkout/checkout.component";
 import { authGuard } from "@core/guards/auth.guard";
 import { checkoutGuard } from "@core/guards/checkout.guard";
+import { BlogsComponent } from "@home/blogs/blogs.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: 'blogs',
+        component: BlogsComponent
+      },
       {
         path: 'homepage',
         component: HomePageComponent,

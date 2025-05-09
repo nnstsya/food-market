@@ -1,0 +1,24 @@
+<div class="page">
+  <div class="flex gap-32">
+    <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage">
+      <div class="blogs__banner flex flex-column h-full gap-8">
+        <h2 class="blogs__banner__heading bolder">{{ sortedBlogs[0].title }}</h2>
+        <div class="blogs__banner__info gap-8 flex align-center">
+          <img class="blogs__banner__info__avatar rounded-full" [src]="sortedBlogs[0].authorAvatar" [alt]="sortedBlogs[0].author">
+          <p class="blogs__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[0].author }}</p>
+          <p class="blogs__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[0].date }}</p>
+        </div>
+      </div>
+    </app-banner>
+    <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[1].blogImage">
+      <div class="blogs__banner flex flex-column h-full gap-8">
+        <h2 class="blogs__banner__heading bolder">{{ sortedBlogs[1].title }}</h2>
+        <div class="blogs__banner__info gap-8 flex align-center">
+          <img class="blogs__banner__info__avatar rounded-full" [src]="sortedBlogs[1].authorAvatar" [alt]="sortedBlogs[1].author">
+          <p class="blogs__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[1].author }}</p>
+          <p class="blogs__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[1].date }}</p>
+        </div>
+      </div>
+    </app-banner>
+  </div>
+</div>

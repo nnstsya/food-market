@@ -1,23 +1,23 @@
 <header>
   <section class="header">
-    <section class="top-bar">
-        <div class="top-bar__contact">
-            <p class="top-bar__contact__chat">Chat with us</p>
-            <a href="tel:+420336775664" class="top-bar__contact__option">+420 336 775 664</a>
-            <a href="mailto:info@freshnesecom.com" class="top-bar__contact__option">info&#64;freshnesecom.com</a>
+    <section class="top-bar flex space-between align-center">
+        <div class="top-bar__contact flex flex-center gap-32">
+            <p class="top-bar__contact__chat fs-14">Chat with us</p>
+            <a href="tel:+420336775664" class="top-bar__contact__option fs-14">+420 336 775 664</a>
+            <a href="mailto:info@freshnesecom.com" class="top-bar__contact__option fs-14">info&#64;freshnesecom.com</a>
         </div>
 
-        <div class="top-bar__links">
-            <a routerLink="/blog" class="top-bar__links__link">Blog</a>
-            <a routerLink="/about" class="top-bar__links__link">About Us</a>
-            <a routerLink="/careers" class="top-bar__links__link">Careers</a>
+        <div class="top-bar__links flex flex-center gap-32">
+            <a routerLink="/blogs" class="top-bar__links__link fs-14">Blog</a>
+            <a routerLink="/about" class="top-bar__links__link fs-14">About Us</a>
+            <a routerLink="/careers" class="top-bar__links__link fs-14">Careers</a>
         </div>
     </section>
 
-    <section class="main-header">
-        <p class="main-header__logo">freshnesecom</p>
+    <section class="main-header flex space-between">
+        <p class="main-header__logo bold">freshnesecom</p>
 
-        <div class="main-header__search-bar">
+        <div class="main-header__search-bar align-center flex w-fit gap-8">
             @if (isHomePage) {
                 <app-dropdown [options]="categories" placeholder="All categories"></app-dropdown>
                 <div class="divider"></div>
@@ -26,25 +26,25 @@
           <app-input class="main-header__search-bar__input" iconUrl="assets/icons/ic-actions-search.svg" [border]="false" placeholder="Search Products, categories..."></app-input>
         </div>
 
-        <div class="main-header__actions">
+        <div class="main-header__actions flex flex-center gap-32">
             <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account"  (click)="navigateUser()">
-            <div class="main-header__actions__cart" (click)="openShoppingCart()">
+            <div class="main-header__actions__cart relative" (click)="openShoppingCart()">
                 <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
-                <span class="main-header__actions__cart-count">{{ cartCount }}</span>
+                <span class="main-header__actions__cart-count rounded-full absolute">{{ cartCount }}</span>
             </div>
         </div>
     </section>
   </section>
 
-  <section class="nav-bar">
-    <ul class="nav-bar__list">
+  <section class="nav-bar relative">
+    <ul class="nav-bar__list flex align-center">
       @for (category of categories; track category) {
-        <li class="nav-bar__item" [routerLink]="'homepage/' + getCategoryName(category.title)" [ngClass]="{ 'nav-bar__item-active': checkIfTabActive(category.title) }">
+        <li class="nav-bar__item w-fit" [routerLink]="'homepage/' + getCategoryName(category.title)" [ngClass]="{ 'nav-bar__item-active': checkIfTabActive(category.title) }">
             <p>{{ category.title }}</p>
         </li>
       }
 
-      <div class="nav__gradient-fade"></div>
+      <div class="nav__gradient-fade absolute"></div>
     </ul>
   </section>
 </header>

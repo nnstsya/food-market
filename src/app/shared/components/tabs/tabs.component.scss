@@ -1,23 +1,12 @@
 @use "../../../../styles/variables" as *;
 
 .tabs {
-  display: flex;
-  flex-direction: column;
   gap: 48px;
-  width: 100%;
 
   &__header {
-    display: flex;
-    justify-content: stretch;
-    width: 100%;
-
     &__tab {
       border-bottom: 2px solid $light-grey-bg-color;
-      display: flex;
       padding: 16px 32px;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
       transition: 0.1s ease-out;
 
       &-active {
@@ -35,7 +24,6 @@
       }
 
       &-title {
-        font-size: 18px;
         font-weight: 600;
       }
     }

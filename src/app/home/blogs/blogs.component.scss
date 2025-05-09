@@ -1,17 +1,21 @@
 .page {
   padding: 16px 45px;
+
+  &__content {
+    &__blogs {
+      flex-wrap: wrap;
+    }
+  }
 }
 
-.blogs {
-  &__banner {
-    justify-content: end;
+.banner {
+  justify-content: end;
 
-    &__info {
-      &__avatar {
-        height: 32px;
-        width: 32px;
-        object-fit: cover;
-      }
+  &__info {
+    &__avatar {
+      height: 32px;
+      width: 32px;
+      object-fit: cover;
     }
   }
 }

@@ -26,6 +26,45 @@ describe('BlogsComponent', () => {
     component.blogs = blogData;
     component.getSortedBlogs();
 
-    expect(component.sortedBlogs[0].date).toBe('17.6.2020');
+    expect(component.allDisplayedBlogs[0].date).toBe('17.6.2020');
+  });
+
+  it('should separate main blogs and remaining blogs correctly', () => {
+    component.blogs = blogData;
+    component.getSortedBlogs();
+
+    expect(component.mainBlogs.length).toBe(2);
+    expect(component.allDisplayedBlogs.length).toBe(blogData.length - 2);
+  });
+
+  it('should update displayed blogs based on current pages', () => {
+    component.blogs = blogData;
+    component.getSortedBlogs();
+    component.onSelectedPagesChange([1, 2]);
+
+    expect(component.displayedBlogs.length).toBeLessThanOrEqual(component.blogsPerPage * 2);
+    expect(component.currentPages).toEqual([1, 2]);
+  });
+
+  it('should save current pages to localStorage', () => {
+    const pages = [1, 2];
+    component.onSelectedPagesChange(pages);
+
+    const storedPages = JSON.parse(localStorage.getItem('currentPages') || '[]');
+    expect(storedPages).toEqual(pages);
+  });
+
+  it('should clear localStorage on component destroy', () => {
+    localStorage.setItem('currentPages', '[1,2]');
+    component.ngOnDestroy();
+
+    expect(localStorage.getItem('currentPages')).toBeNull();
+  });
+
+  it('should initialize with correct total quantity', () => {
+    component.blogs = blogData;
+    component.ngOnInit();
+
+    expect(component.totalQuantity).toBe(blogData.length - 2);
   });
 });

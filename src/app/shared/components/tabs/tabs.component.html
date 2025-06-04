@@ -1,8 +1,8 @@
-<div class="tabs">
-  <div class="tabs__header">
+<div class="tabs flex flex-column w-full">
+  <div class="tabs__header w-full flex justify-stretch">
     @for (tab of tabTitles(); track tab; let i = $index) {
-      <div (click)="selectTab(i)" [class.tabs__header__tab-active]="i === activeTab" class="tabs__header__tab">
-        <p class="tabs__header__tab-title">{{ tab }}</p>
+      <div (click)="selectTab(i)" [class.tabs__header__tab-active]="i === activeTab" class="tabs__header__tab flex gap-8 align-center w-full">
+        <p class="tabs__header__tab-title bolder">{{ tab }}</p>
 
         @if (tabTags()[i]) {
           <app-tag [text]="tabTags()[i]!.toString()"></app-tag>

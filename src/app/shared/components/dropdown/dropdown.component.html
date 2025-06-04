@@ -1,15 +1,20 @@
-<div class="dropdown">
+@if (label()) {
+  <p class="dropdown-label fs-14 bolder">{{ label() }}</p>
+}
+
+<div class="dropdown w-full relative" [ngClass]="{'dropdown-with-background flex align-center': background()}">
   <div
-    class="dropdown-header"
+    class="dropdown-header flex space-between w-full align-center bolder gap-8"
     (click)="toggleDropdown()"
     [class.open]="isDropdownOpen"
+    [ngClass]="{'dropdown-with-background-header': background()}"
   >
     {{ selectedOption || placeholder() }}
     <img ngSrc="assets/icons/ic-chevron-down.svg" width="24" height="24" class="arrow" [class.up]="isDropdownOpen" alt="open">
   </div>
 
   @if (isDropdownOpen) {
-    <ul class="dropdown-list">
+    <ul class="dropdown-list absolute" [ngClass]="{'dropdown-with-background-list': background()}">
       @for (option of options(); track option) {
         <li
           class="dropdown-item"

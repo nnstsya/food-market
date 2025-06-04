@@ -1,9 +1,9 @@
-<div class="checkbox-wrapper" (click)="toggleCheck()">
-  <div class="checkbox-box" [ngClass]="{ 'checked': isChecked, 'disabled': disabled() }">
+<div class="checkbox-wrapper gap-8 flex align-center" (click)="toggleCheck()" [ngClass]="{'checkbox-wrapper-with-background': background()}">
+  <div class="checkbox-box flex flex-center" [ngClass]="{ 'checked': isChecked, 'disabled': disabled() }">
     @if (isChecked) {
       <img ngSrc="assets/icons/ic-actions-check-simple.svg" width="20" height="20" class="checkbox-icon">
     }
   </div>
-  <p class="checkbox-label">{{ label() }}</p>
+  <p class="checkbox-label fs-14">{{ label() }}</p>
   <ng-content></ng-content>
 </div>

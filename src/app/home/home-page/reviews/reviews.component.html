@@ -1,14 +1,14 @@
 <div class="reviews">
-  <div class="reviews__container">
+  <div class="reviews__container relative h-full w-full">
     <div class="reviews__track-wrapper">
-      <div class="reviews__track">
+      <div class="reviews__track flex justify-center gap-32">
 
         @for (review of reviews(); track review.author) {
-          <div class="reviews__slide">
+          <div class="reviews__slide align-center relative">
             <p class="reviews__slide__text">“ {{ review.text }} “</p>
-            <span class="reviews__slide__author">{{ review.author }}</span>
-            <div class="reviews__slide__avatar">
-              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img"/>
+            <span class="reviews__slide__author fs-14">{{ review.author }}</span>
+            <div class="reviews__slide__avatar absolute rounded-full">
+              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img h-full w-full"/>
             </div>
           </div>
         }

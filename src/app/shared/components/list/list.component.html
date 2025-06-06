@@ -3,7 +3,11 @@
     <h3 class="list__content__heading bold">{{ heading() }}</h3>
     <ul class="list__content">
       @for (item of items(); track item.id) {
-        <li class="list__content__item fs-14">{{ item.title }}</li>
+        <li class="list__content__item fs-14"
+            [class.selected]="item.selected"
+            (click)="onItemClick(item.id)">
+          {{ item.title }}
+        </li>
       }
     </ul>
   </div>

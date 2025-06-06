@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, Signal, inject } from '@angular/core';
 import { Blog } from "@core/models/blog.model";
 import { blogData } from "@core/mocks/blogs";
+import { BlogFilterService, BlogFilterState } from '../services/blog-filter.service';
 
 @Component({
   selector: 'app-blogs',
@@ -16,13 +17,26 @@ export class BlogsComponent implements OnInit, OnDestroy {
   blogsPerPage: number = 5;
   allDisplayedBlogs: Blog[] = [];
 
+  filterState: Signal<BlogFilterState> = computed(() => this.blogFilterService.getState()());
+  hasActiveFilters: Signal<boolean> = computed(() => this.filterState().filterHistory.length > 0);
+  filterDescription: Signal<string> = computed(() => this.blogFilterService.getCurrentFilterDescription());
+
+  private blogFilterService: BlogFilterService = inject(BlogFilterService);
+
   ngOnInit() {
+    this.blogFilterService.initializeFilters(this.blogs);
     this.getSortedBlogs();
-    this.totalQuantity = this.allDisplayedBlogs.length;
+
+    if (this.hasActiveFilters()) {
+      this.updateFilteredBlogs();
+    } else {
+      this.updateTotalQuantity();
+    }
   }
 
   ngOnDestroy() {
     localStorage.removeItem('currentPages');
+    localStorage.removeItem('blogFilterState');
   }
 
   getSortedBlogs() {
@@ -43,11 +57,32 @@ export class BlogsComponent implements OnInit, OnDestroy {
     this.updateDisplayedBlogs();
   }
 
+  onFilterSelect(type: 'date' | 'category', id: number): void {
+    this.blogFilterService.toggleFilter(type, id);
+    this.updateFilteredBlogs();
+  }
+
+  onBackClick(): void {
+    this.blogFilterService.goBack();
+    this.updateFilteredBlogs();
+  }
+
   private updateDisplayedBlogs(): void {
     this.displayedBlogs = this.currentPages.reduce((acc: Blog[], page: number): Blog[] => {
       const startIndex: number = (page - 1) * this.blogsPerPage;
       const endIndex: number = startIndex + this.blogsPerPage;
       return acc.concat(this.allDisplayedBlogs.slice(startIndex, endIndex));
     }, []);
+  }
+
+  private updateFilteredBlogs(): void {
+    this.allDisplayedBlogs = this.blogFilterService.filterBlogs(this.blogs.slice(2));
+    this.currentPages = [1];
+    this.updateDisplayedBlogs();
+    this.updateTotalQuantity();
+  }
+
+  private updateTotalQuantity(): void {
+    this.totalQuantity = this.allDisplayedBlogs.length;
   }
 }

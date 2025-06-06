@@ -1,6 +1,6 @@
 @if (type() === 'vertical') {
   <div class="card flex flex-column w-fit gap-24 transition-ease-out">
-    <img class="card__image w-full" [src]="blog().blogImage" [alt]="blog().title">
+    <img class="card__image w-full" [src]="blog().blogImage" (error)="onImageError($event)" [alt]="blog().title">
 
     <div class="card__content flex flex-column gap-16">
       <div class="card__content__body flex flex-column gap-4">

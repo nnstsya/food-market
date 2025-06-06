@@ -1,6 +1,11 @@
 .page {
   padding: 16px 45px;
 
+  &__nav {
+    margin-top: -56px;
+    cursor: pointer;
+  }
+
   &__content {
     &__blogs {
       flex-wrap: wrap;

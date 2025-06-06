@@ -14,13 +14,41 @@
     }
   </div>
 
-  <div class="flex gap-32">
-    <div class="page__content__blogs flex w-full gap-32">
-      @for (blog of displayedBlogs; track blog.id) {
-        <app-blog-card [blog]="blog"></app-blog-card>
-      }
+  <div class="flex flex-column gap-32">
+    @if (hasActiveFilters()) {
+      <div class="flex align-center gap-8 page__nav" (click)="onBackClick()">
+        <img ngSrc="assets/icons/ic-chevron-left-black.svg" width="24" height="24" alt="back">
+        <span class="page__nav__text">{{ filterDescription() }}</span>
+      </div>
+    }
+
+    <div class="flex space-between">
+      <div class="page__filters flex flex-column gap-48" style="width: 280px;">
+        <app-list
+          [heading]="'Filter by Date'"
+          [items]="filterState().dates"
+          (itemSelected)="onFilterSelect('date', $event)">
+        </app-list>
+
+        <app-list
+          [heading]="'Filter by Category'"
+          [items]="filterState().categories"
+          (itemSelected)="onFilterSelect('category', $event)">
+        </app-list>
+      </div>
+
+      <div class="page__content__blogs flex w-full gap-32">
+        @for (blog of displayedBlogs; track blog.id) {
+          <app-blog-card [blog]="blog"></app-blog-card>
+        }
+      </div>
     </div>
   </div>
 
-  <app-pagination itemName="blogs" [totalItems]="totalQuantity" [itemsPerPage]="blogsPerPage" (pageChanged)="onSelectedPagesChange($event)"></app-pagination>
+  <app-pagination
+    itemName="blogs"
+    [totalItems]="totalQuantity"
+    [itemsPerPage]="blogsPerPage"
+    (pageChanged)="onSelectedPagesChange($event)">
+  </app-pagination>
 </div>

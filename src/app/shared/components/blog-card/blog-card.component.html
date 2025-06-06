@@ -1,29 +1,29 @@
 @if (type() === 'vertical') {
-  <div class="card">
-    <img class="card__image" [src]="blog().blogImage" [alt]="blog().title">
+  <div class="card flex flex-column w-fit gap-24 transition-ease-out">
+    <img class="card__image w-full" [src]="blog().blogImage" (error)="onImageError($event)" [alt]="blog().title">
 
-    <div class="card__content">
-      <div class="card__content__body">
+    <div class="card__content flex flex-column gap-16">
+      <div class="card__content__body flex flex-column gap-4">
         <h3 class="card__content__body__blog-title">{{ blog().title }}</h3>
       </div>
 
-      <div class="card__content__footer">
-        <p class="card__content__footer__info">{{ blog().author }}</p>
-        <p class="card__content__footer__info">{{ blog().date }}</p>
+      <div class="card__content__footer flex gap-16">
+        <p class="card__content__footer__info fs-14">{{ blog().author }}</p>
+        <p class="card__content__footer__info fs-14">{{ blog().date }}</p>
       </div>
     </div>
 
   </div>
 } @else {
-  <div class="card card-horizontal">
-    <div class="card__content">
-      <div class="card__content__body">
+  <div class="card card-horizontal flex flex-row gap-16">
+    <div class="card__content flex flex-column">
+      <div class="card__content__body flex flex-column gap-4">
         <p class="card__content__body__blog-title">{{ blog().title }}</p>
       </div>
 
-      <div class="card__content__footer">
-        <p class="card__content__footer__info">{{ blog().author }}</p>
-        <p class="card__content__footer__info">{{ blog().date }}</p>
+      <div class="card__content__footer flex align-center gap-16">
+        <p class="card__content__footer__info fs-14">{{ blog().author }}</p>
+        <p class="card__content__footer__info fs-14">{{ blog().date }}</p>
       </div>
     </div>
 

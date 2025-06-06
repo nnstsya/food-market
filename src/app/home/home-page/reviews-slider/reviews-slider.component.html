@@ -1,17 +1,17 @@
 <div class="reviews">
-  <div class="reviews__container">
-    <div class="reviews__gradient-fade reviews__gradient-fade--left"></div>
-    <img ngSrc="assets/icons/ic-chevron-left.svg" width="24" height="24" class="reviews__button reviews__button--prev" alt="previous" (click)="getPrev()">
+  <div class="reviews__container relative w-full h-full">
+    <div class="reviews__gradient-fade reviews__gradient-fade--left h-full absolute"></div>
+    <img ngSrc="assets/icons/ic-chevron-left.svg" width="24" height="24" class="reviews__button absolute reviews__button--prev" alt="previous" (click)="getPrev()">
 
     <div class="reviews__track-wrapper">
-      <div [ngClass]="{ 'reviews__track--next': slideDirection === 'next', 'reviews__track--prev': slideDirection === 'prev'}" class="reviews__track">
+      <div [ngClass]="{ 'reviews__track--next': slideDirection === 'next', 'reviews__track--prev': slideDirection === 'prev'}" class="reviews__track gap-32 flex justify-center">
 
         @for (review of visibleReviews; track review.author) {
-          <div class="reviews__slide">
+          <div class="reviews__slide relative align-center">
             <p class="reviews__slide__text">“ {{ review.text }} “</p>
-            <span class="reviews__slide__author">{{ review.author }}</span>
-            <div class="reviews__slide__avatar">
-              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img"/>
+            <span class="reviews__slide__author fs-14">{{ review.author }}</span>
+            <div class="reviews__slide__avatar absolute rounded-full">
+              <img [src]="review.avatar" [alt]="'Avatar of ' + review.author" class="reviews__slide__avatar-img h-full w-full"/>
             </div>
           </div>
         }
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <img ngSrc="assets/icons/ic-chevron-right.svg" width="24" height="24" class="reviews__button reviews__button--next" alt="next" (click)="getNext()">
-    <div class="reviews__gradient-fade reviews__gradient-fade--right"></div>
+    <img ngSrc="assets/icons/ic-chevron-right.svg" width="24" height="24" class="reviews__button transition-ease-out absolute reviews__button--next" alt="next" (click)="getNext()">
+    <div class="reviews__gradient-fade reviews__gradient-fade--right h-full absolute"></div>
   </div>
 </div>

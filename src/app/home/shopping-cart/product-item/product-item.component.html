@@ -1,48 +1,48 @@
-<div class="product">
-  <div class="product__item">
+<div class="product flex gap-16">
+  <div class="product__item flex flex-column gap-12">
     <img class="product__image"
-         [src]="product().product.image"
+         [src]="product().product.image[0]"
          (error)="onImageError($event)"
          (click)="navigateToProductDetail(product().product)"
     />
 
-    <div class="product__actions">
+    <div class="product__actions flex flex-column gap-8">
       @if (checkIfInWishList(product().product)) {
-        <div class="product__actions__item" (click)="removeFromWishList(product().product)">
+        <div class="product__actions__item gap-6 flex align-center" (click)="removeFromWishList(product().product)">
           <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
-          <p class="product__actions__item-text">Wishlist</p>
+          <p class="product__actions__item-text fs-14 light">Wishlist</p>
         </div>
       } @else {
-        <div class="product__actions__item" (click)="addToWishList(product().product)">
+        <div class="product__actions__item gap-6 flex align-center" (click)="addToWishList(product().product)">
           <img ngSrc="assets/icons/ic-actions-heart.svg" width="16" height="16">
-          <p class="product__actions__item-text">Wishlist</p>
+          <p class="product__actions__item-text fs-14 light">Wishlist</p>
         </div>
       }
 
-      <div class="product__actions__item">
+      <div class="product__actions__item gap-6 flex align-center">
         <img ngSrc="assets/icons/ic-layout-picture-right.svg" width="16" height="16">
-        <p class="product__actions__item-text">Compare</p>
+        <p class="product__actions__item-text fs-14 light">Compare</p>
       </div>
 
-      <div class="product__actions__item" (click)="removeFromCart()">
+      <div class="product__actions__item gap-6 flex align-center" (click)="removeFromCart()">
         <img ngSrc="assets/icons/ic-actions-close-simple.svg" width="16" height="16">
-        <p class="product__actions__item-text">Remove</p>
+        <p class="product__actions__item-text fs-14 light">Remove</p>
       </div>
     </div>
   </div>
 
-  <div class="product__info">
+  <div class="product__info flex flex-column w-full gap-8">
     <p class="product__info__name">{{ product().product.name }}</p>
 
-    <div class="product__info__details">
-      <div class="product__info__details__title">
-        <p class="product__info__farm">Farm:</p>
-        <p class="product__info__freshness">Freshness:</p>
+    <div class="product__info__details flex gap-14">
+      <div class="product__info__details__title flex flex-column space-between gap-2">
+        <p class="product__info__farm fs-14 light">Farm:</p>
+        <p class="product__info__freshness fs-14 light">Freshness:</p>
       </div>
 
-      <div class="product__info__details__value">
-        <p class="product__info__farm product__info__farm-value">{{ product().product.farm }}</p>
-        <p class="product__info__freshness product__info__freshness-value">{{ product().product.freshness === 1 ? '1 day old' : product().product.freshness + ' days old'}}</p>
+      <div class="product__info__details__value flex flex-column space-between gap-2">
+        <p class="product__info__farm product__info__farm-value fs-14 light">{{ product().product.farm }}</p>
+        <p class="product__info__freshness product__info__freshness-value fs-14 light">{{ product().product.freshness === 1 ? '1 day old' : product().product.freshness + ' days old'}}</p>
       </div>
     </div>
 
@@ -56,10 +56,10 @@
       }
     </div>
 
-    <div class="product__purchase-section">
-      <h3 class="product__purchase-section__price">{{ product().product.price }} UAH</h3>
+    <div class="product__purchase-section flex space-between">
+      <h3 class="product__purchase-section__price bolder">{{ product().product.price }} UAH</h3>
 
-      <div class="product__purchase-section__action">
+      <div class="product__purchase-section__action flex align-center w-fit gap-4">
           <app-input class="product__purchase-section__action__input"
                      [placeholder]="product().quantity"
                      [border]="false"

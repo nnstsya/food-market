@@ -1,24 +1,17 @@
 @use "../../../../styles/variables" as *;
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
   border-radius: $border-radius;
   width: 270px;
-  height: fit-content;
-  transition: 0.2s ease-out;
   cursor: pointer;
 
   &__image {
     border-radius: $border-radius;
-    width: 100%;
     height: 180px;
     object-fit: cover;
   }
 
   &-horizontal {
-    flex-direction: row;
     width: 369px;
     height: 96px;
 
@@ -29,15 +22,7 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
     &__body {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-
       &__blog {
         &-title {
           font-weight: 500;
@@ -46,16 +31,6 @@
             text-decoration: underline;
           }
         }
-      }
-    }
-
-    &__footer {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-
-      &__info {
-        font-size: 14px;
       }
     }
   }

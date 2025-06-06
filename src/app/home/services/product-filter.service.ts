@@ -5,7 +5,7 @@ import { Product } from '@core/models/product.model';
 @Injectable({
   providedIn: 'root'
 })
-export class FilterService {
+export class ProductFilterService {
   private state: WritableSignal<FilterState> = signal<FilterState>({
     wishlist: this.createTagFilter('wishlist', 'In Wishlist'),
     nonWishlist: this.createTagFilter('nonWishlist', 'Not in Wishlist'),

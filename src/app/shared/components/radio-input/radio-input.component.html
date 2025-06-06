@@ -1,0 +1,27 @@
+<div class="radio-wrapper transition-ease-out flex flex-column align-center w-full" [class.disabled]="disabled()" [class.checked]="checked" (click)="onRadioChange()">
+  <div class="radio-control flex align-center w-full">
+    <div class="radio-button rounded-full flex flex-center" [class.checked]="checked">
+      @if (checked) {
+        <div class="radio-inner rounded-full"></div>
+      }
+    </div>
+
+    <div class="radio-content flex relative justify-center align-center">
+      <span class="radio-label fs-14 bolder">{{ label() }}</span>
+
+      @if (additionalText()) {
+        <span class="radio-additional fs-14">{{ additionalText() }}</span>
+      }
+
+      @if (iconUrl()) {
+        <img [src]="iconUrl()" class="radio-icon" alt="icon">
+      }
+    </div>
+  </div>
+
+  @if (checked) {
+    <div class="radio-expandable-content w-full">
+      <ng-content></ng-content>
+    </div>
+  }
+</div>

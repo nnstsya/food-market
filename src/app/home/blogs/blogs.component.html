@@ -1,0 +1,54 @@
+<div class="page flex flex-column gap-96">
+  <div class="flex gap-32">
+    @for (mainBlog of mainBlogs; track mainBlog.id) {
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="mainBlog.blogImage">
+        <div class="banner flex flex-column h-full gap-8">
+          <h2 class="banner__heading bolder">{{ mainBlog.title }}</h2>
+          <div class="banner__info gap-8 flex align-center">
+            <img class="banner__info__avatar rounded-full" [src]="mainBlog.authorAvatar" [alt]="mainBlog.author">
+            <p class="banner__info__details flex gap-16 fs-16">{{ mainBlog.author }}</p>
+            <p class="banner__info__details flex gap-16 fs-16">{{ mainBlog.date }}</p>
+          </div>
+        </div>
+      </app-banner>
+    }
+  </div>
+
+  <div class="flex flex-column gap-32">
+    @if (hasActiveFilters()) {
+      <div class="flex align-center gap-8 page__nav" (click)="onBackClick()">
+        <img ngSrc="assets/icons/ic-chevron-left-black.svg" width="24" height="24" alt="back">
+        <span class="page__nav__text">{{ filterDescription() }}</span>
+      </div>
+    }
+
+    <div class="flex space-between">
+      <div class="page__filters flex flex-column gap-48" style="width: 280px;">
+        <app-list
+          [heading]="'Filter by Date'"
+          [items]="filterState().dates"
+          (itemSelected)="onFilterSelect('date', $event)">
+        </app-list>
+
+        <app-list
+          [heading]="'Filter by Category'"
+          [items]="filterState().categories"
+          (itemSelected)="onFilterSelect('category', $event)">
+        </app-list>
+      </div>
+
+      <div class="page__content__blogs flex w-full gap-32">
+        @for (blog of displayedBlogs; track blog.id) {
+          <app-blog-card [blog]="blog"></app-blog-card>
+        }
+      </div>
+    </div>
+  </div>
+
+  <app-pagination
+    itemName="blogs"
+    [totalItems]="totalQuantity"
+    [itemsPerPage]="blogsPerPage"
+    (pageChanged)="onSelectedPagesChange($event)">
+  </app-pagination>
+</div>

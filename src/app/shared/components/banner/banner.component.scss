@@ -1,12 +1,8 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   border-radius: 12px;
   padding: 48px 34px 34px;
   color: white;
-  height: 100%;
-  transition: 0.2s ease-out;
+  height: 400px;
 
   &:hover {
     cursor: pointer;

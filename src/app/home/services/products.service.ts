@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
-import { Product } from '@core/models/product.model';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { Product, Response } from '@core/models/product.model';
 import { Category } from "@core/models/category.model";
 
 @Injectable({
@@ -12,46 +12,24 @@ export class ProductsService {
   private basePath: string = '/products';
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.basePath).pipe(
-      catchError((err) =>
-        throwError(
-          () =>
-            new Error(
-              err?.error.message ||
-              'Failed to fetch products information.',
-            ),
-        ),
-      ),
+    return this.http.get<Response>(this.basePath).pipe(
+      map((response: Response) => response.results),
+      catchError(() => throwError(() => new Error('Failed to fetch products information.')))
     );
   }
 
   getProductsByCategory(category: Category): Observable<Product[]> {
     const params: HttpParams = new HttpParams().set('category', category);
 
-    return this.http.get<Product[]>(this.basePath, { params }).pipe(
-      catchError((err) =>
-        throwError(
-          () =>
-            new Error(
-              err?.error.message ||
-              'Failed to fetch products information.',
-            ),
-        ),
-      ),
-    )
+    return this.http.get<Response>(this.basePath, { params }).pipe(
+      map((response: Response) => response.results),
+      catchError(() => throwError(() => new Error('Failed to fetch products information.')))
+    );
   }
 
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(this.basePath + '/' + productId).pipe(
-      catchError((err) =>
-        throwError(
-          () =>
-            new Error(
-              err?.error.message ||
-              'Failed to fetch product information.',
-            ),
-        ),
-      ),
+      catchError(() => throwError(() => new Error('Failed to fetch product information.'))),
     );
   }
 

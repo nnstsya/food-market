@@ -2,16 +2,9 @@
 
 .tag {
   padding-inline: 8px;
-  width: fit-content;
   border-radius: $border-radius;
-  display: flex;
   gap: 6px;
-  align-items: center;
   height: 20px;
-
-  &__text {
-    font-size: 12px;
-  }
 
   &__close {
     opacity: 0.3;

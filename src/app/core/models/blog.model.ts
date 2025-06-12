@@ -5,4 +5,6 @@ export interface Blog {
   blogImage: string;
   authorAvatar: string;
   date: string;
+  category: string;
+  article: string;
 }

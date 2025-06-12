@@ -1,7 +1,7 @@
 <div class="page flex flex-column gap-96">
   <div class="flex gap-32">
     @for (mainBlog of mainBlogs; track mainBlog.id) {
-      <app-banner [gradientPosition]="'bottom'" [imageUrl]="mainBlog.blogImage">
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="mainBlog.blogImage" [routerLink]="'/blogs/' + mainBlog.id">
         <div class="banner flex flex-column h-full gap-8">
           <h2 class="banner__heading bolder">{{ mainBlog.title }}</h2>
           <div class="banner__info gap-8 flex align-center">

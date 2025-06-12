@@ -1,0 +1,62 @@
+@use "../../../../styles/variables" as *;
+
+:host {
+  ::ng-deep {
+    app-banner .card:hover {
+      cursor: default;
+    }
+  }
+}
+
+.page {
+  padding: 48px 45px;
+
+  &__container {
+    align-items: flex-start;
+  }
+
+  &__nav {
+    cursor: pointer;
+
+    &__text {
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    max-width: 569px;
+  }
+}
+
+.banner {
+  min-height: 300px;
+  position: relative;
+  align-items: flex-end;
+
+  &__meta {
+    padding-block: 8px;
+
+    &__author {
+      text-decoration: underline;
+    }
+  }
+
+  &__heading {
+    font-size: 32px;
+    color: white;
+    width: 569px;
+  }
+}
+
+.social-share__button {
+  padding: 6px 12px;
+  border-radius: 12px;
+  background-color: $light-grey-bg-color;
+  height: fit-content;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $grey-bg-color;
+  }
+}

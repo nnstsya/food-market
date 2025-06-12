@@ -90,7 +90,7 @@
     </div>
 
     <div class="blogs__items flex gap-32">
-      <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage">
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage" [routerLink]="'/blogs/' + sortedBlogs[0].id">
         <div class="blogs__items__banner flex flex-column h-full gap-8">
           <h2 class="blogs__items__banner__heading bolder">{{ sortedBlogs[0].title }}</h2>
           <div class="blogs__items__banner__info gap-8 flex align-center">
@@ -101,7 +101,7 @@
         </div>
       </app-banner>
 
-      <app-blog-card [blog]="sortedBlogs[1]"></app-blog-card>
+      <app-blog-card [blog]="sortedBlogs[1]" [routerLink]="'/blogs/' + sortedBlogs[1].id"></app-blog-card>
 
       <div class="blogs__items__less-recent flex flex-column gap-32">
         <app-blog-card [blog]="sortedBlogs[2]" type="horizontal"></app-blog-card>

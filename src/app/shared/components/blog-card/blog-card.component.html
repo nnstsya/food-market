@@ -1,6 +1,6 @@
 @if (type() === 'vertical') {
-  <div class="card flex flex-column w-fit gap-24 transition-ease-out">
-    <img class="card__image w-full" [src]="blog().blogImage" [alt]="blog().title">
+  <div class="card flex flex-column w-fit gap-24 transition-ease-out" [routerLink]="'/blogs/' + blog().id">
+    <img class="card__image w-full" [src]="blog().blogImage" (error)="onImageError($event)" [alt]="blog().title">
 
     <div class="card__content flex flex-column gap-16">
       <div class="card__content__body flex flex-column gap-4">
@@ -12,10 +12,9 @@
         <p class="card__content__footer__info fs-14">{{ blog().date }}</p>
       </div>
     </div>
-
   </div>
 } @else {
-  <div class="card card-horizontal flex flex-row gap-16">
+  <div class="card card-horizontal flex flex-row gap-16" [routerLink]="'/blogs/' + blog().id">
     <div class="card__content flex flex-column">
       <div class="card__content__body flex flex-column gap-4">
         <p class="card__content__body__blog-title">{{ blog().title }}</p>
@@ -27,7 +26,7 @@
       </div>
     </div>
 
-    <img class="card__image card-horizontal__image" [src]="blog().blogImage" [alt]="blog().title">
+    <img class="card__image card-horizontal__image" [src]="blog().blogImage" (error)="onImageError($event)" [alt]="blog().title">
   </div>
 }
 

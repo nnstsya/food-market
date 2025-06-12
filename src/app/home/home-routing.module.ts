@@ -8,6 +8,7 @@ import { CheckoutComponent } from "@home/checkout/checkout.component";
 import { authGuard } from "@core/guards/auth.guard";
 import { checkoutGuard } from "@core/guards/checkout.guard";
 import { BlogsComponent } from "@home/blogs/blogs.component";
+import { BlogDetailComponent } from "@home/blogs/blog-detail/blog-detail.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'blogs',
         component: BlogsComponent
+      },
+      {
+        path: 'blogs/:id',
+        component: BlogDetailComponent
       },
       {
         path: 'homepage',

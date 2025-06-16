@@ -1,3 +1,11 @@
+export interface Response {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+  results: Product[];
+}
+
 export interface Product {
   id: string;
   name: string;

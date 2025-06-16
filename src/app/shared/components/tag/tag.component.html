@@ -1,9 +1,9 @@
-<div class="tag" [ngClass]="{
+<div class="tag w-fit flex align-center" [ngClass]="{
     'tag-closed': !visible,
     'green': color() === 'green',
     'gray': color() === 'gray'
  }">
-  <p class="tag__text" [ngClass]="{ 'green-text': color() === 'green', 'gray-text': color() === 'gray'}">
+  <p class="tag__text fs-12" [ngClass]="{ 'green-text': color() === 'green', 'gray-text': color() === 'gray'}">
     {{ text() }}
   </p>
 

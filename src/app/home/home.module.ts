@@ -15,6 +15,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductRecommendationsComponent } from './product-detail/product-recommendations/product-recommendations.component';
 import { RatingFilterComponent } from './filters/rating-filter/rating-filter.component';
 import { PriceFilterComponent } from './filters/price-filter/price-filter.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderSummaryComponent } from './checkout/order-summary/order-summary.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
+import { CommentsComponent } from './blogs/blog-detail/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { PriceFilterComponent } from './filters/price-filter/price-filter.compon
     ProductItemComponent,
     ProductRecommendationsComponent,
     RatingFilterComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    CheckoutComponent,
+    OrderSummaryComponent,
+    BlogsComponent,
+    BlogDetailComponent,
+    CommentsComponent
   ],
   imports: [
     HomeRoutingModule,

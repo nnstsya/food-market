@@ -9,4 +9,9 @@ import { Blog } from '@core/models/blog.model';
 export class BlogCardComponent {
   blog: InputSignal<Blog> = input.required<Blog>();
   type: InputSignal<'vertical' | 'horizontal'> = input<'vertical' | 'horizontal'>('vertical');
+
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/image-placeholder.jpg';
+  }
 }

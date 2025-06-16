@@ -4,6 +4,11 @@ import { HomeComponent } from './home.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CategoryComponent } from "@home/category/category.component";
 import { ProductDetailComponent } from "@home/product-detail/product-detail.component";
+import { CheckoutComponent } from "@home/checkout/checkout.component";
+import { authGuard } from "@core/guards/auth.guard";
+import { checkoutGuard } from "@core/guards/checkout.guard";
+import { BlogsComponent } from "@home/blogs/blogs.component";
+import { BlogDetailComponent } from "@home/blogs/blog-detail/blog-detail.component";
 
 const routes: Routes = [
   {
@@ -11,8 +16,21 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
+        path: 'blogs',
+        component: BlogsComponent
+      },
+      {
+        path: 'blogs/:id',
+        component: BlogDetailComponent
+      },
+      {
         path: 'homepage',
         component: HomePageComponent,
+      },
+      {
+        path: 'homepage/checkout',
+        component: CheckoutComponent,
+        canActivate: [authGuard(), checkoutGuard()],
       },
       {
         path: 'homepage/:category/:product',

@@ -5,7 +5,7 @@ import {
   OnInit,
   Signal,
   computed,
-  ViewChild
+  ViewChild, OnDestroy
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Category } from "@core/models/category.model";
@@ -25,7 +25,7 @@ type Range = { min: number; max: number };
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss'
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
   @ViewChild(PriceFilterComponent) priceFilter!: PriceFilterComponent;
 
   categoryName: string | null = null;
@@ -71,6 +71,10 @@ export class CategoryComponent implements OnInit {
         this.categoryName = null;
       }
     });
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('currentPages');
   }
 
   applyFilters(): void {

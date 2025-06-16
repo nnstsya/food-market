@@ -1,0 +1,11 @@
+<div class="recommendations flex flex-column gap-32">
+  <h3>Related topics</h3>
+
+  <div class="recommendations__blogs flex">
+    @if (recommendedBlogs$ | async; as recommendedBlogs) {
+      @for (blog of recommendedBlogs; track blog.id) {
+        <app-blog-card [blog]="blog"></app-blog-card>
+      }
+    }
+  </div>
+</div>

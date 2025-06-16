@@ -1,0 +1,37 @@
+<div class="comments flex flex-column gap-32">
+  <h3 class="comments__header bolder">Leave a reply</h3>
+  @if (isAuthorized) {
+    <div class="comments__form flex flex-column gap-24" [formGroup]="commentForm">
+      <app-input [multiline]="true"
+                 label="Comment"
+                 class="comment-input"
+                 formControlName="body"
+                 [formControl]="commentForm.controls['body']"
+                 placeholder="Space for your comments"
+      ></app-input>
+      <app-button
+        class="submit-button"
+        [disabled]="commentForm.invalid"
+        (click)="onSubmit()"
+      >
+        Send a comment
+      </app-button>
+    </div>
+  }
+
+  @if (item().comments.length > 0) {
+    <h3 class="comments__header bolder left">Comments</h3>
+
+    <div class="flex flex-column gap-16">
+      @for (comment of item().comments; track item().id) {
+        <div class="comments__card flex flex-column gap-14">
+          <div class="flex flex-column">
+            <p class="bolder fs-12">{{ comment.author }}</p>
+            <p class="light comments__card-date fs-12">{{ comment.date }}</p>
+          </div>
+          <p class="fs-14">{{ comment.body }}</p>
+        </div>
+      }
+    </div>
+  }
+</div>

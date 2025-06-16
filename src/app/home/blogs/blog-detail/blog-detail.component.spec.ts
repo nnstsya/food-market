@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Location, NgOptimizedImage } from '@angular/common';
 import { BlogDetailComponent } from './blog-detail.component';
 import { blogData } from "@core/mocks/blogs";
 import { SharedModule } from "@shared/shared.module";
+import { CommentsComponent } from "@home/blogs/blog-detail/comments/comments.component";
 
 describe('BlogDetailComponent', () => {
   let component: BlogDetailComponent;
@@ -14,8 +15,12 @@ describe('BlogDetailComponent', () => {
     mockRouter = { navigate: jest.fn() } as any;
 
     await TestBed.configureTestingModule({
-      declarations: [BlogDetailComponent],
-      imports: [SharedModule, NgOptimizedImage],
+      declarations: [BlogDetailComponent, CommentsComponent],
+      imports: [
+        SharedModule,
+        NgOptimizedImage,
+        RouterModule
+      ],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '1' } } } },
         { provide: Router, useValue: mockRouter },

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from "@shared/shared.module";
 import { blogData } from "@core/mocks/blogs";
 import { BlogsComponent } from "@home/blogs/blogs.component";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
@@ -10,7 +11,19 @@ describe('BlogsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BlogsComponent],
-      imports: [SharedModule],
+      imports: [SharedModule, RouterModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '1'
+              }
+            }
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BlogsComponent);
@@ -26,7 +39,7 @@ describe('BlogsComponent', () => {
     component.blogs = blogData;
     component.getSortedBlogs();
 
-    expect(component.allDisplayedBlogs[0].date).toBe('17.6.2020');
+    expect(component.allDisplayedBlogs[0].date).toBe('04.06.2025');
   });
 
   it('should separate main blogs and remaining blogs correctly', () => {
@@ -68,3 +81,4 @@ describe('BlogsComponent', () => {
     expect(component.totalQuantity).toBe(blogData.length - 2);
   });
 });
+

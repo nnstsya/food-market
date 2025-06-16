@@ -19,6 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSummaryComponent } from './checkout/order-summary/order-summary.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
+import { CommentsComponent } from './blogs/blog-detail/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
     CheckoutComponent,
     OrderSummaryComponent,
     BlogsComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    CommentsComponent
   ],
   imports: [
     HomeRoutingModule,

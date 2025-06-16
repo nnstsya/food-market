@@ -1,0 +1,21 @@
+.page {
+  padding: 16px 45px;
+
+  &__content {
+    &__blogs {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.banner {
+  justify-content: end;
+
+  &__info {
+    &__avatar {
+      height: 32px;
+      width: 32px;
+      object-fit: cover;
+    }
+  }
+}

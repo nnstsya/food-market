@@ -1,0 +1,56 @@
+<div class="page flex flex-column gap-48">
+  <app-banner [gradientPosition]="'bottom'" [imageUrl]="blog.blogImage" class="blog-detail__banner">
+    <div class="banner flex h-full gap-48 justify-center">
+      <div class="flex gap-64">
+        <div class="flex flex-column gap-12 banner__meta">
+          <p class="fs-14">Date:</p>
+          <p class="fs-14">Author:</p>
+        </div>
+        <div class="flex flex-column gap-12 banner__meta">
+          <p class="fs-14">{{ blog.date }}</p>
+          <p class="fs-14 banner__meta__author">{{ blog.author }}</p>
+        </div>
+      </div>
+      <h1 class="banner__heading bolder">{{ blog.title }}</h1>
+    </div>
+  </app-banner>
+
+  <div class="flex gap-32 justify-center page__container">
+    <div class="flex align-center gap-8 page__nav cursor-pointer" (click)="onBackToBlogList()">
+      <img ngSrc="assets/icons/ic-directions-left.svg" width="16" height="16" alt="back">
+      <span class="page__nav__text">Back to Blog</span>
+    </div>
+
+    <div class="page__content flex flex-column gap-32 w-full">
+      <article class="blog-article">
+        <div class="blog-article__content" [innerHTML]="blog.article"></div>
+      </article>
+
+      <div class="social-share flex space-between align-center">
+        <h3 class="social-share__heading fs-16 bolder">Share</h3>
+        <div class="social-share__buttons flex gap-16">
+          <div class="social-share__button flex align-center gap-8 cursor-pointer">
+            <img ngSrc="assets/icons/ic-facebook.svg" width="16" height="16" alt="Facebook">
+            <p class="fs-14 bold">Facebook</p>
+          </div>
+          <div class="social-share__button flex align-center gap-8 cursor-pointer">
+            <img ngSrc="assets/icons/ic-pinterest.svg" width="16" height="16" alt="Pinterest">
+            <p class="fs-14 bold">Pinterest</p>
+          </div>
+          <div class="social-share__button flex align-center gap-8 cursor-pointer">
+            <img ngSrc="assets/icons/ic-twitter.svg" width="16" height="16" alt="Twitter">
+            <p class="fs-14 bold">Twitter</p>
+          </div>
+          <div class="social-share__button flex align-center gap-8 cursor-pointer">
+            <img ngSrc="assets/icons/ic-linkedin.svg" width="16" height="16" alt="LinkedIn">
+            <p class="fs-14 bold">LinkedIn</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-comments [item]="blog" class="flex justify-center"></app-comments>
+
+  <app-blog-recommendations></app-blog-recommendations>
+</div>

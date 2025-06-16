@@ -74,6 +74,10 @@ export class ShoppingCartService {
     });
   }
 
+  clear(): void {
+    localStorage.removeItem('shoppingCart');
+  }
+
   canIncreaseQuantity(productId: string, increment: number = 1): boolean {
     const item = this.state().find(item => item.product.id === productId);
     if (!item) return true;

@@ -1,0 +1,26 @@
+<div class="page flex flex-column gap-96">
+  <div class="flex gap-32">
+    @for (mainBlog of mainBlogs; track mainBlog.id) {
+      <app-banner [gradientPosition]="'bottom'" [imageUrl]="mainBlog.blogImage" [routerLink]="'/blogs/' + mainBlog.id">
+        <div class="banner flex flex-column h-full gap-8">
+          <h2 class="banner__heading bolder">{{ mainBlog.title }}</h2>
+          <div class="banner__info gap-8 flex align-center">
+            <img class="banner__info__avatar rounded-full" [src]="mainBlog.authorAvatar" [alt]="mainBlog.author">
+            <p class="banner__info__details flex gap-16 fs-16">{{ mainBlog.author }}</p>
+            <p class="banner__info__details flex gap-16 fs-16">{{ mainBlog.date }}</p>
+          </div>
+        </div>
+      </app-banner>
+    }
+  </div>
+
+  <div class="flex gap-32">
+    <div class="page__content__blogs flex w-full gap-32">
+      @for (blog of displayedBlogs; track blog.id) {
+        <app-blog-card [blog]="blog"></app-blog-card>
+      }
+    </div>
+  </div>
+
+  <app-pagination itemName="blogs" [totalItems]="totalQuantity" [itemsPerPage]="blogsPerPage" (pageChanged)="onSelectedPagesChange($event)"></app-pagination>
+</div>

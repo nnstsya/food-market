@@ -30,7 +30,7 @@
 
             <div class="page__top-bar__actions__item flex align-center gap-4">
               <app-tag [text]="productsQuantity"></app-tag>
-              <p class="page__top-bar__actions__text">Products</p>
+              <p class="page__top-bar__actions__text fs-12">Products</p>
             </div>
           </div>
       </div>
@@ -80,7 +80,7 @@
           <app-rating-filter [ratings]="ratings()" (filterChanged)="onFilterChange($event)"></app-rating-filter>
 
           <app-price-filter [priceRange]="priceRange()" (filterChanged)="onPriceRangeChange($event)"></app-price-filter>
-          
+
           <div class="page__content__filters__buttons flex">
             <app-button (click)="applyFilters()">Apply</app-button>
             <p class="page__content__filters__buttons__reset-button flex flex-center fs-16 bolder"

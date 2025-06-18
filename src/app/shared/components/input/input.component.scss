@@ -4,12 +4,9 @@
   background: none;
   flex: 1;
   border: none;
-  width: 100%;
 
   &-wrapper {
     background-color: $light-bg-color;
-    display: flex;
-    align-items: center;
     padding: 12px 12px 12px 16px;
   }
 
@@ -20,10 +17,6 @@
   &-border {
     border-radius: 12px;
     border: 1.5px solid $border-color;
-  }
-
-  &-label {
-    font-size: 14px;
   }
 
   &:focus {

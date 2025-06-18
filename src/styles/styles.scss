@@ -1,24 +1,4 @@
 @use "variables";
 @use "typography";
 @use "base";
-
-.skeleton-loader {
-  animation: shimmer 1.5s infinite;
-  background: linear-gradient(
-      to right,
-      variables.$light-grey-bg-color 0%,
-      variables.$light-bg-color 50%,
-      variables.$light-grey-bg-color 100%
-  );
-  background-size: 200% 100%;
-  border-radius: 4px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
+@use "shared";

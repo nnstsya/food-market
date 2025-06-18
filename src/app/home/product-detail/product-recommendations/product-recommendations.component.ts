@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from "@home/services/products.service";
-import { Product } from "@core/models/product.model";
+import { Product, Response } from "@core/models/product.model";
 import { ActivatedRoute } from "@angular/router";
-import { map, Observable, of } from "rxjs";
+import { map, Observable, of, switchMap } from "rxjs";
 
 @Component({
   selector: 'app-product-recommendations',
   templateUrl: './product-recommendations.component.html',
-  styleUrl: './product-recommendations.component.scss'
+  styleUrl: './product-recommendations.component.scss',
+  standalone: false
 })
 export class ProductRecommendationsComponent implements OnInit {
   recommendedProducts$: Observable<Product[]> = of([]);
@@ -16,14 +17,16 @@ export class ProductRecommendationsComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    const currentProductId: string = this.route.snapshot.queryParamMap.get('id')!;
-    this.loadRecommendations(currentProductId);
+    this.recommendedProducts$ = this.route.queryParamMap.pipe(
+      map(params => params.get('id')!),
+      switchMap((currentProductId: string) => this.loadRecommendations(currentProductId))
+    );
   }
 
-  private loadRecommendations(currentProductId: string): void {
-    this.recommendedProducts$ = this.productService.getProducts().pipe(
-      map((products: Product[]): Product[] => {
-        const filteredProducts: Product[] = products.filter((p: Product) => p.id !== currentProductId);
+  private loadRecommendations(currentProductId: string): Observable<Product[]> {
+    return this.productService.getProducts().pipe(
+      map((res: Response) => {
+        const filteredProducts = res.results.filter((p: Product) => p.id !== currentProductId);
         return this.getRandomProducts(filteredProducts, 4);
       })
     );

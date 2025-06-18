@@ -1,7 +1,7 @@
-<div class="recommendations">
+<div class="recommendations flex flex-column gap-32">
   <h3>Related products</h3>
 
-  <div class="recommendations__products">
+  <div class="recommendations__products flex gap-32">
     @if (recommendedProducts$ | async; as recommendedProducts) {
       @for (product of recommendedProducts; track product.id) {
         <app-product-card [product]="product"></app-product-card>

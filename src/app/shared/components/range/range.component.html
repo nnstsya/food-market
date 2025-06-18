@@ -1,8 +1,8 @@
-<div class="slider__container">
-    <div class="slider__wrapper">
+<div class="slider__container flex flex-column gap-16">
+    <div class="slider__wrapper relative">
         <input
                 type="range"
-                class="slider min-slider"
+                class="slider min-slider w-full absolute"
                 [min]="min()"
                 [max]="maxValue - step()"
                 [step]="step()"
@@ -13,7 +13,7 @@
 
         <input
                 type="range"
-                class="slider max-slider"
+                class="slider max-slider w-full absolute"
                 [min]="minValue + step()"
                 [max]="max()"
                 [step]="step()"
@@ -22,16 +22,17 @@
                 [style.width.%]="maxSliderWidth"
         />
 
-        <div class="slider__track slider__track-inactive"></div>
-        <div class="slider__track" [style.left.%]="trackLeft" [style.width.%]="trackWidth"></div>
+        <div class="slider__track absolute slider__track-inactive w-full"></div>
+        <div class="slider__track absolute" [style.left.%]="trackLeft" [style.width.%]="trackWidth"></div>
     </div>
 
-    <div class="inputs">
+    <div class="inputs flex space-between align-center">
         <app-input class="inputs__item"
                    [label]="'Min'"
                    [placeholder]="''"
                    [type]="'number'"
-                   [(ngModel)]="minInputValue"
+                   [ngModel]="minInputValue"
+                   (ngModelChange)="minInputValue = $event"
                    (blur)="handleInputChange('min')">
         </app-input>
         <p class="inputs__separator">-</p>
@@ -39,7 +40,8 @@
                    [label]="'Max'"
                    [placeholder]="''"
                    [type]="'number'"
-                   [(ngModel)]="maxInputValue"
+                   [ngModel]="maxInputValue"
+                   (ngModelChange)="maxInputValue = $event"
                    (blur)="handleInputChange('max')">
         </app-input>
     </div>

@@ -2,16 +2,10 @@
 
 .btn {
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
   gap: 2px;
-  justify-content: center;
   border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease-out;
-  width: 100%;
 
   &:disabled {
     border: 2px solid $grey-bg-color;

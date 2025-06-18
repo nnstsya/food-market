@@ -24,8 +24,8 @@ export class ProductRecommendationsComponent implements OnInit {
 
   private loadRecommendations(currentProductId: string): Observable<Product[]> {
     return this.productService.getProducts().pipe(
-      map((response: Response) => {
-        const filteredProducts = response.results.filter((p: Product) => p.id !== currentProductId);
+      map((res: Response) => {
+        const filteredProducts = res.results.filter((p: Product) => p.id !== currentProductId);
         return this.getRandomProducts(filteredProducts, 4);
       })
     );

@@ -10,6 +10,7 @@ export interface Option {
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
+  standalone: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -28,26 +29,24 @@ export class DropdownComponent implements ControlValueAccessor {
   selectedOption: string | null = null;
   isDropdownOpen: boolean = false;
 
-  private onChange: (value: string) => void = () => {};
+  private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
-    this.onTouched();
   }
 
   selectOption(option: Option) {
     this.selectedOption = option.title;
     this.isDropdownOpen = false;
     this.optionSelected.emit(option);
-    this.onChange(option.title);
   }
 
   writeValue(value: string): void {
     this.selectedOption = value || null;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: boolean) => void): void {
     this.onChange = fn;
   }
 

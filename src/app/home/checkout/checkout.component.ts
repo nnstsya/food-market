@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Option } from "@shared/components/dropdown/dropdown.component";
 import { countryOptions } from "@core/mocks/countries";
 import { User } from "@auth/models/user.model";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -12,6 +13,10 @@ import { User } from "@auth/models/user.model";
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   countryOptions: Option[] = countryOptions;
+  formSubmitted = false;
+  orderId: number = 0;
+
+  private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
 
   shippingMethods = [
     { value: 'fedex', label: 'FedEx', additionalText: 'Additional price', iconUrl: 'assets/icons/ic-fedex.svg' },
@@ -50,18 +55,15 @@ export class CheckoutComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]{1,250}$/)
       ]],
-      state: ['', [
+      country: ['', [
         Validators.required,
-        Validators.pattern(/^[A-Za-z\s]{1,250}$/)
       ]],
       zipCode: ['', [
         Validators.required,
         Validators.pattern(/^[A-Za-z0-9]{1,9}$/)
       ]],
-
       shippingMethod: ['fedex', Validators.required],
       paymentMethod: ['credit', Validators.required],
-
       cardNumber: ['', [
         Validators.required,
         Validators.pattern(/^[0-9]{16}$/)
@@ -77,7 +79,14 @@ export class CheckoutComponent implements OnInit {
       cvc: ['', [
         Validators.required,
         Validators.pattern(/^[0-9]{3}$/)
-      ]]
+      ]],
+      orderNotes: ['', [
+      Validators.maxLength(500)
+      ]],
+      acceptTerms: [false, [
+      Validators.requiredTrue
+      ]],
+      confirmOrder: [false]
     });
   }
 
@@ -87,8 +96,8 @@ export class CheckoutComponent implements OnInit {
 
   prefillFormData() {
     const storedUserData: User | null = localStorage.getItem('user')
-        ? JSON.parse(localStorage.getItem('user') || '{}')
-        : null;
+      ? JSON.parse(localStorage.getItem('user') || '{}')
+      : null;
 
     if (storedUserData) {
       this.checkoutForm.get('firstName')?.setValue(storedUserData.firstName);
@@ -96,6 +105,10 @@ export class CheckoutComponent implements OnInit {
       this.checkoutForm.get('email')?.setValue(storedUserData.email);
       this.checkoutForm.get('phoneNumber')?.setValue(storedUserData.phoneNumber);
     }
+  }
+
+  onCountryChange(value: string) {
+    this.checkoutForm.get('country')?.setValue(value);
   }
 
   onShippingMethodChange(value: string): void {
@@ -109,5 +122,13 @@ export class CheckoutComponent implements OnInit {
   isPaymentMethodEnabled(methodValue: string): boolean {
     const method = this.paymentMethods.find(m => m.value === methodValue);
     return method ? method.enabled : false;
+  }
+
+  submitForm(): void {
+    if (this.checkoutForm.valid) {
+      this.orderId = Date.now();
+      this.formSubmitted = true;
+      this.shoppingCartService.clear();
+    }
   }
 }

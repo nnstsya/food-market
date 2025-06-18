@@ -1,57 +1,26 @@
 @use "../../../styles/variables" as *;
 
 .page {
-  display: flex;
-  flex-direction: column;
-
   &__top-bar {
     padding-inline: 45px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
 
     &__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       padding-block: 8px;
     }
 
     &__actions {
-      gap: 24px;
-      display: flex;
-
-      &__item {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-      }
-
       &__text {
         color: $secondary-color;
-        font-size: 12px;
       }
     }
 
     &__filters {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      gap: 16px;
-
       &__items {
-        display: flex;
-        gap: 16px;
-
         &-active {
-          align-items: center;
-          display: flex;
           flex-wrap: wrap;
-          gap: 12px;
 
           &-text {
             color: $secondary-color;
-            font-size: 14px;
             font-weight: 500;
           }
         }
@@ -61,36 +30,17 @@
 
   &__content {
     padding: 64px 45px;
-    display: flex;
-    gap: 32px;
 
     &-text {
       margin-inline: auto;
       color: $secondary-color;
     }
 
-    &__products {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      width: 100%;
-    }
-
     &__filters {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-
       &__buttons {
-        display: flex;
         gap: 46px;
 
         &__reset-button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          font-size: 16px;
           cursor: pointer;
           color: $secondary-color;
           transition: color 0.2s ease-out;
@@ -104,10 +54,7 @@
   }
 
   &__category-text {
-    align-self: center;
-    justify-self: center;
     color: $secondary-color;
-    width: 100%;
     text-align: center;
   }
 }
@@ -135,7 +82,6 @@
   height: 48px;
   border: 5px solid $border-color;
   border-bottom-color: transparent;
-  border-radius: 50%;
   align-self: center;
   display: inline-block;
   box-sizing: border-box;

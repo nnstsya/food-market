@@ -2,17 +2,25 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "@shared/shared.module";
+import { ShoppingCartService } from "@home/services/shopping-cart.service";
+import { OrderSummaryComponent } from "@home/checkout/order-summary/order-summary.component";
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
   let fixture: ComponentFixture<CheckoutComponent>;
+  let cartService: jest.Mocked<ShoppingCartService>;
 
   beforeEach(async () => {
+    cartService = {
+      clear: jest.fn()
+    } as any;
+
     await TestBed.configureTestingModule({
-      declarations: [
-        CheckoutComponent
-      ],
-      imports: [ReactiveFormsModule, SharedModule]
+      declarations: [CheckoutComponent, OrderSummaryComponent],
+      imports: [ReactiveFormsModule, SharedModule],
+      providers: [
+        { provide: ShoppingCartService, useValue: cartService }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CheckoutComponent);
@@ -32,15 +40,16 @@ describe('CheckoutComponent', () => {
       expect(component.checkoutForm.get('phoneNumber')?.value).toBe('');
       expect(component.checkoutForm.get('address')?.value).toBe('');
       expect(component.checkoutForm.get('city')?.value).toBe('');
-      expect(component.checkoutForm.get('state')?.value).toBe('');
+      expect(component.checkoutForm.get('country')?.value).toBe('');
       expect(component.checkoutForm.get('zipCode')?.value).toBe('');
     });
 
-    it('should have all fields as required', () => {
-      const controls = component.checkoutForm.controls;
-      Object.keys(controls).forEach(key => {
-        const control = component.checkoutForm.get(key);
+    it('should have required fields marked as required', () => {
+      const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'address', 'city', 'country', 'zipCode'];
+      requiredFields.forEach(field => {
+        const control = component.checkoutForm.get(field);
         control?.setValue('');
+        control?.markAsTouched();
         expect(control?.errors?.['required']).toBeTruthy();
       });
     });
@@ -124,6 +133,11 @@ describe('CheckoutComponent', () => {
       expect(component.countryOptions).toBeDefined();
       expect(Array.isArray(component.countryOptions)).toBeTruthy();
       expect(component.countryOptions.length).toBeGreaterThan(0);
+    });
+
+    it('should update country when changed', () => {
+      component.onCountryChange('Ukraine');
+      expect(component.checkoutForm.get('country')?.value).toBe('Ukraine');
     });
   });
 
@@ -229,17 +243,72 @@ describe('CheckoutComponent', () => {
         phoneNumber: '1234567890',
         address: '123 Main St',
         city: 'New York',
-        state: 'New York',
+        country: 'US',
         zipCode: '10001',
         shippingMethod: 'fedex',
         paymentMethod: 'credit',
         cardNumber: '1234567890123456',
         cardHolder: 'John Doe',
         expirationDate: '01/12/25',
-        cvc: '123'
+        cvc: '123',
+        acceptTerms: true,
+        confirmOrder: true
       });
 
       expect(component.checkoutForm.valid).toBeTruthy();
+    });
+  });
+
+  describe('Form Submission', () => {
+    beforeEach(() => {
+      // Fill form with valid data
+      component.checkoutForm.patchValue({
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
+        phoneNumber: '1234567890',
+        address: '123 Main St',
+        city: 'New York',
+        country: 'US',
+        zipCode: '10001',
+        shippingMethod: 'fedex',
+        paymentMethod: 'credit',
+        cardNumber: '1234567890123456',
+        cardHolder: 'John Doe',
+        expirationDate: '01/12/25',
+        cvc: '123',
+        acceptTerms: true,
+        confirmOrder: true
+      });
+    });
+
+    it('should generate order ID on form submission', () => {
+      const now = 1234567890;
+      jest.spyOn(Date, 'now').mockImplementation(() => now);
+
+      component.submitForm();
+
+      expect(component.orderId).toBe(now);
+      expect(component.formSubmitted).toBeTruthy();
+    });
+
+    it('should clear shopping cart on successful submission', () => {
+      component.submitForm();
+
+      expect(cartService.clear).toHaveBeenCalled();
+    });
+
+    it('should not submit if form is invalid', () => {
+      component.checkoutForm.get('acceptTerms')?.setValue(false);
+      component.checkoutForm.markAsTouched();
+
+      // Mock form validity
+      jest.spyOn(component.checkoutForm, 'valid', 'get').mockReturnValue(false);
+
+      component.submitForm();
+
+      expect(cartService.clear).not.toHaveBeenCalled();
+      expect(component.formSubmitted).toBeFalsy();
     });
   });
 });

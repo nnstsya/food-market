@@ -1,10 +1,23 @@
 @use "../../../../styles/variables" as *;
 
 .checkbox-wrapper {
-  display: flex;
-  align-items: center;
   cursor: pointer;
-  gap: 8px;
+
+  &-with-background {
+    background-color: $light-bg-color;
+    padding: 12px 12px 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid $border-color;
+  }
+
+  &-with-background {
+    background-color: $light-bg-color;
+    display: flex;
+    align-items: center;
+    padding: 12px 12px 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid $border-color;
+  }
 
   &-with-background {
     background-color: $light-bg-color;
@@ -25,18 +38,11 @@
     height: 24px;
     border: 2px solid $border-color;
     border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 
     &.checked {
       background-color: $primary-color;
       border: 2px solid $primary-color-dark;
     }
-  }
-
-  .checkbox-label {
-    font-size: 14px;
   }
 }

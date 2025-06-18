@@ -1,11 +1,8 @@
 @use "../../../../styles/variables" as *;
 
 .filter {
-  align-items: center;
   background-color: $light-bg-color;
   border-radius: $border-radius;
   border: 1px solid $border-color;
-  display: flex;
-  gap: 8px;
   padding: 11px 18px;
 }

@@ -3,7 +3,8 @@ import { Component, input, InputSignal, output, OutputEmitterRef } from '@angula
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.scss'
+  styleUrl: './filter.component.scss',
+  standalone: false
 })
 export class FilterComponent {
   label: InputSignal<string> = input.required<string>();

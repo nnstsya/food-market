@@ -1,16 +1,16 @@
-<div class="radio-wrapper" [class.disabled]="disabled()" [class.checked]="checked" (click)="onRadioChange()">
-  <div class="radio-control">
-    <div class="radio-button" [class.checked]="checked">
+<div class="radio-wrapper transition-ease-out flex flex-column align-center w-full" [class.disabled]="disabled()" [class.checked]="checked" (click)="onRadioChange()">
+  <div class="radio-control flex align-center w-full">
+    <div class="radio-button rounded-full flex flex-center" [class.checked]="checked">
       @if (checked) {
-        <div class="radio-inner"></div>
+        <div class="radio-inner rounded-full"></div>
       }
     </div>
 
-    <div class="radio-content">
-      <span class="radio-label">{{ label() }}</span>
+    <div class="radio-content flex relative justify-center align-center">
+      <span class="radio-label fs-14 bolder">{{ label() }}</span>
 
       @if (additionalText()) {
-        <span class="radio-additional">{{ additionalText() }}</span>
+        <span class="radio-additional fs-14">{{ additionalText() }}</span>
       }
 
       @if (iconUrl()) {
@@ -20,7 +20,7 @@
   </div>
 
   @if (checked) {
-    <div class="radio-expandable-content">
+    <div class="radio-expandable-content w-full">
       <ng-content></ng-content>
     </div>
   }

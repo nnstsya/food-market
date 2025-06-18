@@ -3,7 +3,7 @@
 }
 
 <div class="input-wrapper" [ngClass]="{ 'input-border': border(), 'error': errorState() }">
-  @if (multiline()) {
+  @if (type() === "textarea") {
     <textarea
       class="input"
       [value]="value"

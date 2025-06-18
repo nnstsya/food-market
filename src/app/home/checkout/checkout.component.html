@@ -144,7 +144,7 @@
           class="order-notes"
           formControlName="orderNotes"
           label="Order notes"
-          [multiline]="true"
+          type="textarea"
           placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
           [errorState]="!!(checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched)"
         >

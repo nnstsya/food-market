@@ -19,10 +19,9 @@ export class InputComponent implements ControlValueAccessor {
   iconUrl: InputSignal<string> = input<string>('');
   border: InputSignal<boolean> = input<boolean>(true);
   errorState: InputSignal<boolean> = input<boolean>(false);
-  type: InputSignal<'password' | 'email' | 'text' | 'number'> = input<'password' | 'email' | 'text' | 'number'>('text');
+  type: InputSignal<'password' | 'email' | 'text' | 'number' | 'textarea'> = input<'password' | 'email' | 'text' | 'number' | 'textarea'>('text');
   min: InputSignal<number> = input<number>(-Infinity);
   max: InputSignal<number> = input<number>(Infinity);
-  multiline: InputSignal<boolean> = input<boolean>(false);
 
   blur: OutputEmitterRef<void> = output<void>();
   iconClicked: OutputEmitterRef<void> = output<void>();

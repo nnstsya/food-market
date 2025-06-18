@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from "@home/services/products.service";
-import { Product } from "@core/models/product.model";
+import { Product, Response } from "@core/models/product.model";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable, of, switchMap } from "rxjs";
 
@@ -24,8 +24,8 @@ export class ProductRecommendationsComponent implements OnInit {
 
   private loadRecommendations(currentProductId: string): Observable<Product[]> {
     return this.productService.getProducts().pipe(
-      map((products: Product[]) => {
-        const filteredProducts = products.filter((p: Product) => p.id !== currentProductId);
+      map((response: Response) => {
+        const filteredProducts = response.results.filter((p: Product) => p.id !== currentProductId);
         return this.getRandomProducts(filteredProducts, 4);
       })
     );

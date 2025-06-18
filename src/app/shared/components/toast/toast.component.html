@@ -1,0 +1,5 @@
+@if (visible()) {
+  <div class="toast" [class]="toast()?.type">
+    <p class="toast__message">{{ toast()?.message }}</p>
+  </div>
+}

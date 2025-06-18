@@ -79,15 +79,15 @@
         </div>
 
         <div class="product__actions flex w-full gap-16">
-          @if (checkIfInWishList(product)) {
-            <div class="product__actions__item gap-6 transition-ease-out flex align-center w-fit" (click)="removeFromWishList(product)">
-              <img ngSrc="assets/icons/ic-actions-heart-filled-red.svg" width="18" height="18"/>
-              <p class="product__actions__item-text bolder">Added to wishlist</p>
-            </div>
-          } @else {
+          @if (!isAuthenticated || !isInWishlist) {
             <div class="product__actions__item gap-6 transition-ease-out flex align-center w-fit" (click)="addToWishList(product)">
               <img ngSrc="assets/icons/ic-actions-heart-red.svg" width="18" height="18"/>
               <p class="product__actions__item-text bolder">Add to my wishlist</p>
+            </div>
+          } @else {
+            <div class="product__actions__item gap-6 transition-ease-out flex align-center w-fit" (click)="removeFromWishList(product)">
+              <img ngSrc="assets/icons/ic-actions-heart-filled-red.svg" width="18" height="18"/>
+              <p class="product__actions__item-text bolder">Added to wishlist</p>
             </div>
           }
           <div class="product__actions__item gap-6 transition-ease-out flex align-center w-fit">

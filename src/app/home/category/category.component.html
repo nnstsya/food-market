@@ -82,7 +82,7 @@
           <app-price-filter [priceRange]="priceRange()" (filterChanged)="onPriceRangeChange($event)"></app-price-filter>
 
           <div class="page__content__filters__buttons flex">
-            <app-button (click)="applyFilters()">Apply</app-button>
+            <app-button (click)="onFiltersApply()">Apply</app-button>
             <p class="page__content__filters__buttons__reset-button flex flex-center fs-16 bolder"
                (click)="onResetFilters()">
               Reset
@@ -105,7 +105,13 @@
         </div>
       </div>
 
-      <app-pagination itemName="products" [totalItems]="productsQuantity" [itemsPerPage]="productsPerPage" (pageChanged)="onSelectedPagesChange($event)"></app-pagination>
+      <app-pagination
+        itemName="products"
+        [totalItems]="productsQuantity"
+        [itemsPerPage]="productsPerPage"
+        [resetPages]="shouldResetPages"
+        (pageChanged)="onSelectedPagesChange($event)">
+      </app-pagination>
     </div>
   } @else {
     <div class="page flex flex-column">

@@ -19,6 +19,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { RangeComponent } from './components/range/range.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { RadioInputComponent } from './components/radio-input/radio-input.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RadioInputComponent } from './components/radio-input/radio-input.compon
     TabsComponent,
     FilterComponent,
     RangeComponent,
+    ToastComponent,
     RadioInputComponent
   ],
   imports: [
@@ -65,7 +67,8 @@ import { RadioInputComponent } from './components/radio-input/radio-input.compon
     TabsComponent,
     FilterComponent,
     RangeComponent,
-    RadioInputComponent
+    RadioInputComponent,
+    ToastComponent
   ]
 })
 export class SharedModule {}

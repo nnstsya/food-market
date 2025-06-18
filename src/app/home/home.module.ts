@@ -17,6 +17,7 @@ import { RatingFilterComponent } from './filters/rating-filter/rating-filter.com
 import { PriceFilterComponent } from './filters/price-filter/price-filter.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSummaryComponent } from './checkout/order-summary/order-summary.component';
+import { CoreModule } from "@core/core.module";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { OrderSummaryComponent } from './checkout/order-summary/order-summary.co
     NgClass,
     ReactiveFormsModule,
     FormsModule,
-    DecimalPipe
+    DecimalPipe,
+    CoreModule
   ],
   exports: [
     ShoppingCartComponent

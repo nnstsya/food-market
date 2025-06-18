@@ -22,28 +22,21 @@ export class ShoppingCartService {
   addToCart(product: Product, quantity: number = 1): void {
     this.state.update((state: ProductCart[]) => {
       const existingItem: ProductCart | undefined = state.find(item => item.product.id === product.id);
+      const normalizedQuantity = Math.min(quantity, product.maxKgs);
 
       if (existingItem) {
-        const newQuantity: number = Math.min(
-          existingItem.quantity + quantity,
-          product.maxKgs
-        );
-
-        if (existingItem.quantity >= product.maxKgs) {
-          return state;
-        }
-
-        const updatedItems: ProductCart[] = state.map(item =>
-          item.product.id === product.id
-            ? { ...item, quantity: newQuantity }
-            : item
-        );
-
-        this.saveCart(updatedItems);
-        return updatedItems;
+        const newItems = state.map(item => {
+          if (item.product.id === product.id) {
+            const newQuantity = Math.min(item.quantity + normalizedQuantity, product.maxKgs);
+            return { ...item, quantity: newQuantity };
+          }
+          return item;
+        });
+        this.saveCart(newItems);
+        return newItems;
       }
 
-      const newItems: ProductCart[] = [...state, { product, quantity: Math.min(quantity, product.maxKgs) }];
+      const newItems: ProductCart[] = [...state, { product, quantity: normalizedQuantity }];
       this.saveCart(newItems);
       return newItems;
     });
@@ -79,7 +72,7 @@ export class ShoppingCartService {
   }
 
   canIncreaseQuantity(productId: string, increment: number = 1): boolean {
-    const item = this.state().find(item => item.product.id === productId);
+    const item = this.items().find(item => item.product.id === productId);
     if (!item) return true;
     return (item.quantity + increment) <= item.product.maxKgs;
   }

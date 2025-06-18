@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '@home/services/products.service';
-import { map } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { BuyBy, Product } from "@core/models/product.model";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -21,10 +21,12 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
-  buyByOptions: Option[] = buyByOptions;
+  buyByOptions: Option[] = [];
   quantity: number = 1;
+  isAuthenticated: boolean = !!localStorage.getItem('user');
+  isInWishlist: boolean = false;
 
-  private productService: ProductsService = inject(ProductsService);
+  private productsService: ProductsService = inject(ProductsService);
   private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private destroyRef: DestroyRef = inject(DestroyRef);
@@ -42,10 +44,12 @@ export class ProductDetailComponent implements OnInit {
     this.route.queryParamMap.pipe(
       switchMap(params => {
         const productId: string = params.get('id')!;
-        return this.productService.getProductById(productId).pipe(
+        return this.productsService.getProductById(productId).pipe(
           map((product: Product) => {
             this.product = product;
             this.updateBuyByOptions();
+            this.checkIfInWishList(this.product!).subscribe();
+
             return this.product;
           })
         )
@@ -55,7 +59,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getRatingArray(rate: number): number[] {
-    return [1, 1, 1, 1, 1].fill(0, Math.floor(rate), 5);
+    return [1, 1, 1, 1, 1].fill(0, Math.round(rate), 5);
   }
 
   onImageError(event: Event): void {
@@ -64,19 +68,33 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToWishList(product: Product): void {
-    this.productService.addToWishList(product);
+    this.productsService.addToWishList(product.id).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
+
+    this.isInWishlist = true;
   }
 
   removeFromWishList(product: Product): void {
-    this.productService.removeFromWishList(product);
+    this.productsService.removeFromWishList(product.id).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
+
+    this.isInWishlist = false;
   }
 
-  checkIfInWishList(product: Product): boolean {
-    return this.productService.getWishList().some((wishListProduct: Product) => product.id === wishListProduct.id);
+  checkIfInWishList(product: Product): Observable<boolean> {
+    return this.productsService.getWishList().pipe(
+      map(wishList => wishList.results.some((wishListProduct: Product) => product.id === wishListProduct.id)),
+      tap((result: boolean) => this.isInWishlist = result),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   getFormattedCategory(category: string): string {
-    return categoriesData[category.toUpperCase() as keyof typeof Category];
+    if (!category) return '';
+    const formattedCategory = categoriesData[category.toUpperCase() as keyof typeof Category];
+    return formattedCategory || '';
   }
 
   getFormattedStock(stock: string): string {
@@ -92,7 +110,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getUrlCategoryName(title: string): string {
-   return this.getFormattedCategory(title).split(' ').join('').toLowerCase();
+    if (!title) return '';
+    const formattedCategory = this.getFormattedCategory(title);
+    return formattedCategory ? formattedCategory.split(' ').join('').toLowerCase() : '';
   }
 
   addToCart(): void {
@@ -111,3 +131,4 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 }
+

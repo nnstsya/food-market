@@ -1,6 +1,6 @@
 <div class="page">
   <section class="section flex gap-32">
-    <app-list heading="Category menu" [items]="categories" buttonText="More categories"></app-list>
+    <app-list heading="Category menu" [items]="categories" [getLink]="getCategoryUrl" buttonText="More categories"></app-list>
 
     <div class="section__content gap-32 flex w-full space-evenly">
       <app-banner
@@ -39,6 +39,7 @@
 
   <section class="section flex gap-32">
     <app-list
+      [getLink]="getCategoryUrl"
       heading="Best selling products"
       [items]="bestSellingProductsCategories"
       buttonText="More products">
@@ -56,7 +57,7 @@
   </section>
 
   <section class="section flex gap-32">
-    <app-list heading="Best from Farmers" [items]="popularProductsCategories" buttonText="More products"></app-list>
+    <app-list heading="Best from Farmers" [items]="popularProductsCategories" [getLink]="getSubcategoryUrl" buttonText="More products"></app-list>
 
     <div class="section__content gap-32 flex w-full space-between">
       @if (popularProducts.length > 0) {

@@ -64,6 +64,11 @@ describe('CheckboxComponent', () => {
       expect(component.isChecked).toBe(false);
     });
 
+    it('should writeValue and update isChecked', () => {
+      component.writeValue(true);
+      expect(component.isChecked).toBe(true);
+    });
+
     it('should call onChange when value changes through toggleCheck', () => {
       const onChangeSpy = jest.fn();
       component.registerOnChange(onChangeSpy);

@@ -16,13 +16,15 @@
   @if (isDropdownOpen) {
     <ul class="dropdown-list absolute" [ngClass]="{'dropdown-with-background-list': background()}">
       @for (option of options(); track option) {
-        <li
-          class="dropdown-item"
-          (click)="selectOption(option)"
-          [class.selected]="option.title === selectedOption"
-        >
-          <p>{{ option.title }}</p>
-        </li>
+        @if (option.title) {
+          <li
+            class="dropdown-item"
+            (click)="selectOption(option)"
+            [class.selected]="option.title === selectedOption"
+          >
+            <p>{{ option.title }}</p>
+          </li>
+        }
       }
     </ul>
   }

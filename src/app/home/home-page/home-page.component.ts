@@ -2,7 +2,7 @@ import { blogData } from '@core/mocks/blogs';
 import { Blog } from '@core/models/blog.model';
 import { Review } from '@core/models/review.model';
 import { reviewData } from '@core/mocks/reviews';
-import { CategoryItem } from '@core/models/category.model';
+import { Category, CategoryItem, Subcategory } from '@core/models/category.model';
 import { Product, Response } from '@core/models/product.model';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { categoryData, popularCategoryData } from '@core/mocks/categories';
@@ -54,5 +54,15 @@ export class HomePageComponent implements OnInit {
 
       return date2.getTime() - date1.getTime();
     });
+  }
+
+  getCategoryUrl(title: string): string {
+    const categoryKey = title.split(' ').join('').toUpperCase() as keyof typeof Category;
+    return `/homepage/${categoryKey.toLowerCase()}`;
+  }
+
+  getSubcategoryUrl(title: string): string {
+    const subcategoryKey = title.split(' ').join('').toUpperCase() as keyof typeof Subcategory;
+    return `/homepage/${subcategoryKey.toLowerCase()}`;
   }
 }

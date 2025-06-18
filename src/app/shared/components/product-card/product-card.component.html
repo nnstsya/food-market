@@ -104,15 +104,15 @@
             <img ngSrc="assets/icons/ic-chevron-right.svg" width="18" height="18">
           </app-button>
 
-          @if (checkIfInWishList(product())) {
-            <app-button [size]="'s'" [variant]="'secondary'" (click)="removeFromWishList(product())" class="card-horizontal__footer__button">
-              <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
-              <p>Added</p>
-            </app-button>
-          } @else {
+          @if (!isAuthenticated || !isInWishlist) {
             <app-button [size]="'s'" [variant]="'secondary'" (click)="addToWishList(product())" class="card-horizontal__footer__button">
               <img ngSrc="assets/icons/ic-actions-heart.svg" width="16" height="16">
               <p>Add to wish list</p>
+            </app-button>
+          } @else {
+            <app-button [size]="'s'" [variant]="'secondary'" (click)="removeFromWishList(product())" class="card-horizontal__footer__button">
+              <img ngSrc="assets/icons/ic-actions-heart-filled.svg" width="16" height="16">
+              <p>Added</p>
             </app-button>
           }
         </div>

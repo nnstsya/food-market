@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FilterService } from "@home/services/filter.service";
 import { ActiveFilter, FilterValue, PriceRange, RatingCheckbox } from "@home/models/filter.model";
 import { PriceFilterComponent } from "@home/filters/price-filter/price-filter.component";
+import { switchMap } from "rxjs/operators";
 
 type Range = { min: number; max: number };
 
@@ -37,6 +38,7 @@ export class CategoryComponent implements OnInit {
   products: Product[] = [];
   displayedProducts: Product[] = [];
   currentPages: number[] = [];
+  shouldResetPages: boolean = false;
 
   priceRange: Signal<PriceRange> = computed(() => this.filterService.getState()().priceRange);
   ratings: Signal<RatingCheckbox[]> = computed(() => this.filterService.getState()().ratings);
@@ -57,43 +59,57 @@ export class CategoryComponent implements OnInit {
     this.route.paramMap.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe((params: ParamMap) => {
-      const categoryParam = params.get('category')?.toUpperCase() as keyof typeof Category;
+      const categoryParam = params.get('category')?.toUpperCase();
 
-      if (categoryParam && Category[categoryParam]) {
-        if (this.category !== Category[categoryParam]) {
+      if (categoryParam && Object.values(Category).includes(categoryParam as Category)) {
+        if (this.category !== categoryParam) {
           this.currentPages = [1];
           localStorage.setItem('currentPages', JSON.stringify(this.currentPages));
         }
 
-        this.categoryName = categoriesData[Category[categoryParam]];
-        this.category = Category[categoryParam];
+        queueMicrotask(() => {
+          this.categoryName = categoriesData[categoryParam as Category];
+          this.category = categoryParam as Category;
 
-        if (this.currentPages.length !== 1) {
-          for (let page of this.currentPages) {
-            this.productsService.getProductsByCategory(this.category!, page, this.productsPerPage).pipe(
-              map((response: Response) => {
-                this.originalProducts.push(...response.results);
-                this.filterService.initializeFilters(this.originalProducts);
-                this.applyFilters();
-                this.productsQuantity = response.totalItems;
-                return response;
-              }),
-              takeUntilDestroyed(this.destroyRef)
-            ).subscribe();
-          }
-        } else {
-          this.productsService.getProductsByCategory(this.category!, this.currentPages[0], this.productsPerPage).pipe(
-            map((response: Response) => {
-              this.originalProducts = response.results;
-              this.filterService.initializeFilters(response.results);
-              this.applyFilters();
+          this.productsService.getProducts(1, this.productsPerPage, categoryParam as Category).pipe(
+            switchMap((response: Response) => {
               this.productsQuantity = response.totalItems;
-              return response;
+
+              const allPagesRequests = Array.from({ length: response.totalPages }, (_, i) =>
+                this.productsService.getProducts(
+                  i + 1,
+                  this.productsPerPage,
+                  categoryParam as Category,
+                  null,
+                  null,
+                  [1, 2, 3, 4, 5]
+                )
+              );
+
+              return forkJoin(allPagesRequests);
+            }),
+            switchMap((responses: Response[]) => {
+              const allProducts = responses.flatMap(response => response.results);
+
+              return this.productsService.getWishList().pipe(
+                map((wishlistProducts: Response) => {
+                  const wishlistIds = new Set(wishlistProducts.results.map(p => p.id));
+
+                  return allProducts.map(product => ({
+                    ...product,
+                    isInWishlist: wishlistIds.has(product.id)
+                  }));
+                })
+              );
+            }),
+            map((products: Product[]) => {
+              this.originalProducts = products;
+              this.filterService.initializeFilters(this.originalProducts);
+              return products;
             }),
             takeUntilDestroyed(this.destroyRef)
           ).subscribe();
-        }
-
+        });
       } else {
         this.categoryName = null;
       }
@@ -101,15 +117,18 @@ export class CategoryComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.products = this.filterService.filterProducts(this.originalProducts);
-    this.productsQuantity = this.products.length;
-
-    this.filterService.applyFilters();
-    this.updateDisplayedProducts();
+    this.filterService.filterProducts(this.productsPerPage, this.currentPages, this.category!)
+      .subscribe((response: Response) => {
+        this.products = response.results;
+        this.productsQuantity = response.totalItems;
+        this.displayedProducts = [...response.results];
+        this.filterService.applyFilters();
+      });
   }
 
   onFiltersApply(): void {
     this.currentPages = [1];
+    this.shouldResetPages = true;
     this.applyFilters();
   }
 
@@ -121,7 +140,11 @@ export class CategoryComponent implements OnInit {
       this.priceFilter.reset();
     }
 
+    this.shouldResetPages = true;
     this.applyFilters();
+    queueMicrotask(() => {
+      this.shouldResetPages = false;
+    });
   }
 
   changeView(view: 'grid' | 'list'): void {
@@ -145,16 +168,20 @@ export class CategoryComponent implements OnInit {
   }
 
   onResetFilters(): void {
-   this.filterService.resetAllFilters();
+    this.filterService.resetAllFilters();
+    this.shouldResetPages = true;
     this.applyFilters();
     this.priceFilter.reset();
+    queueMicrotask(() => {
+      this.shouldResetPages = false;
+    });
   }
 
   private updateDisplayedProducts(): void {
     this.displayedProducts = [];
 
     const requests: Observable<Product[]>[] = this.currentPages.map(page =>
-      this.productsService.getProductsByCategory(this.category!, page, this.productsPerPage).pipe(
+      this.productsService.getProducts(page, this.productsPerPage, this.category!).pipe(
         map((response: Response) => response.results)
       )
     );

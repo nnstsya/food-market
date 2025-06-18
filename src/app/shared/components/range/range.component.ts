@@ -66,7 +66,12 @@ export class RangeComponent implements OnChanges {
   }
 
   handleSliderInput(event: Event, type: 'min' | 'max'): void {
-    const value: number = +(event.target as HTMLInputElement).value;
+    const inputValue = (event.target as HTMLInputElement).value;
+    const value = Number(inputValue);
+
+    if (isNaN(value)) {
+      return;
+    }
 
     if (type === 'min') {
       this.minValue = value;

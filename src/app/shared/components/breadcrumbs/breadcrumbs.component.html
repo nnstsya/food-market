@@ -1,16 +1,16 @@
 @if (breadcrumbs.length) {
-  <nav class="breadcrumbs">
+  <nav class="breadcrumbs flex align-center w-full gap-8">
     @for (breadcrumb of breadcrumbs; track breadcrumb.label) {
       @if (!$last) {
-        <p [routerLink]="breadcrumb.url" class="breadcrumbs__link">{{ breadcrumb.label }}</p>
+        <p [routerLink]="breadcrumb.url" class="breadcrumbs__link fs-14">{{ breadcrumb.label }}</p>
       }
 
       @if ($last) {
-        <p class="breadcrumbs__current">{{ breadcrumb.label }}</p>
+        <p class="breadcrumbs__current fs-14">{{ breadcrumb.label }}</p>
       }
 
       @if (!$last) {
-        <p [routerLink]="breadcrumb.url" class="breadcrumbs__separator">/</p>
+        <p [routerLink]="breadcrumb.url" class="breadcrumbs__separator fs-14">/</p>
       }
     }
   </nav>

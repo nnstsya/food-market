@@ -3,19 +3,13 @@
 .slider {
   -webkit-appearance: none;
   background: none;
-  width: 100%;
-  position: absolute;
   top: 0;
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
     width: 251px;
   }
 
   &__wrapper {
-    position: relative;
     height: 30px;
   }
 
@@ -35,25 +29,19 @@
 
   &__track {
     top: 25%;
-    position: absolute;
     height: 5px;
     background-color: $primary-color;
     border-radius: 5px;
 
     &-inactive {
       background-color: $grey-bg-color;
-      width: 100%;
     }
   }
 }
 
 .inputs {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   &__separator {
-    color: #a9a9a9;
+    color: $secondary-color;
     margin-top: 20px;
   }
 

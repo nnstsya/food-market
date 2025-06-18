@@ -8,7 +8,8 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss'
+  styleUrl: './product-card.component.scss',
+  standalone: false
 })
 export class ProductCardComponent {
   product: InputSignal<Product> = input.required<Product>();

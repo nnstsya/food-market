@@ -10,6 +10,8 @@ export interface Option {
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
+  standalone: false
+  styleUrl: './dropdown.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

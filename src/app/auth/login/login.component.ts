@@ -11,6 +11,7 @@ import { LoginForm } from '@auth/models/form.model';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: '../../shared/components/modal/modal.component.scss',
+  standalone: false
 })
 export class LoginComponent {
   passwordVisible: boolean = false;

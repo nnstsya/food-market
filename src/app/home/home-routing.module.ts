@@ -4,6 +4,9 @@ import { HomeComponent } from './home.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CategoryComponent } from "@home/category/category.component";
 import { ProductDetailComponent } from "@home/product-detail/product-detail.component";
+import { CheckoutComponent } from "@home/checkout/checkout.component";
+import { authGuard } from "@core/guards/auth.guard";
+import { checkoutGuard } from "@core/guards/checkout.guard";
 
 const routes: Routes = [
   {
@@ -13,6 +16,11 @@ const routes: Routes = [
       {
         path: 'homepage',
         component: HomePageComponent,
+      },
+      {
+        path: 'homepage/checkout',
+        component: CheckoutComponent,
+        canActivate: [authGuard(), checkoutGuard()],
       },
       {
         path: 'homepage/:category/:product',

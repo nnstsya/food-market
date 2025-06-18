@@ -25,6 +25,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnChange
   label: InputSignal<string> = input<string>('');
   disabled: InputSignal<boolean> = input<boolean>(false);
   checked: InputSignal<boolean> = input<boolean>(false);
+  background: InputSignal<boolean> = input<boolean>(false);
 
   changed: OutputEmitterRef<boolean> = output<boolean>();
 

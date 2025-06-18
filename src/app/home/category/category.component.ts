@@ -24,7 +24,8 @@ type Range = { min: number; max: number };
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrl: './category.component.scss'
+  styleUrl: './category.component.scss',
+  standalone: false
 })
 export class CategoryComponent implements OnInit {
   @ViewChild(PriceFilterComponent) priceFilter!: PriceFilterComponent;

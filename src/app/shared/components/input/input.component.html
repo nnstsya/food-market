@@ -1,18 +1,30 @@
 @if (label()) {
-  <p class="input-label">{{ label() }}</p>
+  <p class="input-label fs-14 bolder">{{ label() }}</p>
 }
 
-<div class="input-wrapper" [ngClass]="{ 'input-border': border(), 'error': errorState() }">
-  <input [type]="type()"
-         class="input"
-         [value]="value"
-         [disabled]="disabled"
-         (input)="onInputChange($event)"
-         (blur)="onBlur()"
-         [placeholder]="placeholder()"
-         [min]="min()"
-         [max]="max()"
-  >
+<div class="input-wrapper flex align-center" [ngClass]="{ 'input-border': border(), 'error': errorState() }">
+  @if (type() === "textarea") {
+    <textarea
+      class="input w-full"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onInputChange($event)"
+      (blur)="onBlur()"
+      [placeholder]="placeholder()"
+    ></textarea>
+  } @else {
+    <input
+      [type]="type()"
+      class="input w-full"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onInputChange($event)"
+      (blur)="onBlur()"
+      [placeholder]="placeholder()"
+      [min]="min()"
+      [max]="max()"
+    >
+  }
 
   @if (iconUrl()) {
     <img [ngSrc]="iconUrl()" width="20" height="20" class="input-icon" (click)="onIconClick()">

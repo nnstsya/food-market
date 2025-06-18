@@ -4,29 +4,18 @@
   $slide-width: 369px;
   height: 250px;
 
-  &__container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
   &__track {
-    display: flex;
-    justify-content: center;
     padding-block: 4px;
-    gap: 32px;
   }
 
   &__slide {
     display: grid;
     grid-template-rows: 1fr min-content;
-    align-items: center;
     min-width: $slide-width;
     max-width: $slide-width;
     font-weight: 500;
     height: 220px;
     padding: 20px;
-    position: relative;
     text-align: center;
     border-radius: $border-radius;
     box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
@@ -42,23 +31,18 @@
     &__author {
       display: block;
       margin-bottom: 24px;
-      font-size: 14px;
       color: #888;
     }
 
     &__avatar {
-      position: absolute;
       bottom: -20px;
       left: 44%;
       width: 50px;
       height: 50px;
-      border-radius: 50%;
       overflow: hidden;
     }
 
     &__avatar-img {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
     }
   }

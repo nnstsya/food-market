@@ -12,6 +12,7 @@ import { passwordsMatchValidator } from "@auth/validators/password-match.validat
   selector: 'app-password-recovery',
   templateUrl: './password-recovery.component.html',
   styleUrl: '../../shared/components/modal/modal.component.scss',
+  standalone: false
 })
 export class PasswordRecoveryComponent {
   newPasswordVisible: boolean = false;

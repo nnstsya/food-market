@@ -8,7 +8,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss'
+  styleUrl: './product-card.component.scss',
+  standalone: false
 })
 export class ProductCardComponent implements OnInit {
   product: InputSignal<Product> = input.required<Product>();

@@ -11,6 +11,7 @@ import { SignUpForm } from '@auth/models/form.model';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: '../../shared/components/modal/modal.component.scss',
+  standalone: false
 })
 export class RegisterComponent {
   passwordVisible: boolean = false;
@@ -28,7 +29,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       username: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{13}$/)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\+?[0-9]{10,14}$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',

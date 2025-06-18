@@ -16,7 +16,8 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.scss']
+  styleUrls: ['./product-detail.component.scss'],
+  standalone: false
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | null = null;

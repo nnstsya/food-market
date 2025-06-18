@@ -55,8 +55,52 @@ describe('CheckboxComponent', () => {
     expect(emitSpy).not.toHaveBeenCalled();
   });
 
-  it('should writeValue and update isChecked', () => {
-    component.writeValue(true);
-    expect(component.isChecked).toBe(true);
+  describe('ControlValueAccessor implementation', () => {
+    it('should handle null/undefined value in writeValue', () => {
+      component.writeValue(null as any);
+      expect(component.isChecked).toBe(false);
+
+      component.writeValue(undefined as any);
+      expect(component.isChecked).toBe(false);
+    });
+
+    it('should writeValue and update isChecked', () => {
+      component.writeValue(true);
+      expect(component.isChecked).toBe(true);
+    });
+
+    it('should call onChange when value changes through toggleCheck', () => {
+      const onChangeSpy = jest.fn();
+      component.registerOnChange(onChangeSpy);
+
+      component.isChecked = false;
+      component.toggleCheck();
+
+      expect(onChangeSpy).toHaveBeenCalledWith(true);
+      expect(component.isChecked).toBe(true);
+    });
+
+    it('should call onTouched when value changes through toggleCheck', () => {
+      const onTouchedSpy = jest.fn();
+      component.registerOnTouched(onTouchedSpy);
+
+      component.toggleCheck();
+
+      expect(onTouchedSpy).toHaveBeenCalled();
+    });
+
+    it('should not call onChange or onTouched when disabled', () => {
+      const onChangeSpy = jest.fn();
+      const onTouchedSpy = jest.fn();
+
+      component.registerOnChange(onChangeSpy);
+      component.registerOnTouched(onTouchedSpy);
+      fixture.componentRef.setInput('disabled', true);
+
+      component.toggleCheck();
+
+      expect(onChangeSpy).not.toHaveBeenCalled();
+      expect(onTouchedSpy).not.toHaveBeenCalled();
+    });
   });
 });

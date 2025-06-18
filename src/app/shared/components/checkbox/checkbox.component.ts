@@ -13,17 +13,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
-      multi: true,
-    },
+      {
+          provide: NG_VALUE_ACCESSOR,
+          useExisting: forwardRef(() => CheckboxComponent),
+          multi: true,
+      },
   ],
+  standalone: false
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit, OnChanges {
   label: InputSignal<string> = input<string>('');
   disabled: InputSignal<boolean> = input<boolean>(false);
   checked: InputSignal<boolean> = input<boolean>(false);
+  background: InputSignal<boolean> = input<boolean>(false);
 
   changed: OutputEmitterRef<boolean> = output<boolean>();
 

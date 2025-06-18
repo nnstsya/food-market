@@ -1,23 +1,23 @@
 @if (type() === 'vertical') {
-  <div class="card">
-    <img class="card__image"
+  <div class="card flex flex-column space-between transition-ease-out">
+    <img class="card__image w-full"
          [src]="product().image[0]"
          (error)="onImageError($event)"
          (click)="navigateToProductDetail()"
     />
 
-    <div class="card__content">
-      <div class="card__body">
+    <div class="card__content flex flex-column space-between">
+      <div class="card__body gap-4 flex flex-column h-fit">
         <p class="card__body__product-title">
           {{ product().name }}
         </p>
 
-        <p class="card__body__product-description">
+        <p class="card__body__product-description fs-12">
           {{ product().description }}
         </p>
 
         @if (showRate() && product().rate) {
-          <div class="card__body__product-rating">
+          <div class="card__body__product-rating flex">
             @for (rating of getRatingArray(); track rating) {
               <img [ngSrc]="rating ? 'assets/icons/ic-actions-star-filled.svg' : 'assets/icons/ic-actions-star.svg'"
                    width="16"
@@ -29,8 +29,8 @@
         }
       </div>
 
-      <div class="card__footer">
-        <p class="card__footer__product-price">
+      <div class="card__footer flex space-between align-center">
+        <p class="card__footer__product-price bolder">
           {{ product().price | number: '1.2-2' }} UAH
         </p>
         <app-button [size]="'s'" (click)="addToCart()">Buy now</app-button>
@@ -38,23 +38,23 @@
     </div>
   </div>
 } @else {
-  <div class="card card-horizontal">
-    <div class="card-horizontal__image-wrapper">
-      <img class="card__image card-horizontal__image"
+  <div class="card card-horizontal flex flex-row transition-ease-out">
+    <div class="card-horizontal__image-wrapper h-full">
+      <img class="card__image card-horizontal__image h-full w-full"
            [src]="product().image[0]"
            (error)="onImageError($event)"
            (click)="navigateToProductDetail()"
       />
     </div>
 
-    <div class="card-horizontal__content">
-      <div class="card__body card-horizontal__body">
-        <div class="card-horizontal__body__product">
+    <div class="card-horizontal__content flex space-between w-full h-full">
+      <div class="card__body gap-4 card-horizontal__body flex flex-column space-between h-full">
+        <div class="card-horizontal__body__product gap-8 flex flex-column">
           <h4 class="card__body__product-title">
             {{ product().name }}
           </h4>
 
-          <p class="card__body__product-description card-horizontal__body__product-description">
+          <p class="card__body__product-description fs-12 card-horizontal__body__product-description">
             {{ product().description }}
           </p>
 
@@ -71,35 +71,35 @@
           }
         </div>
 
-        <div class="card__body__product-info">
-          <div class="card__body__product-info__items">
+        <div class="card__body__product-info gap-32 flex">
+          <div class="card__body__product-info__items flex flex-column">
             <p class="card__body__product-info__items-item">Freshness:</p>
-            <p class="card__body__product-info__items-item">Farm:</p>
-            <p class="card__body__product-info__items-item">Delivery:</p>
-            <p class="card__body__product-info__items-item">Stock:</p>
+            <p class="card__body__product-info__items-item fs-14 light">Farm:</p>
+            <p class="card__body__product-info__items-item fs-14 light">Delivery:</p>
+            <p class="card__body__product-info__items-item fs-14 light">Stock:</p>
           </div>
 
           <div class="card__body__product-info__items">
             <p class="card__body__product-info__items-item text-primary">{{ getFreshness(product().freshness) }}</p>
-            <p class="card__body__product-info__items-item">{{ product().farm }}</p>
-            <p class="card__body__product-info__items-item">{{ product().deliveryAria }}</p>
-            <p class="card__body__product-info__items-item text-primary">{{ product().maxKgs }} kg</p>
+            <p class="card__body__product-info__items-item fs-14 light">{{ product().farm }}</p>
+            <p class="card__body__product-info__items-item fs-14 light">{{ product().deliveryAria }}</p>
+            <p class="card__body__product-info__items-item fs-14 light text-primary">{{ product().maxKgs }} kg</p>
           </div>
         </div>
       </div>
 
-      <div class="card__footer card-horizontal__footer">
-        <p class="card__footer__product-price">
+      <div class="card__footer card-horizontal__footer flex space-between flex-column h-full">
+        <p class="card__footer__product-price bolder">
           {{ product().price | number: '1.2-2' }} UAH
         </p>
 
-        <div class="card-horizontal__footer__delivery">
-          <p class="card-horizontal__footer__delivery-info">{{ product().deliveryCoast ? product().deliveryCoast + ' UAH' : 'Free'}} Shipping</p>
-          <p class="card-horizontal__footer__delivery-speed">Delivery {{ product().deliveryDays === 1 ? 'in 1 day' : product().deliveryDays === 0 ? 'today' : 'in ' + product().deliveryDays + ' days' }}</p>
+        <div class="card-horizontal__footer__delivery flex flex-column">
+          <p class="card-horizontal__footer__delivery-info fs-12">{{ product().deliveryCoast ? product().deliveryCoast + ' UAH' : 'Free'}} Shipping</p>
+          <p class="card-horizontal__footer__delivery-speed fs-12 light">Delivery {{ product().deliveryDays === 1 ? 'in 1 day' : product().deliveryDays === 0 ? 'today' : 'in ' + product().deliveryDays + ' days' }}</p>
         </div>
 
-        <div class="card-horizontal__footer__buttons">
-          <app-button class="card-horizontal__footer__button" (click)="navigateToProductDetail()">
+        <div class="card-horizontal__footer__buttons gap-12 flex flex-column w-full align-center">
+          <app-button class="card-horizontal__footer__button w-full" (click)="navigateToProductDetail()">
             <p>Product detail</p>
             <img ngSrc="assets/icons/ic-chevron-right.svg" width="18" height="18">
           </app-button>

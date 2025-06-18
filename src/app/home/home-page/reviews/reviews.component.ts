@@ -5,6 +5,7 @@ import { Review } from '@core/models/review.model';
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss'],
+  standalone: false
 })
 export class ReviewsComponent {
   reviews: InputSignal<Review[]> = input.required<Review[]>();

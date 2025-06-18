@@ -1,16 +1,16 @@
 <div class="page">
-  <section class="section">
+  <section class="section flex gap-32">
     <app-list heading="Category menu" [items]="categories" [getLink]="getCategoryUrl" buttonText="More categories"></app-list>
 
-    <div class="section__content">
+    <div class="section__content gap-32 flex w-full space-evenly">
       <app-banner
-        class="section__content__card"
+        class="section__content__card h-full flex flex-column"
         [imageUrl]="'https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg'"
         [gradientPosition]="'top'"
       >
         <div>
-          <p class="section__content__card__upper-text">Special Offers</p>
-          <h2 class="section__content__card__heading">Multi-buy discounts available this week only!</h2>
+          <p class="section__content__card__upper-text fs-14 bolder">Special Offers</p>
+          <h2 class="section__content__card__heading bolder">Multi-buy discounts available this week only!</h2>
         </div>
 
         <app-button>
@@ -20,13 +20,13 @@
       </app-banner>
 
       <app-banner
-        class="section__content__card"
+        class="section__content__card h-full flex flex-column"
         [imageUrl]="'https://lh7-us.googleusercontent.com/docsz/AD_4nXc0mdnWSJDMkg8AnXxeW3ja7xvl_fg427-XFgzNPSTLEWyqGW4Nn6JLgTJC_EsVng2wWY6WZGrJLZw-GttmvHFOBmKl601_4fcwx644aMFSvROYsOxuu3t3U4IrHWcFVJL0hdRMKJUz3yI7pyC9Kgv7VcLt?key=aViLBHe981uqzrfs2Wn2gA'"
         [gradientPosition]="'top'"
       >
         <div>
-          <p class="section__content__card__upper-text">Online E-vouchers</p>
-          <h2 class="section__content__card__heading">Online E-vouchers are redeemable on thousands of items in our webshop.</h2>
+          <p class="section__content__card__upper-text fs-14 bolder">Online E-vouchers</p>
+          <h2 class="section__content__card__heading bolder">Online E-vouchers are redeemable on thousands of items in our webshop.</h2>
         </div>
 
         <app-button>
@@ -37,7 +37,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section flex gap-32">
     <app-list
       [getLink]="getCategoryUrl"
       heading="Best selling products"
@@ -45,7 +45,7 @@
       buttonText="More products">
     </app-list>
 
-    <div class="section__content">
+    <div class="section__content gap-32 flex w-full space-between">
       @if (bestSellingProducts.length > 0) {
         @for (product of bestSellingProducts; track product?.id) {
           <app-product-card [product]="product" [showRate]="false"></app-product-card>
@@ -56,22 +56,22 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section flex gap-32">
     <app-list heading="Best from Farmers" [items]="popularProductsCategories" [getLink]="getSubcategoryUrl" buttonText="More products"></app-list>
 
-    <div class="section__content">
+    <div class="section__content gap-32 flex w-full space-between">
       @if (popularProducts.length > 0) {
         @for (product of popularProducts; track product?.id) {
           <app-product-card [product]="product" [showRate]="false"></app-product-card>
         }
       } @else {
-        <span class="loader"></span>
+        <span class="loader rounded-full"></span>
       }
     </div>
   </section>
 
   <div class="quotes">
-    <h3 class="quotes__heading">Our customers say</h3>
+    <h3 class="quotes__heading bolder">Our customers say</h3>
 
     @if (reviews.length > 3) {
       <app-reviews-slider [reviews]="reviews"></app-reviews-slider>
@@ -81,30 +81,30 @@
 
   </div>
 
-  <section class="blogs">
-    <div class="blogs__header">
-      <h3 class="blogs__header__heading">Read our Blog posts</h3>
-      <div class="blogs__header__nav" routerLink="/blogs">
+  <section class="blogs flex flex-column gap-32">
+    <div class="blogs__header flex space-between">
+      <h3 class="blogs__header__heading bolder">Read our Blog posts</h3>
+      <div class="blogs__header__nav gap-8 bolder flex align-center" routerLink="/blogs">
         <p>Go to blog</p>
         <img ngSrc="assets/icons/ic-chevron-right-green.svg" width="24" height="24" alt="go">
       </div>
     </div>
 
-    <div class="blogs__items">
+    <div class="blogs__items flex gap-32">
       <app-banner [gradientPosition]="'bottom'" [imageUrl]="sortedBlogs[0].blogImage">
-        <div class="blogs__items__banner">
-          <h2 class="blogs__items__banner__heading">{{ sortedBlogs[0].title }}</h2>
-          <div class="blogs__items__banner__info">
-            <img class="blogs__items__banner__info__avatar" [src]="sortedBlogs[0].authorAvatar" [alt]="sortedBlogs[0].author">
-            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].author }}</p>
-            <p class="blogs__items__banner__info__details">{{ sortedBlogs[0].date }}</p>
+        <div class="blogs__items__banner flex flex-column h-full gap-8">
+          <h2 class="blogs__items__banner__heading bolder">{{ sortedBlogs[0].title }}</h2>
+          <div class="blogs__items__banner__info gap-8 flex align-center">
+            <img class="blogs__items__banner__info__avatar rounded-full" [src]="sortedBlogs[0].authorAvatar" [alt]="sortedBlogs[0].author">
+            <p class="blogs__items__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[0].author }}</p>
+            <p class="blogs__items__banner__info__details flex gap-16 fs-16">{{ sortedBlogs[0].date }}</p>
           </div>
         </div>
       </app-banner>
 
       <app-blog-card [blog]="sortedBlogs[1]"></app-blog-card>
 
-      <div class="blogs__items__less-recent">
+      <div class="blogs__items__less-recent flex flex-column gap-32">
         <app-blog-card [blog]="sortedBlogs[2]" type="horizontal"></app-blog-card>
         <app-blog-card [blog]="sortedBlogs[3]" type="horizontal"></app-blog-card>
         <app-blog-card [blog]="sortedBlogs[4]" type="horizontal"></app-blog-card>

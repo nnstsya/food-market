@@ -2,41 +2,41 @@
 
 @if (categoryName) {
   @if (originalProducts.length) {
-    <div class="page">
-      <div class="page__top-bar">
-        <div class="page__top-bar__header">
+    <div class="page flex flex-column">
+      <div class="page__top-bar flex flex-column gap-16">
+        <div class="page__top-bar__header flex space-between align-center">
           <h1>{{ categoryName }}</h1>
 
-          <div class="page__top-bar__actions">
-            <div class="page__top-bar__actions__item view-action" (click)="changeView('grid')">
+          <div class="page__top-bar__actions flex gap-24">
+            <div class="page__top-bar__actions__item view-action flex align-center gap-4" (click)="changeView('grid')">
               @if (view === 'grid') {
                 <img ngSrc="assets/icons/ic-layout-square-grid-green.svg" width="18" height="18">
-                <p class="page__top-bar__actions__text selected">Grid view</p>
+                <p class="page__top-bar__actions__text selected fs-12">Grid view</p>
               } @else {
                 <img ngSrc="assets/icons/ic-layout-square-grid.svg" width="18" height="18">
-                <p class="page__top-bar__actions__text">Grid view</p>
+                <p class="page__top-bar__actions__text fs-12">Grid view</p>
               }
             </div>
 
-            <div class="page__top-bar__actions__item view-action" (click)="changeView('list')">
+            <div class="page__top-bar__actions__item view-action flex align-center gap-4" (click)="changeView('list')">
               @if (view === 'list') {
                 <img ngSrc="assets/icons/ic-layout-sections-green.svg" width="18" height="18">
-                <p class="page__top-bar__actions__text selected">List view</p>
+                <p class="page__top-bar__actions__text selected fs-12">List view</p>
               } @else {
                 <img ngSrc="assets/icons/ic-layout-sections.svg" width="18" height="18">
-                <p class="page__top-bar__actions__text">List view</p>
+                <p class="page__top-bar__actions__text fs-12">List view</p>
               }
             </div>
 
-            <div class="page__top-bar__actions__item">
+            <div class="page__top-bar__actions__item flex align-center gap-4">
               <app-tag [text]="productsQuantity"></app-tag>
-              <p class="page__top-bar__actions__text">Products</p>
+              <p class="page__top-bar__actions__text fs-12">Products</p>
             </div>
           </div>
       </div>
 
-        <div class="page__top-bar__filters">
-          <div class="page__top-bar__filters__items">
+        <div class="page__top-bar__filters flex flex-column w-full gap-16">
+          <div class="page__top-bar__filters__items flex gap-16">
             <app-filter
               [label]="wishlistFilter().label"
               [itemsCount]="wishlistFilter().count!"
@@ -51,8 +51,8 @@
             </app-filter>
           </div>
 
-          <div class="page__top-bar__filters__items-active">
-            <p class="page__top-bar__filters__items-active-text">Applied filters:</p>
+          <div class="page__top-bar__filters__items-active flex align-center gap-12">
+            <p class="page__top-bar__filters__items-active-text fs-14">Applied filters:</p>
             @for (filter of appliedFilters(); track filter.id) {
               <app-tag
                 [text]="filter.label"
@@ -75,22 +75,22 @@
         </div>
       </div>
 
-      <div class="page__content">
-        <div class="page__content__filters">
+      <div class="page__content flex gap-32">
+        <div class="page__content__filters flex flex-column gap-48">
           <app-rating-filter [ratings]="ratings()" (filterChanged)="onFilterChange($event)"></app-rating-filter>
 
           <app-price-filter [priceRange]="priceRange()" (filterChanged)="onPriceRangeChange($event)"></app-price-filter>
 
-          <div class="page__content__filters__buttons">
+          <div class="page__content__filters__buttons flex">
             <app-button (click)="onFiltersApply()">Apply</app-button>
-            <p class="page__content__filters__buttons__reset-button"
+            <p class="page__content__filters__buttons__reset-button flex flex-center fs-16 bolder"
                (click)="onResetFilters()">
               Reset
             </p>
           </div>
         </div>
 
-        <div class="page__content__products" [ngClass]="view">
+        <div class="page__content__products flex flex-column w-full gap-32" [ngClass]="view">
           @for (product of displayedProducts; track product.id) {
             @if (view === 'list') {
               <app-product-card [product]="product" [type]="'horizontal'"></app-product-card>
@@ -114,16 +114,18 @@
       </app-pagination>
     </div>
   } @else {
-    <div class="page">
-      <div class="page__content">
-        <span class="loader"></span>
+    <div class="page flex flex-column">
+      <div class="page__content flex">
+        <span class="loader rounded-full"></span>
       </div>
     </div>
   }
 } @else {
-  <div class="page">
-    <div class="page__content">
-      <p class="page__category-text">Sorry, looks like this category does not exist.</p>
+  <div class="page flex flex-column">
+    <div class="page__content flex">
+      <p class="page__category-text w-full self-center">Sorry, looks like this category does not exist.</p>
     </div>
   </div>
 }
+
+

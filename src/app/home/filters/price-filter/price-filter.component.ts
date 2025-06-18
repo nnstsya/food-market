@@ -6,7 +6,7 @@ type Range = { min: number; max: number };
 @Component({
   selector: 'app-price-filter',
   templateUrl: './price-filter.component.html',
-  styleUrl: './price-filter.component.scss'
+  standalone: false
 })
 export class PriceFilterComponent {
   @ViewChild(RangeComponent) range!: RangeComponent;

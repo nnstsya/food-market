@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from './dropdown.component';
 
 describe('DropdownComponent', () => {
@@ -12,6 +13,7 @@ describe('DropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [DropdownComponent]
     }).compileComponents();
 
@@ -54,5 +56,37 @@ describe('DropdownComponent', () => {
     fixture.componentRef.setInput('placeholder', 'Custom placeholder');
     fixture.detectChanges();
     expect(component.placeholder()).toBe('Custom placeholder');
+  });
+
+  describe('ControlValueAccessor implementation', () => {
+    it('should call onChange when option is selected', () => {
+      const onChangeSpy = jest.fn();
+      component.registerOnChange(onChangeSpy);
+
+      const selectedOption = mockOptions[0];
+      component.selectOption(selectedOption);
+
+      expect(onChangeSpy).toHaveBeenCalledWith(selectedOption.title);
+    });
+
+    it('should call onTouched when dropdown is opened', () => {
+      const onTouchedSpy = jest.fn();
+      component.registerOnTouched(onTouchedSpy);
+
+      component.toggleDropdown();
+
+      expect(onTouchedSpy).toHaveBeenCalled();
+    });
+
+    it('should update selectedOption when writeValue is called', () => {
+      component.writeValue('Option 1');
+      expect(component.selectedOption).toBe('Option 1');
+
+      component.writeValue('');
+      expect(component.selectedOption).toBeNull();
+
+      component.writeValue(null as any);
+      expect(component.selectedOption).toBeNull();
+    });
   });
 });

@@ -7,7 +7,8 @@ import { map, Observable, of, switchMap } from "rxjs";
 @Component({
   selector: 'app-product-recommendations',
   templateUrl: './product-recommendations.component.html',
-  styleUrl: './product-recommendations.component.scss'
+  styleUrl: './product-recommendations.component.scss',
+  standalone: false
 })
 export class ProductRecommendationsComponent implements OnInit {
   recommendedProducts$: Observable<Product[]> = of([]);

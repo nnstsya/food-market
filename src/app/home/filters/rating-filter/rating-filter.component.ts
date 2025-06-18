@@ -4,7 +4,7 @@ import { RatingCheckbox } from '@home/models/filter.model';
 @Component({
   selector: 'app-rating-filter',
   templateUrl: './rating-filter.component.html',
-  styleUrl: './rating-filter.component.scss'
+  standalone: false
 })
 export class RatingFilterComponent {
   ratings: InputSignal<RatingCheckbox[]> = input.required<RatingCheckbox[]>();

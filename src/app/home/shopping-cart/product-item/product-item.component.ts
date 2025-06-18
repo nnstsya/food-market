@@ -12,7 +12,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrl: './product-item.component.scss'
+  styleUrl: './product-item.component.scss',
+  standalone: false
 })
 export class ProductItemComponent implements OnInit {
   product: InputSignal<ProductCart> = input.required<ProductCart>();

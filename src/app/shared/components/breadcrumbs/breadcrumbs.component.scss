@@ -1,16 +1,10 @@
+@use "../../../../styles/variables" as *;
+
 .breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
   padding: 16px 45px;
 
-  &__link, &__current, &__separator {
-    font-size: 14px;
-  }
-
   &__link {
-    color: #a9a9a9;
+    color: $secondary-color;
 
     &:hover {
       text-decoration: underline;
@@ -19,6 +13,6 @@
   }
 
   &__separator {
-    color: #a9a9a9;
+    color: $secondary-color;
   }
 }

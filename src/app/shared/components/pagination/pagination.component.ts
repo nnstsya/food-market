@@ -3,7 +3,8 @@ import { Component, input, InputSignal, OnInit, output, OutputEmitterRef, effect
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss'
+  styleUrl: './pagination.component.scss',
+  standalone: false
 })
 export class PaginationComponent implements OnInit {
   itemName: InputSignal<string> = input<string>('');

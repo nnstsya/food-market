@@ -1,23 +1,16 @@
 @use "../../../../styles/variables" as *;
 
 .list {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-
   &__content {
     list-style: none;
     padding: 0;
     width: 268px;
 
     &__heading {
-      font-weight: bold;
       margin-bottom: 20px;
     }
 
     &__item {
-      font-size: 14px;
       margin-bottom: 13px;
       color: $primary-color;
       text-decoration: underline;

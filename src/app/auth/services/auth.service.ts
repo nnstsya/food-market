@@ -13,7 +13,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
-  private basePath: string = '/users';
+  private basePath: string = '/auth';
 
   signIn(userCredentials: UserCredentials): Observable<User> {
     return this.http.post<User>(`${this.basePath}/login`, userCredentials).pipe(
@@ -22,7 +22,7 @@ export class AuthService {
         throwError(
           () =>
             new Error(
-              err?.error.error || 'Login failed due to a server error.',
+              err?.error.message || 'Login failed due to a server error.',
             ),
         ),
       ),
@@ -36,7 +36,7 @@ export class AuthService {
         throwError(
           () =>
             new Error(
-              err?.error.error || 'Sign up failed due to a server error.',
+              err?.error.message || 'Sign up failed due to a server error.',
             ),
         ),
       ),
@@ -53,7 +53,7 @@ export class AuthService {
           throwError(
             () =>
               new Error(
-                err?.error.error ||
+                err?.error.message ||
                   'Password reset failed due to a server error.',
               ),
           ),

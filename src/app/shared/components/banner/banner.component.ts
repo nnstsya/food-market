@@ -3,7 +3,8 @@ import { Component, input, InputSignal } from '@angular/core';
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
-  styleUrl: './banner.component.scss'
+  styleUrl: './banner.component.scss',
+  standalone: false
 })
 export class BannerComponent {
   imageUrl: InputSignal<string> = input<string>('');

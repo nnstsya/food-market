@@ -8,7 +8,8 @@ import { ShoppingCartService } from "@home/services/shopping-cart.service";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
+  standalone: false
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;

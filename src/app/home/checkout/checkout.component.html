@@ -270,11 +270,10 @@
                 </div>
 
                 <form [formGroup]="checkoutForm">
-                    <app-input
+                    <app-input type="textarea"
                             class="order-notes"
                             formControlName="orderNotes"
                             label="Order notes"
-                            [multiline]="true"
                             placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
                             [errorState]="!!(checkoutForm.get('orderNotes')?.invalid && checkoutForm.get('orderNotes')?.touched)"
                     >

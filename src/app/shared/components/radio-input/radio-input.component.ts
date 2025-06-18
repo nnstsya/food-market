@@ -11,7 +11,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       useExisting: forwardRef(() => RadioInputComponent),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class RadioInputComponent implements ControlValueAccessor {
   label: InputSignal<string> = input<string>('');

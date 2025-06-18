@@ -15,8 +15,7 @@
     </section>
 
     <section class="main-header flex space-between">
-        <p class="main-header__logo bold">freshnesecom</p>
-
+        <p class="main-header__logo bold" routerLink="/homepage">freshnesecom</p>
         <div class="main-header__search-bar align-center flex w-fit gap-8">
             @if (isHomePage) {
                 <app-dropdown [options]="categories" placeholder="All categories"></app-dropdown>

@@ -5,6 +5,15 @@ export interface LoginForm {
   password: FormControl<string>;
 }
 
+export interface ProfileForm {
+  firstName: FormControl<string>;
+  lastName: FormControl<string>;
+  username: FormControl<string>;
+  email: FormControl<string>;
+  phoneNumber: FormControl<string>;
+  newsletterConsent: FormControl<boolean>;
+}
+
 export interface PasswordRecoveryForm {
   email: FormControl<string>;
   newPassword: FormControl<string>;

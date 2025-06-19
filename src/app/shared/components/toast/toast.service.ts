@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Toast {
   message: string;
-  type: 'error';
+  type: 'error' | 'success';
 }
 
 @Injectable({

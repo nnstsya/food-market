@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { ProductCart } from "@core/models/product.model";
 import { ModalService } from "@shared/components/modal/modal.service";
 import { ShoppingCartService } from "@home/services/shopping-cart.service";
@@ -11,8 +11,8 @@ import { Router } from "@angular/router";
   standalone: false
 })
 export class ShoppingCartComponent {
-  products: ProductCart[] = [];
-  totalPrice: number = 0;
+  readonly products: Signal<ProductCart[]>;
+  readonly totalPrice: Signal<number>;
   isAuthenticated: boolean = !!localStorage.getItem('user');
 
   private shoppingCartService: ShoppingCartService = inject(ShoppingCartService);
@@ -20,10 +20,8 @@ export class ShoppingCartComponent {
   private router: Router = inject(Router)
 
   constructor() {
-    effect(() => {
-      this.products = this.shoppingCartService.items();
-      this.totalPrice = this.shoppingCartService.total();
-    });
+    this.products = this.shoppingCartService.items;
+    this.totalPrice = this.shoppingCartService.total;
   }
 
   navigateUser(): void {

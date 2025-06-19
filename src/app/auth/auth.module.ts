@@ -7,12 +7,14 @@ import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from "@auth/profile/profile.component";
 
 @NgModule({
   declarations: [
     LoginComponent,
     PasswordRecoveryComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
   exports: [
     LoginComponent,
     PasswordRecoveryComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AuthModule {}

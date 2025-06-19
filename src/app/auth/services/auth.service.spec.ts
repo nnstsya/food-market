@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
-import { UserCredentials, UserData, UserPasswordRecovery } from '../models/user.model';
+import { User, UserCredentials, UserData, UserPasswordRecovery } from '../models/user.model';
+import { Router } from '@angular/router';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -17,11 +18,18 @@ describe('AuthService', () => {
       length: 0
     };
 
+    const mockRouter = {
+      navigateByUrl: jest.fn()
+    };
+
     jest.spyOn(window, 'localStorage', 'get').mockReturnValue(mockLocalStorage);
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService]
+      providers: [
+        AuthService,
+        { provide: Router, useValue: mockRouter }
+      ]
     });
 
     service = TestBed.inject(AuthService);
@@ -175,4 +183,65 @@ describe('AuthService', () => {
 
     expect(localStorage.setItem).toHaveBeenCalledWith('user', JSON.stringify(mockResponse));
   });
+
+  it('should update user profile', () => {
+    const userData: Omit<User, 'role'> = {
+      id: '1',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      username: 'janedoe',
+      email: 'jane@email.com',
+      phoneNumber: '1234567890123',
+      token: 'mock-token',
+      newsletterConsent: true
+    };
+
+    const mockResponse = {
+      ...userData,
+      role: 'user'
+    };
+
+    service.updateProfile(userData).subscribe(response => {
+      expect(response).toEqual(mockResponse);
+      expect(localStorage.setItem).toHaveBeenCalledWith('user', JSON.stringify(mockResponse));
+    });
+
+    const req = httpMock.expectOne('/users');
+    expect(req.request.method).toBe('PUT');
+    req.flush(mockResponse);
+  });
+
+  it('should handle profile update error', () => {
+    const userData: Omit<User, 'role'> = {
+      id: '1',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      username: 'janedoe',
+      email: 'jane@email.com',
+      phoneNumber: '1234567890123',
+      token: 'mock-token',
+      newsletterConsent: true
+    };
+
+    service.updateProfile(userData).subscribe({
+      error: (error) => {
+        expect(error.message).toBe('Profile update failed due to a server error.');
+      }
+    });
+
+    const req = httpMock.expectOne('/users');
+    req.error(new ErrorEvent('Network error'));
+  });
+
+  it('should perform logout actions', () => {
+    service.logout();
+
+    expect(localStorage.removeItem).toHaveBeenCalledWith('user');
+    expect(TestBed.inject(Router).navigateByUrl).toHaveBeenCalledWith('/');
+
+    service.isAuthenticated$.subscribe(isAuthenticated => {
+      expect(isAuthenticated).toBeFalsy();
+    });
+  });
 });
+

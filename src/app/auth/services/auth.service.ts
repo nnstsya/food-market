@@ -6,7 +6,8 @@ import {
   UserData,
   UserPasswordRecovery,
 } from '../models/user.model';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,17 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
   private basePath: string = '/auth';
+  private authState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!localStorage.getItem('user'));
+  private router: Router = inject(Router);
+
+  isAuthenticated$: Observable<boolean> = this.authState.asObservable();
 
   signIn(userCredentials: UserCredentials): Observable<User> {
     return this.http.post<User>(`${this.basePath}/login`, userCredentials).pipe(
-      tap((response: User) => this.storeUserData(response)),
+      tap((response: User) => {
+        this.storeUserData(response);
+        this.storeUserToken(response.token);
+      }),
       catchError((err) =>
         throwError(
           () =>
@@ -31,7 +39,10 @@ export class AuthService {
 
   signUp(user: UserData): Observable<User> {
     return this.http.post<User>(`${this.basePath}/register`, user).pipe(
-      tap((response: User) => this.storeUserData(response)),
+      tap((response: User) => {
+        this.storeUserData(response);
+        this.storeUserToken(response.token);
+      }),
       catchError((err) =>
         throwError(
           () =>
@@ -61,9 +72,33 @@ export class AuthService {
       );
   }
 
-  private storeUserData(user: User): void {
-    const userData: User = { ...user };
+  updateProfile(userData: Omit<User, 'role'>): Observable<User> {
+    return this.http.put<User>('/users', userData).pipe(
+      tap((response: User) => this.storeUserData(response)),
+      catchError((err) =>
+        throwError(
+          () =>
+            new Error(
+              err?.error.message || 'Profile update failed due to a server error.',
+            ),
+        ),
+      ),
+    );
+  }
 
-    localStorage.setItem('user', JSON.stringify(userData));
+  private storeUserToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  private storeUserData(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+
+    this.authState.next(true);
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/');
+    this.authState.next(false);
   }
 }

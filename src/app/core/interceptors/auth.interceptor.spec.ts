@@ -9,19 +9,8 @@ describe('authInterceptor', () => {
     localStorage.clear();
   });
 
-  it('should handle malformed JSON in localStorage', () => {
-    localStorage.setItem('user', '{invalid-json: "test-token"}');
-    const request = new HttpRequest('GET', '/test');
-
-    authInterceptor(request, mockHandler);
-
-    const modifiedRequest = mockHandler.mock.calls[0][0];
-    expect(modifiedRequest.headers.get('Authorization')).toBe('Bearer undefined');
-  });
-
   it('should add Authorization header when user is logged in', () => {
-    const mockUser = { token: 'test-token' };
-    localStorage.setItem('user', JSON.stringify(mockUser));
+    localStorage.setItem('token', 'test-token');
 
     const request = new HttpRequest('GET', '/test');
 
@@ -37,7 +26,7 @@ describe('authInterceptor', () => {
     authInterceptor(request, mockHandler);
 
     const modifiedRequest = mockHandler.mock.calls[0][0];
-    expect(modifiedRequest.headers.get('Authorization')).toBe('Bearer undefined');
+    expect(modifiedRequest.headers.get('Authorization')).toBe('Bearer null');
   });
 
   afterEach(() => {

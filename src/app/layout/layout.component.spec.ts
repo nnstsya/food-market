@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { LayoutComponent } from "./layout.component";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { LayoutModule } from "./layout.module";
+import { HttpClientModule } from "@angular/common/http";
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -11,7 +12,7 @@ describe('LayoutComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LayoutComponent],
-      imports: [LayoutModule],
+      imports: [LayoutModule, HttpClientModule],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { params: {} }, queryParams: of({}) } }
       ]

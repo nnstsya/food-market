@@ -26,11 +26,14 @@
         </div>
 
         <div class="main-header__actions flex flex-center gap-32">
-            <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account"  (click)="navigateUser()">
-            <div class="main-header__actions__cart relative" (click)="openShoppingCart()">
-                <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
-                <span class="main-header__actions__cart-count rounded-full absolute">{{ cartCount }}</span>
-            </div>
+          @if (isAuthenticated) {
+            <img ngSrc="assets/icons/ic-actions-heart-thin.svg" width="24" height="24" class="main-header__actions__icon" alt="favourites" routerLink="/favourites">
+          }
+          <img ngSrc="assets/icons/ic-actions-user.svg" width="24" height="24" class="main-header__actions__icon user-icon" alt="account" (click)="navigateUser()">
+          <div class="main-header__actions__cart relative" (click)="openShoppingCart()">
+              <img ngSrc="assets/icons/ic-ecommerce-basket.svg" width="24" height="24" class="main-header__actions__icon cart-icon" alt="cart">
+              <span class="main-header__actions__cart-count rounded-full absolute">{{ cartCount }}</span>
+          </div>
         </div>
     </section>
   </section>

@@ -4,7 +4,8 @@ import { Toast, ToastService } from "@shared/components/toast/toast.service";
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.scss'
+  styleUrl: './toast.component.scss',
+  standalone: false
 })
 export class ToastComponent implements OnInit {
   private toastService: ToastService = inject(ToastService);

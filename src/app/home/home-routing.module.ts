@@ -7,12 +7,17 @@ import { ProductDetailComponent } from "@home/product-detail/product-detail.comp
 import { CheckoutComponent } from "@home/checkout/checkout.component";
 import { authGuard } from "@core/guards/auth.guard";
 import { checkoutGuard } from "@core/guards/checkout.guard";
+import { FavouritesComponent } from "@home/favourites/favourites.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: 'favourites',
+        component: FavouritesComponent,
+      },
       {
         path: 'homepage',
         component: HomePageComponent,

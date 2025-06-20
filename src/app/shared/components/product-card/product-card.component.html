@@ -39,8 +39,8 @@
   </div>
 } @else {
   <div class="card card-horizontal flex flex-row transition-ease-out">
-    <div class="card-horizontal__image-wrapper h-full">
-      <img class="card__image card-horizontal__image h-full w-full"
+    <div class="card-horizontal__image-wrapper">
+      <img class="card__image card-horizontal__image w-full"
            [src]="product().image[0]"
            (error)="onImageError($event)"
            (click)="navigateToProductDetail()"

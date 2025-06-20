@@ -1,16 +1,15 @@
 import { HttpHandlerFn, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { User } from "@auth/models/user.model";
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
-  let storedUserData: User | null;
+  let token: string | null;
+
   try {
-    const userJson = localStorage.getItem('user');
-    storedUserData = userJson ? JSON.parse(userJson) : null;
+    token = localStorage.getItem('token');
   } catch (e) {
-    storedUserData = null;
+    token = null;
   }
 
-  const headers: HttpHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + storedUserData?.token);
+  const headers: HttpHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
   const modifiedReq: HttpRequest<unknown> = req.clone({
     headers: headers,

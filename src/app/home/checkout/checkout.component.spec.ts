@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "@shared/shared.module";
 import { ShoppingCartService } from "@home/services/shopping-cart.service";
 import { OrderSummaryComponent } from "@home/checkout/order-summary/order-summary.component";
+import { signal } from '@angular/core';
+import { NgOptimizedImage } from "@angular/common";
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -12,12 +14,14 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     cartService = {
-      clear: jest.fn()
+      clear: jest.fn(),
+      items: signal([]),
+      total: signal(0)
     } as any;
 
     await TestBed.configureTestingModule({
       declarations: [CheckoutComponent, OrderSummaryComponent],
-      imports: [ReactiveFormsModule, SharedModule],
+      imports: [ReactiveFormsModule, SharedModule, NgOptimizedImage],
       providers: [
         { provide: ShoppingCartService, useValue: cartService }
       ]
@@ -261,7 +265,6 @@ describe('CheckoutComponent', () => {
 
   describe('Form Submission', () => {
     beforeEach(() => {
-      // Fill form with valid data
       component.checkoutForm.patchValue({
         firstName: 'John',
         lastName: 'Doe',
@@ -302,7 +305,6 @@ describe('CheckoutComponent', () => {
       component.checkoutForm.get('acceptTerms')?.setValue(false);
       component.checkoutForm.markAsTouched();
 
-      // Mock form validity
       jest.spyOn(component.checkoutForm, 'valid', 'get').mockReturnValue(false);
 
       component.submitForm();
@@ -312,3 +314,4 @@ describe('CheckoutComponent', () => {
     });
   });
 });
+

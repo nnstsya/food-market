@@ -2,8 +2,8 @@
   <h2 class="bolder">Shopping cart</h2>
 
   <div class="cart__product-list flex flex-column">
-    @if (products.length) {
-      @for (product of products; track product.product.id; let last = $last) {
+    @if (products().length) {
+      @for (product of products(); track product.product.id; let last = $last) {
         <app-product-item [product]="product" [ngClass]="{ 'border-bottom': !last }"></app-product-item>
       }
     } @else {
@@ -13,7 +13,7 @@
 
   <div class="cart__bill">
     <p class="cart__bill-text semibold fs-14">Subtotal</p>
-    <h2 class="bolder">{{ totalPrice | number:'0.2' }} UAH</h2>
+    <h2 class="bolder">{{ totalPrice() | number:'0.2' }} UAH</h2>
   </div>
 
   <div class="cart__actions flex space-between align-center">

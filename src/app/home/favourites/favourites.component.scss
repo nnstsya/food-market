@@ -1,9 +1,9 @@
 @use "../../../styles/variables" as *;
 
 .page {
-  &__top-bar {
-    padding: 45px;
+  padding: 40px 45px;
 
+  &__top-bar {
     &__header {
       padding-block: 8px;
     }
@@ -13,49 +13,15 @@
         color: $secondary-color;
       }
     }
-
-    &__filters {
-      &__items {
-        &-active {
-          flex-wrap: wrap;
-
-          &-text {
-            color: $secondary-color;
-            font-weight: 500;
-          }
-        }
-      }
-    }
   }
 
-  &__content {
-    padding: 64px 45px;
+  &__content__products {
+    padding-block: 25px;
 
     &-text {
       margin-inline: auto;
       color: $secondary-color;
     }
-
-    &__filters {
-      &__buttons {
-        gap: 46px;
-
-        &__reset-button {
-          cursor: pointer;
-          color: $secondary-color;
-          transition: color 0.2s ease-out;
-
-          &:hover {
-            color: #868686;
-          }
-        }
-      }
-    }
-  }
-
-  &__category-text {
-    color: $secondary-color;
-    text-align: center;
   }
 }
 
@@ -88,7 +54,6 @@
   animation: rotation 1s linear infinite;
   margin-top: 60px;
   margin-inline: auto;
-;
 }
 
 @keyframes rotation {

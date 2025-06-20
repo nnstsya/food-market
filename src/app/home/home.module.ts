@@ -18,6 +18,7 @@ import { PriceFilterComponent } from './filters/price-filter/price-filter.compon
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSummaryComponent } from './checkout/order-summary/order-summary.component';
 import { CoreModule } from "@core/core.module";
+import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CoreModule } from "@core/core.module";
     RatingFilterComponent,
     PriceFilterComponent,
     CheckoutComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    FavouritesComponent
   ],
   imports: [
     HomeRoutingModule,

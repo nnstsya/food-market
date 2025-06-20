@@ -67,7 +67,10 @@
     height: 280px;
 
     &__image {
+      height: 100%;
+
       &-wrapper {
+        height: 100%;
         width: 268px;
       }
     }

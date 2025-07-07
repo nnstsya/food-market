@@ -6,7 +6,7 @@ import {
   UserData,
   UserPasswordRecovery,
 } from '../models/user.model';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,16 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
   private basePath: string = '/auth';
+  private authState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!localStorage.getItem('user'));
+
+  isAuthenticated$: Observable<boolean> = this.authState.asObservable();
 
   signIn(userCredentials: UserCredentials): Observable<User> {
     return this.http.post<User>(`${this.basePath}/login`, userCredentials).pipe(
-      tap((response: User) => this.storeUserData(response)),
+      tap((response: User) => {
+        this.storeUserData(response);
+        this.storeUserToken(response.token);
+      }),
       catchError((err) =>
         throwError(
           () =>
@@ -31,7 +37,10 @@ export class AuthService {
 
   signUp(user: UserData): Observable<User> {
     return this.http.post<User>(`${this.basePath}/register`, user).pipe(
-      tap((response: User) => this.storeUserData(response)),
+      tap((response: User) => {
+        this.storeUserData(response);
+        this.storeUserToken(response.token);
+      }),
       catchError((err) =>
         throwError(
           () =>
@@ -61,9 +70,13 @@ export class AuthService {
       );
   }
 
-  private storeUserData(user: User): void {
-    const userData: User = { ...user };
+  private storeUserToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
 
-    localStorage.setItem('user', JSON.stringify(userData));
+  private storeUserData(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+
+    this.authState.next(true);
   }
 }

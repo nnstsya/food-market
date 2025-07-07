@@ -5,6 +5,7 @@ import { ModalService } from '@shared/components/modal/modal.service';
 import { ShoppingCartService } from '@home/services/shopping-cart.service';
 import { SharedModule } from "@shared/shared.module";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -29,7 +30,7 @@ describe('HeaderComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [SharedModule],
+      imports: [SharedModule, HttpClientModule],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: ModalService, useValue: mockModalService },
@@ -61,11 +62,11 @@ describe('HeaderComponent', () => {
     expect(mockModalService.showModal).toHaveBeenCalledWith('cart');
   });
 
-  it('should navigate to /account if authenticated', () => {
+  it('should navigate to /profile if authenticated', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockReturnValue('mockToken');
     component.isAuthenticated = true;
     component.navigateUser();
-    expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/account');
+    expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/profile');
   });
 
   it('should open login modal if not authenticated', () => {

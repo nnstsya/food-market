@@ -3,7 +3,6 @@ import { ShoppingCartComponent } from './shopping-cart.component';
 import { ShoppingCartService } from '@home/services/shopping-cart.service';
 import { ModalService } from '@shared/components/modal/modal.service';
 import { Router } from '@angular/router';
-import { signal } from '@angular/core';
 import { SharedModule } from "@shared/shared.module";
 
 describe('ShoppingCartComponent', () => {
@@ -15,8 +14,8 @@ describe('ShoppingCartComponent', () => {
 
   beforeEach(async () => {
     shoppingCartService = {
-      items: jest.fn().mockReturnValue(signal([])),
-      total: jest.fn().mockReturnValue(signal(0))
+      items: jest.fn().mockReturnValue([]),
+      total: jest.fn().mockReturnValue(0)
     } as unknown as jest.Mocked<ShoppingCartService>;
 
     const modalSpy = {
@@ -62,7 +61,7 @@ describe('ShoppingCartComponent', () => {
     fixture.detectChanges();
 
     component.navigateUser();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/checkout');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('homepage/checkout');
   });
 
   it('should show login modal if not authenticated', () => {

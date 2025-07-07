@@ -34,7 +34,7 @@ export class HeaderComponent {
   }
 
   navigateUser(): void {
-    this.isAuthenticated ? this.router.navigateByUrl('/account') : this.modalService.showModal('login');
+    this.isAuthenticated ? this.router.navigateByUrl('/profile') : this.modalService.showModal('login');
   }
 
   getCategoryName(title: string): string {

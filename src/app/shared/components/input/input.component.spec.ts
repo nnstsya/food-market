@@ -122,8 +122,8 @@ describe('InputComponent', () => {
     expect(iconClickSpy).toHaveBeenCalled();
   });
 
-  it('should handle multiline input', () => {
-    fixture.componentRef.setInput('multiline', true);
+  it('should handle text area type', () => {
+    fixture.componentRef.setInput('type', 'textarea');
     fixture.detectChanges();
 
     const textareaElement = fixture.nativeElement.querySelector('textarea');
@@ -131,17 +131,6 @@ describe('InputComponent', () => {
 
     expect(textareaElement).toBeTruthy();
     expect(inputElement).toBeFalsy();
-  });
-
-  it('should handle regular input when multiline is false', () => {
-    fixture.componentRef.setInput('multiline', false);
-    fixture.detectChanges();
-
-    const textareaElement = fixture.nativeElement.querySelector('textarea');
-    const inputElement = fixture.nativeElement.querySelector('input');
-
-    expect(textareaElement).toBeFalsy();
-    expect(inputElement).toBeTruthy();
   });
 
   describe('ControlValueAccessor implementation', () => {
@@ -195,8 +184,8 @@ describe('InputComponent', () => {
       expect(inputElement.disabled).toBe(true);
     });
 
-    it('should handle textarea change when multiline is true', () => {
-      fixture.componentRef.setInput('multiline', true);
+    it('should handle textarea change', () => {
+      fixture.componentRef.setInput('type', 'textarea');
       fixture.detectChanges();
 
       const onChangeSpy = jest.fn();

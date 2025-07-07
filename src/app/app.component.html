@@ -25,6 +25,11 @@
           <app-shopping-cart class="modal-content flex flex-column w-full gap-24"></app-shopping-cart>
         </app-modal>
       }
+      @case ('confirm') {
+        <app-modal class="modal absolute z-index-999">
+          <app-confirmation-modal class="modal-content flex flex-column w-full gap-24"></app-confirmation-modal>
+        </app-modal>
+      }
     }
   }
 

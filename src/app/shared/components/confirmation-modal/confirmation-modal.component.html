@@ -1,0 +1,21 @@
+<h3>Proceed with action?</h3>
+
+<div class="modal__form">
+  <div class="modal__form__buttons">
+    <app-button
+      class="modal__form__buttons__button"
+      size="s"
+      (click)="onConfirm()"
+    >
+      Confirm
+    </app-button>
+    <app-button
+      variant="secondary"
+      size="s"
+      class="modal__form__buttons__button"
+      (click)="onCancel()"
+    >
+      Cancel
+    </app-button>
+  </div>
+</div>

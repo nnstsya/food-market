@@ -1,0 +1,14 @@
+.modal {
+  max-width: 400px !important;
+  min-width: 350px !important;
+
+  &__text {
+    text-align: center;
+  }
+
+  &__form {
+    &__buttons {
+      margin-top: 24px !important;
+    }
+  }
+}

@@ -20,6 +20,7 @@ import { RangeComponent } from './components/range/range.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { RadioInputComponent } from './components/radio-input/radio-input.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ToastComponent } from './components/toast/toast.component';
     FilterComponent,
     RangeComponent,
     ToastComponent,
-    RadioInputComponent
+    RadioInputComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +70,8 @@ import { ToastComponent } from './components/toast/toast.component';
     FilterComponent,
     RangeComponent,
     RadioInputComponent,
-    ToastComponent
+    ToastComponent,
+    ConfirmationModalComponent
   ]
 })
 export class SharedModule {}
